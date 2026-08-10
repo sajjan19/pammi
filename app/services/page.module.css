@@ -1,0 +1,135 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--sp-7);
+  padding: var(--sp-6);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  scroll-margin-top: 96px;
+}
+
+@media (max-width: 780px) {
+  .item {
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+  }
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-3);
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+}
+
+.alt {
+  font-size: 0.8125rem;
+  color: var(--stone);
+  letter-spacing: 0.06em;
+}
+
+.summary {
+  margin: var(--sp-4) 0 var(--sp-5);
+  color: var(--slate);
+}
+
+.includes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.includes li {
+  position: relative;
+  padding-left: var(--sp-5);
+  font-size: 0.9375rem;
+  color: var(--slate);
+}
+
+.includes li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 10px;
+  height: 1.5px;
+  background: var(--gold);
+}
+
+.aside {
+  border-left: 1px solid var(--border);
+  padding-left: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+@media (max-width: 780px) {
+  .aside {
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    padding-left: 0;
+    padding-top: var(--sp-5);
+  }
+}
+
+.priceLabel {
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--stone);
+  font-weight: 600;
+  margin: 0 0 var(--sp-1);
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--wine);
+  line-height: 1;
+  margin: 0;
+}
+
+.priceNote {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin: var(--sp-2) 0 0;
+}
+
+.turnaround {
+  font-size: 0.875rem;
+  color: var(--slate);
+  margin: 0;
+}
+
+.policies {
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.policy h3 {
+  font-size: 1.125rem;
+  margin: 0 0 var(--sp-2);
+}
+
+.policy p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--slate);
+}

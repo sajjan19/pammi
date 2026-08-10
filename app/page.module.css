@@ -1,142 +1,281 @@
-.page {
-  --background: #fafafa;
-  --foreground: #fff;
+/* ── Hero ─────────────────────────────────── */
 
-  --text-primary: #000;
-  --text-secondary: #666;
+.hero {
+  background: linear-gradient(180deg, var(--cream) 0%, var(--ivory) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-9) 0 var(--sp-8);
+}
 
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
-  display: flex;
-  flex: 1;
-  flex-direction: column;
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: var(--sp-8);
   align-items: center;
-  justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
 }
 
-.main {
+.heroTitle {
+  margin: 0;
+}
+
+.heroLede {
+  margin: var(--sp-5) 0 0;
+  font-size: 1.1875rem;
+  line-height: 1.7;
+  color: var(--slate);
+  max-width: 44ch;
+}
+
+.heroActions {
   display: flex;
-  flex: 1;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-7);
+}
+
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-5);
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+
+.heroMetaItem {
+  font-size: 0.875rem;
+  color: var(--slate);
+}
+
+.heroMetaItem strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--wine);
+  line-height: 1.2;
+}
+
+/* Overlapping fabric swatches — stands in for a photo until she has one. */
+.swatches {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  max-width: 440px;
+  margin-left: auto;
   width: 100%;
-  max-width: 800px;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
 }
 
-.intro {
+.swatch {
+  position: absolute;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(26, 18, 17, 0.08);
+}
+
+.swatchA {
+  inset: 0 26% 30% 0;
+  background: linear-gradient(135deg, #e8318a 0%, #9c0f4e 100%);
+}
+
+.swatchB {
+  inset: 18% 0 12% 34%;
+  background: linear-gradient(135deg, #f7d24f 0%, #d9a01a 100%);
+}
+
+.swatchC {
+  inset: 58% 42% 0 8%;
+  background: linear-gradient(135deg, #f45fa4 0%, #c51a68 100%);
+}
+
+/* A row of running stitches across the top swatch. */
+.swatchB::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 24%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 253, 249, 0.85) 0 8px,
+    transparent 8px 14px
+  );
+}
+
+@media (max-width: 900px) {
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-7);
+  }
+
+  .swatches {
+    margin: 0 auto;
+    max-width: 340px;
+  }
+}
+
+/* ── Section heads ────────────────────────── */
+
+.sectionHead {
+  max-width: 58ch;
+  margin-bottom: var(--sp-7);
+}
+
+.sectionHeadCenter {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* ── Garment cards ────────────────────────── */
+
+.garmentGrid {
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.garmentCard {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.18s ease, transform 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
-.intro h1 {
-  max-width: 320px;
-  font-size: 40px;
+.garmentCard:hover {
+  border-color: var(--khaki);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.garmentName {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--char);
+  margin: 0;
+}
+
+.garmentAlt {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin: var(--sp-1) 0 0;
+}
+
+.garmentSummary {
+  margin: var(--sp-4) 0 var(--sp-5);
+  color: var(--slate);
+  font-size: 0.9375rem;
+  flex: 1;
+}
+
+.garmentFoot {
+  font-size: 0.8125rem;
+  color: var(--wine);
   font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
+  letter-spacing: 0.06em;
 }
 
-.intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
+/* ── Steps ────────────────────────────────── */
+
+.steps {
+  display: grid;
+  gap: var(--sp-6);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  counter-reset: step;
 }
 
-.intro a {
-  font-weight: 500;
-  color: var(--text-primary);
+.step {
+  counter-increment: step;
+  padding-top: var(--sp-5);
+  border-top: 2px solid var(--sand);
 }
 
-.ctas {
+.step::before {
+  content: "0" counter(step);
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: var(--sp-3);
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin: 0 0 var(--sp-2);
+}
+
+.stepBody {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--slate);
+}
+
+/* ── Gallery strip ────────────────────────── */
+
+.strip {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+/* ── Closing band ─────────────────────────── */
+
+.band {
+  background: var(--char);
+  color: var(--cream);
+  padding: var(--sp-9) 0;
+  text-align: center;
+}
+
+.bandTitle {
+  color: var(--white);
+  margin: 0 auto;
+  max-width: 20ch;
+}
+
+.bandLede {
+  margin: var(--sp-5) auto 0;
+  max-width: 52ch;
+  color: var(--khaki);
+}
+
+.bandActions {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
   justify-content: center;
-  align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
+  margin-top: var(--sp-7);
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+.bandBtn {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--char);
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.bandBtn:hover:not(:disabled) {
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
+  color: var(--char);
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
+.bandBtnGhost {
+  background: transparent;
+  border-color: rgba(253, 241, 204, 0.4);
+  color: var(--cream);
 }
 
-@media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
-  }
-
-  .intro {
-    gap: 16px;
-  }
-
-  .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
-
-  .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
-  }
+.bandBtnGhost:hover:not(:disabled) {
+  background: rgba(253, 241, 204, 0.14);
+  border-color: var(--gold-soft);
+  color: var(--white);
 }

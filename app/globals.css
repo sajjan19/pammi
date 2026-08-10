@@ -1,16 +1,88 @@
+/* ─────────────────────────────────────────────
+   Pammi's Tailoring & Alterations — design system
+
+   Taken straight off the logo: a deep magenta carries the structure and the
+   type, marigold gold does the accents, and everything rests on the same
+   warm cream the badge sits on.
+
+   `--wine` and `--gold` keep their names because they're used all over the
+   components — the values below are what actually decide the colour.
+   ───────────────────────────────────────────── */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Neutrals — the logo's cream through to near-black, tinted rose */
+  --ivory: #fdf8f0;
+  --cream: #fbe9ee;
+  --sand: #f0d3dd;
+  --khaki: #cca3b3;
+  --stone: #96707e;
+  --slate: #6b4e58;
+  --ink: #3a2129;
+  --char: #24121a;
+  --white: #fffcf8;
+
+  /* Accents — magenta leads, gold answers */
+  --wine: #c51a68;
+  --wine-deep: #9c0f4e;
+  --wine-soft: #fce3ed;
+  --gold: #d9a01a;
+  --gold-bright: #f5c842;
+  --gold-soft: #fdf0cf;
+
+  /* Status — the danger red is pulled away from the brand magenta on
+     purpose, so a warning never reads as just another accent. */
+  --success: #2f6b4f;
+  --success-bg: #e6f0e9;
+  --danger: #b3261e;
+  --danger-bg: #fbe7e4;
+  --warn: #8a6120;
+  --warn-bg: #fdf1cc;
+
+  /* Semantic */
+  --bg: var(--ivory);
+  --surface: var(--white);
+  --text: var(--ink);
+  --text-muted: var(--stone);
+  --border: var(--sand);
+
+  /* Type */
+  --font-display: var(--font-serif), "Georgia", "Times New Roman", serif;
+  --font-body: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+
+  /* Space */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+
+  --radius: 3px;
+  --radius-lg: 8px;
+  --shadow: 0 1px 2px rgba(58, 33, 41, 0.05),
+    0 8px 24px -14px rgba(58, 33, 41, 0.2);
+  --shadow-lg: 0 2px 4px rgba(58, 33, 41, 0.05),
+    0 28px 56px -20px rgba(58, 33, 41, 0.26);
+
+  --maxw: 1140px;
+  --maxw-narrow: 760px;
+
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
   height: 100%;
 }
 
@@ -20,30 +92,418 @@ body {
   overflow-x: hidden;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 body {
+  margin: 0;
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: -0.005em;
   margin: 0;
+  color: var(--char);
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+}
+h2 {
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
+}
+h3 {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+}
+h4 {
+  font-size: 1.125rem;
+}
+
+p {
+  margin: 0 0 var(--sp-4);
 }
 
 a {
   color: inherit;
-  text-decoration: none;
+  text-decoration-color: var(--khaki);
+  text-underline-offset: 3px;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+a:hover {
+  text-decoration-color: var(--wine);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--wine);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* ── Layout primitives ───────────────────── */
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+}
+
+.container-narrow {
+  width: 100%;
+  max-width: var(--maxw-narrow);
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+}
+
+.section {
+  padding: var(--sp-9) 0;
+}
+
+.section-sm {
+  padding: var(--sp-8) 0;
+}
+
+.section-tinted {
+  background: var(--cream);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--wine);
+  font-weight: 600;
+  margin: 0 0 var(--sp-4);
+}
+
+.lede {
+  font-size: 1.125rem;
+  color: var(--slate);
+  line-height: 1.7;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.center {
+  text-align: center;
+}
+
+.stack > * + * {
+  margin-top: var(--sp-4);
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: var(--sp-7) 0;
+}
+
+/* A thin woven-looking divider, used under section headings. */
+.thread {
+  width: 64px;
+  height: 2px;
+  border: 0;
+  margin: var(--sp-5) 0 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--gold) 0 6px,
+    transparent 6px 10px
+  );
+}
+
+.thread-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--char);
+  color: var(--white);
+  padding: var(--sp-3) var(--sp-4);
+  z-index: 200;
+}
+.skip-link:focus {
+  left: var(--sp-4);
+  top: var(--sp-4);
+}
+
+/* ── Buttons ─────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: var(--sp-4) var(--sp-6);
+  border: 1px solid var(--wine);
+  border-radius: var(--radius);
+  background: var(--wine);
+  color: var(--white);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--wine-deep);
+  border-color: var(--wine-deep);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--wine);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: var(--wine);
+  color: var(--white);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--slate);
+  border-color: transparent;
+  padding: var(--sp-3) var(--sp-4);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--cream);
+  color: var(--char);
+  border-color: transparent;
+}
+
+.btn-sm {
+  padding: var(--sp-2) var(--sp-4);
+  font-size: 0.6875rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ── Forms ───────────────────────────────── */
+
+.field {
+  display: block;
+  margin-bottom: var(--sp-5);
+}
+
+.label {
+  display: block;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-weight: 600;
+  margin-bottom: var(--sp-2);
+}
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--sp-3) var(--sp-4);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--wine);
+  box-shadow: 0 0 0 3px rgba(197, 26, 104, 0.14);
+}
+
+.input-error,
+.input-error:focus {
+  border-color: var(--danger);
+}
+
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.hint {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin: var(--sp-2) 0 0;
+}
+
+.error-text {
+  font-size: 0.8125rem;
+  color: var(--danger);
+  margin: var(--sp-2) 0 0;
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-3);
+  cursor: pointer;
+}
+
+.check input {
+  margin-top: 0.35em;
+  accent-color: var(--wine);
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+/* ── Cards & surfaces ────────────────────── */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-6);
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.notice {
+  padding: var(--sp-4) var(--sp-5);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  font-size: 0.9375rem;
+}
+
+.notice-error {
+  background: var(--danger-bg);
+  border-color: #f0c8c2;
+  color: var(--danger);
+}
+
+.notice-success {
+  background: var(--success-bg);
+  border-color: #c9dccf;
+  color: var(--success);
+}
+
+.notice-warn {
+  background: var(--warn-bg);
+  border-color: #f2dc9c;
+  color: var(--warn);
+}
+
+/* ── Badges ──────────────────────────────── */
+
+.badge {
+  display: inline-block;
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 3px var(--sp-2);
+  border-radius: var(--radius);
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+
+.badge-pending {
+  color: var(--warn);
+  background: var(--warn-bg);
+}
+.badge-confirmed {
+  color: var(--success);
+  background: var(--success-bg);
+}
+.badge-done {
+  color: var(--slate);
+  background: var(--cream);
+}
+.badge-cancelled {
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+/* ── Utilities ───────────────────────────── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.grid-2 {
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.grid-3 {
+  display: grid;
+  gap: var(--sp-5);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }

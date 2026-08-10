@@ -1,0 +1,187 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(253, 248, 240, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-5);
+  min-height: 72px;
+}
+
+/* The business name is long, so the brand block is allowed to shrink and
+   wrap rather than shoving the menu button off the side of a phone. */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  text-decoration: none;
+  color: var(--char);
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.brandMark {
+  color: var(--wine);
+  display: flex;
+  flex-shrink: 0;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  min-width: 0;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3.6vw, 1.25rem);
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+.brandTag {
+  font-size: 0.5625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--stone);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.link {
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  color: var(--slate);
+  text-decoration: none;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius);
+  transition: color 0.18s ease, background 0.18s ease;
+}
+
+.link:hover {
+  color: var(--char);
+  background: var(--cream);
+}
+
+.linkActive {
+  color: var(--wine);
+  font-weight: 600;
+}
+
+.cta {
+  margin-left: var(--sp-3);
+}
+
+.toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--char);
+  cursor: pointer;
+}
+
+.toggleBars {
+  display: block;
+  width: 18px;
+  height: 12px;
+  position: relative;
+}
+
+.toggleBars::before,
+.toggleBars::after,
+.toggleBars span {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.toggleBars::before {
+  top: 0;
+}
+.toggleBars span {
+  top: 5.25px;
+}
+.toggleBars::after {
+  bottom: 0;
+}
+
+.toggleOpen .toggleBars::before {
+  transform: translateY(5.25px) rotate(45deg);
+}
+.toggleOpen .toggleBars span {
+  opacity: 0;
+}
+.toggleOpen .toggleBars::after {
+  transform: translateY(-5.25px) rotate(-45deg);
+}
+
+@media (max-width: 860px) {
+  .toggle {
+    display: inline-flex;
+  }
+
+  .inner {
+    gap: var(--sp-4);
+  }
+
+  .nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--sp-3) var(--sp-5) var(--sp-5);
+    background: var(--ivory);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    display: none;
+  }
+
+  .navOpen {
+    display: flex;
+  }
+
+  .link {
+    padding: var(--sp-4) var(--sp-2);
+    font-size: 1rem;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+  }
+
+  .cta {
+    margin: var(--sp-5) 0 0;
+  }
+}
+
+/* On the narrowest phones the tagline is the first thing to go — the name
+   and a reachable menu button matter more. */
+@media (max-width: 420px) {
+  .brandTag {
+    display: none;
+  }
+}

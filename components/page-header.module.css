@@ -1,0 +1,20 @@
+.header {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-8) 0 var(--sp-7);
+}
+
+.inner {
+  max-width: 62ch;
+}
+
+.title {
+  margin: 0;
+}
+
+.lede {
+  margin: var(--sp-5) 0 0;
+  font-size: 1.125rem;
+  color: var(--slate);
+  line-height: 1.7;
+}

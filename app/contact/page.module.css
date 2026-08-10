@@ -1,0 +1,103 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--sp-8);
+  align-items: start;
+}
+
+@media (max-width: 820px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.methods {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.method {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.methodLabel {
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--stone);
+  font-weight: 600;
+}
+
+.methodValue {
+  font-size: 1rem;
+  color: var(--char);
+}
+
+.faq {
+  margin-top: var(--sp-8);
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-5) 0;
+}
+
+.faqItem summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--char);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.faqItem summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqItem summary::after {
+  content: "+";
+  color: var(--gold);
+  font-size: 1.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.faqItem[open] summary::after {
+  content: "–";
+}
+
+.faqBody {
+  margin: var(--sp-4) 0 0;
+  color: var(--slate);
+  max-width: 66ch;
+}
+
+.aside {
+  position: sticky;
+  top: 96px;
+  padding: var(--sp-6);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.aside h3 {
+  margin: 0 0 var(--sp-3);
+  font-size: 1.25rem;
+}
+
+.aside p {
+  font-size: 0.9375rem;
+  color: var(--slate);
+}
