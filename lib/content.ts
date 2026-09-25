@@ -17,7 +17,7 @@ export const business = {
   tagline: "Punjabi Suits, Stitched to Measure",
   /** Shown in the hero. One or two sentences. */
   intro:
-    "Punjabi suits for women — salwar kameez, Patiala, Anarkali — cut to your measurements and stitched by hand. Turbans and children's patkas from cloth you bring, and small repairs on anything else you own.",
+    "Punjabi suits for women, stitched by hand to fit you. Salwar kameez, Patiala and Anarkali. She also makes turbans and children's patkas from cloth you bring, and does small repairs on anything else you own.",
   /** Longer paragraph for the About page. */
   story:
     "Punjabi suits are the whole of the work: every one cut and stitched by hand, one at a time. Bring your own fabric, or a suit you already love the fit of. She measures you herself before anything is cut — and it comes back the way you asked for it, with the neckline you wanted, a sleeve length that actually works, and a fit that sits right the first time.",
