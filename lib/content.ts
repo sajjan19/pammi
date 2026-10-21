@@ -78,22 +78,22 @@ export const about = {
     {
       id: "chai",
       title: "Always a cup of chai",
-      body: "She always finds a reason for another cup. Starting a suit, finishing one or just because.",
+      body: "She always finds a reason for another cup of chai.",
     },
     {
       id: "cooking",
       title: "Loves to cook",
-      body: "She makes all kinds of dishes but Punjabi food is her speciality.",
+      body: "All kinds of dishes but Punjabi food is her speciality.",
     },
     {
       id: "dramas",
       title: "Punjabi movies and dramas",
-      body: "Her favourite way to relax after a long day.",
+      body: "Her favourite way to unwind at the end of a long day.",
     },
     {
       id: "shopping",
       title: "Loves suit shopping",
-      body: "Her house ran out of room for suits, so now she's filling up her siblings' houses.",
+      body: "Her house is full so her suits now fill her siblings' houses.",
     },
   ] as {
     id: "chai" | "cooking" | "dramas" | "shopping";
