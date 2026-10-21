@@ -142,9 +142,36 @@
     gap: var(--sp-7);
   }
 
+  /* On a phone the three prints spread out side by side in a shorter,
+     wider strip, so the whole picture fits on the first screen under the
+     buttons instead of running off the bottom. */
+  .heroGrid {
+    gap: var(--sp-5);
+  }
+
   .collage {
     margin: 0 auto;
-    max-width: 340px;
+    max-width: 440px;
+    aspect-ratio: 3 / 2;
+  }
+
+  .frame {
+    width: 40%;
+  }
+
+  .frame0 {
+    top: 2%;
+    left: 2%;
+  }
+
+  .frame1 {
+    top: 8%;
+    right: 2%;
+  }
+
+  .frame2 {
+    bottom: 2%;
+    left: 30%;
   }
 }
 
