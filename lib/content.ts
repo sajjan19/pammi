@@ -93,7 +93,7 @@ export const about = {
     {
       id: "shopping",
       title: "Loves suit shopping",
-      body: "Her house ran out of room for suits years ago. Now her siblings' houses are filling up too.",
+      body: "Her house ran out of room for suits, so now she's filling up her siblings' houses.",
     },
   ] as {
     id: "chai" | "cooking" | "dramas" | "shopping";

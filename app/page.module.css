@@ -274,7 +274,9 @@
   margin: 0 0 var(--sp-2);
 }
 
+/* "About 14 days →" — the arrow stays on the same line as the days. */
 .garmentFoot {
+  white-space: nowrap;
   font-size: 0.8125rem;
   color: var(--wine);
   font-weight: 600;
@@ -395,10 +397,18 @@
 
 /* ── Gallery strip ────────────────────────── */
 
+/* Same grid as the suits above: four across, or two by two on a phone. */
 .strip {
   display: grid;
-  gap: var(--sp-4);
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--sp-5);
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 900px) {
+  .strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-3);
+  }
 }
 
 /* ── Closing band ─────────────────────────── */
