@@ -14,6 +14,11 @@
 
 .shown {
   transform: translateY(0);
+  /* Frosts the page behind the button so it stands out. */
+  background: rgba(253, 248, 240, 0.55);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(234, 217, 200, 0.7);
 }
 
 .button {

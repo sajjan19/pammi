@@ -1,0 +1,124 @@
+/* 4.4s in all: about a second to reach each step, with a short pause there.
+   The step icons light up on the same beat — see .stepIcon in
+   app/page.module.css. */
+
+.track {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.thread {
+  position: absolute;
+  background-image: repeating-linear-gradient(
+    var(--dir),
+    var(--gold) 0 6px,
+    transparent 6px 10px
+  );
+}
+
+/* A zero-size point the needle's tip sits on. */
+.needle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 2;
+}
+
+.needle svg {
+  position: absolute;
+  right: 0;
+  top: -6px;
+  filter: drop-shadow(0 1px 1px rgba(42, 31, 36, 0.25));
+}
+
+/* ── Across a row: along the line above the steps ── */
+
+.horizontal {
+  --dir: to right;
+}
+
+.horizontal .thread {
+  top: -1px;
+  left: var(--p0);
+  height: 2px;
+  width: 0;
+}
+
+.horizontal .needle {
+  top: 0;
+  left: var(--p0);
+}
+
+.horizontal.playing .thread {
+  animation: thread-x 4.4s ease-in-out forwards;
+}
+
+.horizontal.playing .needle {
+  animation: needle-x 4.4s ease-in-out forwards;
+}
+
+@keyframes needle-x {
+  0%, 8% { left: var(--p0); }
+  30%, 38% { left: var(--p1); }
+  60%, 68% { left: var(--p2); }
+  90%, 100% { left: var(--p3); }
+}
+
+@keyframes thread-x {
+  0%, 8% { width: 0; }
+  30%, 38% { width: calc(var(--p1) - var(--p0)); }
+  60%, 68% { width: calc(var(--p2) - var(--p0)); }
+  90%, 100% { width: calc(var(--p3) - var(--p0)); }
+}
+
+/* ── Down a column: behind the step icons ── */
+
+.vertical {
+  --dir: to bottom;
+}
+
+.vertical .thread {
+  left: 29px;
+  top: var(--p0);
+  width: 2px;
+  height: 0;
+}
+
+.vertical .needle {
+  left: 30px;
+  top: var(--p0);
+  transform: rotate(90deg);
+}
+
+.vertical.playing .thread {
+  animation: thread-y 4.4s ease-in-out forwards;
+}
+
+.vertical.playing .needle {
+  animation: needle-y 4.4s ease-in-out forwards;
+}
+
+@keyframes needle-y {
+  0%, 8% { top: var(--p0); }
+  30%, 38% { top: var(--p1); }
+  60%, 68% { top: var(--p2); }
+  90%, 100% { top: var(--p3); }
+}
+
+@keyframes thread-y {
+  0%, 8% { height: 0; }
+  30%, 38% { height: calc(var(--p1) - var(--p0)); }
+  60%, 68% { height: calc(var(--p2) - var(--p0)); }
+  90%, 100% { height: calc(var(--p3) - var(--p0)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    display: none;
+  }
+}

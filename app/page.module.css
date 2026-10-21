@@ -243,18 +243,69 @@
 
 /* ── Steps ────────────────────────────────── */
 
+/* One row of four on a wide screen, one column on a phone — never two by
+   two, so the needle (components/steps-needle.tsx) has a straight path. */
 .steps {
+  position: relative;
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   gap: var(--sp-6);
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .step {
   padding-top: var(--sp-5);
   border-top: 2px solid var(--sand);
+}
+
+/* On a phone each icon sits to the left of its words, so the needle can
+   run straight down through the icons. */
+@media (max-width: 899px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    column-gap: var(--sp-4);
+    align-items: start;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .step .stepIcon {
+    grid-row: span 2;
+    margin-bottom: 0;
+  }
+}
+
+/* Each icon lights up as the needle reaches it. */
+.steps[data-playing] .stepIcon {
+  animation: step-lit 0.5s ease-out both;
+  animation-delay: calc(var(--i) * 1.32s);
+}
+
+@keyframes step-lit {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+    border-color: var(--gold);
+    background: var(--gold-soft);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .steps[data-playing] .stepIcon {
+    animation: none;
+  }
 }
 
 /* Each step's tool in a white circle, with its number in a small badge so
@@ -271,6 +322,7 @@
   background: var(--white);
   border: 1px solid var(--border);
   color: var(--wine);
+  z-index: 1;
 }
 
 .stepNumber {

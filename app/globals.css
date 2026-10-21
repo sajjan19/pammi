@@ -90,10 +90,12 @@ html {
   height: 100%;
 }
 
+/* `clip`, not `hidden`: hidden would turn the page into its own scroll box
+   and stop the sticky header from sticking. */
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -535,4 +537,25 @@ img {
   display: grid;
   gap: var(--sp-5);
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+/* ── Scroll animation ──
+   Each block in a section rises and fades in as it scrolls into view. Uses
+   the browser's own scroll-linked animation, so there's no script; browsers
+   without it simply show everything as normal. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    main .section .container > * {
+      animation: rise-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
 }

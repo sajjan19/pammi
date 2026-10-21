@@ -4,6 +4,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { getLang } from "@/lib/i18n-server";
 import { getContent } from "@/lib/localize";
 import { GalleryTile } from "@/components/gallery-tile";
+import { StepsNeedle } from "@/components/steps-needle";
 import { Icon } from "@/components/icon";
 import { Illustration } from "@/components/illustration";
 import styles from "./page.module.css";
@@ -107,8 +108,12 @@ export default async function Home() {
 
           <ol className={styles.steps}>
             {steps.map((step, i) => (
-              <li key={step.title} className={styles.step}>
-                <span className={styles.stepIcon} aria-hidden="true">
+              <li
+                key={step.title}
+                className={styles.step}
+                style={{ "--i": i } as React.CSSProperties}
+              >
+                <span className={styles.stepIcon} aria-hidden="true" data-step-icon>
                   <Icon name={step.icon} size={30} />
                   <span className={styles.stepNumber}>{i + 1}</span>
                 </span>
@@ -116,6 +121,7 @@ export default async function Home() {
                 <p className={styles.stepBody}>{step.body}</p>
               </li>
             ))}
+            <StepsNeedle />
           </ol>
         </div>
       </section>
