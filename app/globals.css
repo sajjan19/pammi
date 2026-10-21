@@ -1,5 +1,5 @@
 /* ─────────────────────────────────────────────
-   Pammi's Tailoring & Alterations — design system
+   Pammi Penji's Tailoring & Alterations — design system
 
    Taken straight off the logo: a deep magenta carries the structure and the
    type, marigold gold does the accents, and everything rests on the same
@@ -160,9 +160,11 @@ html:lang(pa) body {
   line-height: 1.85;
 }
 
-html:lang(pa) *,
-html:lang(pa) *::before,
-html:lang(pa) *::after {
+/* :lang() matches each element's own language, so English inside a Punjabi
+   page — marked lang="en", like the business name — keeps its spacing. */
+:lang(pa),
+:lang(pa)::before,
+:lang(pa)::after {
   letter-spacing: normal !important;
 }
 
@@ -266,24 +268,6 @@ img {
   border: 0;
   border-top: 1px solid var(--border);
   margin: var(--sp-7) 0;
-}
-
-/* A thin woven-looking divider, used under section headings. */
-.thread {
-  width: 64px;
-  height: 2px;
-  border: 0;
-  margin: var(--sp-5) 0 0;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--gold) 0 6px,
-    transparent 6px 10px
-  );
-}
-
-.thread-center {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .skip-link {
@@ -478,6 +462,16 @@ img {
   background: var(--success-bg);
   border-color: #c9dccf;
   color: var(--success);
+}
+
+/* An instruction that must not be missed — "don't measure yourself". Red
+   like an error, but with a heavy left bar so it reads as a rule to follow
+   rather than something that went wrong. */
+.notice-important {
+  background: var(--danger-bg);
+  border-color: #f0c8c2;
+  border-left: 4px solid var(--danger);
+  color: var(--danger);
 }
 
 .notice-warn {

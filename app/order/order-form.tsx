@@ -5,6 +5,7 @@ import { useActionState, useMemo, useState } from "react";
 import { getDictionary } from "@/lib/dictionary";
 import type { Lang } from "@/lib/i18n";
 import { getContent, localizedGroupsFor } from "@/lib/localize";
+import { shrinkPhotosIn } from "@/lib/shrink-photo";
 import { Illustration } from "@/components/illustration";
 import { submitOrder, type OrderFormState } from "./actions";
 import styles from "./order-form.module.css";
@@ -310,7 +311,7 @@ export function OrderForm({
           </>
         ) : (
           <>
-            <p className="notice notice-warn">
+            <p className="notice notice-important">
               <strong>{t.dontMeasure}</strong>
             </p>
 
@@ -435,11 +436,11 @@ export function OrderForm({
             name="photos"
             accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
             multiple
-            onChange={(event) =>
-              setFileNames(
-                Array.from(event.target.files ?? []).map((f) => f.name),
-              )
-            }
+            onChange={(event) => {
+              const input = event.currentTarget;
+              setFileNames(Array.from(input.files ?? []).map((f) => f.name));
+              void shrinkPhotosIn(input);
+            }}
           />
           <span className="btn btn-outline btn-sm">{t.choosePhotos}</span>
           <span className="hint" style={{ display: "block" }}>

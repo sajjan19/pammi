@@ -337,6 +337,72 @@ const repair = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" wi
 </svg>
 `;
 
+/* ── Men's and kids' suits ─────────────────────────────────── */
+
+/** A men's kurta: straight, knee length, full sleeves, squarer shoulders. */
+const MEN_KURTA = `M208 246 L392 246 L436 262 L470 478 L434 488 L398 330
+  L398 642 L202 642 L202 330 L166 488 L130 478 L164 262 Z`;
+
+/** Kurta with its band collar, buttoned placket, cuffs and hem band. */
+function menKurta(cloth, trim) {
+  return `<g>
+    <path d="${MEN_KURTA}" fill="${cloth}"/>
+    <path d="M202 620 H398 V642 H202 Z" fill="${trim}"/>
+    <path d="M132 462 L168 472 L166 488 L130 478 Z" fill="${trim}"/>
+    <path d="M468 462 L432 472 L434 488 L470 478 Z" fill="${trim}"/>
+    <rect x="272" y="232" width="56" height="22" rx="6" fill="${trim}"/>
+    <rect x="295" y="252" width="10" height="150" rx="4" fill="${trim}"/>
+    ${dotRun(300, 272, 300, 384, 5, 4.5, cloth)}
+  </g>`;
+}
+
+/** Straight pyjama legs showing below a knee-length kurta. */
+function pyjama(fill) {
+  return `<g fill="${fill}">
+    <path d="M226 630 L218 772 L290 772 L294 630 Z"/>
+    <path d="M374 630 L382 772 L310 772 L306 630 Z"/>
+  </g>`;
+}
+
+const mensSuit = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img">
+  <rect width="600" height="800" fill="${C.cream}"/>
+  ${weave(C.gold)}
+  <circle cx="300" cy="404" r="286" fill="${C.blush}"/>
+  ${lotus(300, 68, 1.5, C.gold, 0.5)}
+  ${lotus(300, 750, 1.3, C.gold, 0.5)}
+  ${pyjama(C.goldBright)}
+  ${menKurta(C.magentaDeep, C.goldBright)}
+</svg>
+`;
+
+/**
+ * Two small outfits side by side — a girl's suit and a boy's kurta pyjama —
+ * drawn at full size and scaled down, so they match the adult drawings.
+ */
+const girlsSuit = `
+  ${legs(C.goldBright)}
+  <path d="${KAMEEZ_BODY}" fill="${C.magenta}"/>
+  ${border(KAMEEZ_HEM, C.goldBright)}
+  <path d="${NECK}" fill="${C.cream}"/>
+  ${placket(300, 250, 430, C.goldBright)}
+  <path d="M414 392 L458 374 L466 396 L420 414 Z" fill="${C.goldBright}"/>
+  <path d="M186 392 L142 374 L134 396 L180 414 Z" fill="${C.goldBright}"/>`;
+
+const boysSuit = `
+  ${pyjama(C.magenta)}
+  ${menKurta(C.goldBright, C.magentaDeep)}`;
+
+const kidsSuits = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img">
+  <rect width="600" height="800" fill="${C.blush}"/>
+  ${weave(C.magenta)}
+  <circle cx="300" cy="404" r="286" fill="${C.cream}"/>
+  ${lotus(300, 68, 1.5, C.magenta, 0.4)}
+  ${lotus(300, 750, 1.3, C.magenta, 0.4)}
+  <g transform="translate(0 196) scale(0.56)">${girlsSuit}</g>
+  <g transform="translate(264 196) scale(0.56)">${boysSuit}</g>
+</svg>
+`;
+
 fs.mkdirSync(OUT, { recursive: true });
 for (const { file, svg } of tiles) {
   fs.writeFileSync(path.join(OUT, file), svg);
@@ -344,5 +410,7 @@ for (const { file, svg } of tiles) {
 fs.writeFileSync(path.join(OUT, "placeholder-7.svg"), patka);
 fs.writeFileSync(path.join(OUT, "placeholder-8.svg"), turban);
 fs.writeFileSync(path.join(OUT, "placeholder-9.svg"), repair);
+fs.writeFileSync(path.join(OUT, "placeholder-10.svg"), mensSuit);
+fs.writeFileSync(path.join(OUT, "placeholder-11.svg"), kidsSuits);
 
-console.log(`wrote ${tiles.length + 3} illustrations to public/gallery`);
+console.log(`wrote ${tiles.length + 5} illustrations to public/gallery`);

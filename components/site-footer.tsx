@@ -19,7 +19,10 @@ export function SiteFooter({ lang }: { lang: Lang }) {
           <div>
             <Link href="/" className={styles.brand}>
               <Logo size={40} />
-              <span className={styles.brandName}>{business.name}</span>
+              <span className={styles.brandText} lang="en">
+                <span className={styles.brandName}>{business.shortName}</span>
+                <span className={styles.brandTag}>{business.trade}</span>
+              </span>
             </Link>
             <p className={styles.blurb}>{business.intro}</p>
           </div>

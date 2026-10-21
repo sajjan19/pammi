@@ -15,6 +15,7 @@ export type StatusResult = {
   updatedOn: string;
   neededBy: string | null;
   quotedPrice: number | null;
+  message: string | null;
 };
 
 /**
@@ -43,7 +44,7 @@ export async function lookupOrder(
     return { status: "error", error: "missing" };
   }
 
-  const order = getOrderByReference(reference);
+  const order = await getOrderByReference(reference);
 
   // Deliberately the same answer either way, so this can't be used to work
   // out which references exist.
@@ -64,6 +65,7 @@ export async function lookupOrder(
       updatedOn: order.updated_at,
       neededBy: order.needed_by,
       quotedPrice: order.quoted_price,
+      message: order.customer_message,
     },
   };
 }

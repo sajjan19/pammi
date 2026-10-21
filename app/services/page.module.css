@@ -145,6 +145,19 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+.policyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: var(--sp-3);
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--wine);
+}
+
 .policy h3 {
   font-size: 1.25rem;
   margin: 0 0 var(--sp-2);

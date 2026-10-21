@@ -16,20 +16,26 @@
  * ─────────────────────────────────────────────────────────────
  */
 
+import type { IconName } from "@/components/icon";
+
 export const business = {
-  name: "Pammi's Tailoring & Alterations",
-  // TODO: confirm how she wants her name shown on the site.
-  tailor: "TODO: full name",
+  name: "Pammi Penji's Tailoring & Alterations",
+  /**
+   * The name as a logo lockup: `shortName` large, `trade` small underneath.
+   * Shown in the header and footer. `shortName` alone also goes in tab
+   * titles, where the full name gets cut off. Both stay in English in
+   * Punjabi mode — they're the business's name, as on the logo.
+   */
+  shortName: "Pammi Penji",
+  trade: "Tailoring & Alterations",
+  /** Her full name. "Pammi" is what everyone calls her. */
+  tailor: "Parmjit Kaur Sajjan",
   tagline: "Punjabi Suits, Stitched to Measure",
   /** Shown in the hero, the footer and search results. Keep it short. */
   intro:
-    "Punjabi suits for women, made to fit you. Also turbans, patkas and small repairs.",
-  /** Shown on the About page. */
-  story:
-    "Pammi stitches every suit herself, one at a time. She measures you in person, so it fits the first time.",
-
-  // TODO: replace with her real city / service area.
-  city: "TODO: city",
+    "Punjabi suits for women, men and kids, made to fit you. Alterations on any clothes too.",
+  /** Shown on the Contact page and in the footer. */
+  city: "South Vancouver, BC",
 
   // Home-based tailors usually don't publish an address. Set to true only
   // once she's happy for it to be public.
@@ -37,10 +43,9 @@ export const business = {
   address: "TODO: address",
   addressNote: "You'll get the address once your order is confirmed.",
 
-  // TODO: replace with her real contact details.
   // Set any of these to null to hide them across the site.
-  email: "TODO@example.com" as string | null,
-  phone: null as string | null,
+  email: "parmjitksajjan@gmail.com" as string | null,
+  phone: "672-999-3798" as string | null,
   /** Digits only, with country code — used for the WhatsApp link. */
   whatsapp: null as string | null,
   instagram: null as string | null,
@@ -57,6 +62,56 @@ export const business = {
    * and the name is still spelled out beside it.
    */
   logoSrc: "/logo.jpeg" as string | null,
+};
+
+/* ── About her ─────────────────────────────────────────────── */
+
+export const about = {
+  /** A couple of short paragraphs. */
+  story: [
+    "Born and raised in Nawanshahr, Punjab, she loved sewing from a very young age. She learned from her mother and her four older sisters.",
+    "At 18 she moved to Vancouver, Canada. Today she sews every suit herself, one at a time, and measures you in person so it fits the first time.",
+  ],
+  /**
+   * Small things about her, each with a little drawing. `id` picks the
+   * drawing and links each fact to its Punjabi in lib/content-pa.ts.
+   */
+  facts: [
+    {
+      id: "chai",
+      title: "Chai first",
+      body: "A cup of Indian chai before, during and after every suit.",
+    },
+    {
+      id: "cooking",
+      title: "A great cook",
+      body: "Food from all over, but Punjabi food is her best.",
+    },
+    {
+      id: "dramas",
+      title: "Punjabi dramas",
+      body: "Her favourite thing to watch.",
+    },
+    {
+      id: "shopping",
+      title: "Loves shopping",
+      body: "So many clothes, some have to live at her siblings' houses.",
+    },
+  ] as {
+    id: "chai" | "cooking" | "dramas" | "shopping";
+    title: string;
+    body: string;
+  }[],
+  /**
+   * A photo of her, in /public. Set it to null to leave it off.
+   *
+   * A replacement photo should go through scripts/prepare-photo.mjs first,
+   * which strips the location data phones hide in photos. (This one was
+   * checked: it carries none.)
+   */
+  photo: "/parmjit-photo.jpeg" as string | null,
+  photoAlt:
+    "Parmjit Kaur Sajjan holding her blue cookie tin, open and full of thread spools.",
 };
 
 /**
@@ -85,9 +140,9 @@ export function instagramUrl(): string | null {
 /**
  * Everything she takes on.
  *
- * The women's Punjabi suits come first deliberately — that's the work. The
- * order of this list is the order they appear everywhere on the site, with
- * repairs last.
+ * Punjabi clothes are her main work — women's first, then men's and kids'
+ * — so they come first. The order of this list is the order they appear
+ * everywhere on the site, with alterations on other clothes last.
  *
  * `measurementGroups` decides which rough-size fields the order form offers —
  * see lib/measurements.ts for what each group contains. They're optional
@@ -130,7 +185,7 @@ export type MeasurementGroupId = "upper" | "sleeve" | "kameez" | "bottom";
 export const garments: Garment[] = [
   {
     slug: "salwar-kameez",
-    name: "Punjabi Suit",
+    name: "Women's Punjabi Suit",
     otherNames: "salwar kameez",
     kind: "stitching",
     image: "/gallery/placeholder-1.svg",
@@ -149,7 +204,6 @@ export const garments: Garment[] = [
     turnaroundDays: 14,
     summary: "With a full, pleated Patiala salwar.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
-    popular: true,
   },
   {
     slug: "anarkali",
@@ -160,7 +214,6 @@ export const garments: Garment[] = [
     turnaroundDays: 21,
     summary: "Fitted on top, flared from the waist.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
-    popular: true,
   },
   {
     slug: "sharara-palazzo",
@@ -183,6 +236,29 @@ export const garments: Garment[] = [
     measurementGroups: ["upper", "sleeve", "kameez"],
   },
   {
+    slug: "kurta-pyjama",
+    name: "Men's Kurta Pyjama",
+    otherNames: "men's Punjabi suit",
+    kind: "stitching",
+    image: "/gallery/placeholder-10.svg",
+    price: null,
+    turnaroundDays: 14,
+    summary: "The men's Punjabi suit, made to fit.",
+    measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
+    popular: true,
+  },
+  {
+    slug: "kids-suits",
+    name: "Kids' Punjabi Suits",
+    kind: "stitching",
+    image: "/gallery/placeholder-11.svg",
+    price: null,
+    turnaroundDays: 10,
+    summary: "For boys and girls, any age.",
+    measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
+    popular: true,
+  },
+  {
     slug: "turbans-patkas",
     name: "Turbans & Patkas",
     otherNames: "pagg, dastaar",
@@ -197,12 +273,12 @@ export const garments: Garment[] = [
   },
   {
     slug: "repairs",
-    name: "Repairs & Hemming",
+    name: "Alterations & Repairs",
     kind: "repair",
     image: "/gallery/placeholder-9.svg",
     price: null,
     turnaroundDays: 5,
-    summary: "Small rips, split seams and hems, on any clothes.",
+    summary: "Take in, let out, hem or fix any clothes.",
     // Nothing to measure — a repair needs a description and a photo, and the
     // order form asks for exactly that instead.
     measurementGroups: [],
@@ -215,20 +291,25 @@ export function getGarment(slug: string): Garment | undefined {
 
 /* ── How it works ──────────────────────────────────────────── */
 
-export const steps = [
+/** Each step's `icon` is a drawing from components/icon.tsx. */
+export const steps: { icon: IconName; title: string; body: string }[] = [
   {
+    icon: "order",
     title: "Send your order",
     body: "Tell her what you want. Add a photo if you have one.",
   },
   {
+    icon: "tag",
     title: "Get a price",
     body: "She'll message you with the price and a date.",
   },
   {
+    icon: "tape",
     title: "Get measured",
     body: "Bring your fabric. She measures you in person.",
   },
   {
+    icon: "hanger",
     title: "Collect it",
     body: "Small fixes after you try it on are free.",
   },
@@ -365,25 +446,29 @@ export function getStatus(value: string) {
 /* ── Policies ──────────────────────────────────────────────── */
 
 /**
- * TODO: confirm these with her — they're sensible defaults, not her words.
- * A policy whose body starts with "TODO" is hidden from customers.
+ * A policy whose body starts with "TODO" is hidden from customers. Each
+ * `icon` is a drawing from components/icon.tsx.
  */
-export const policies = [
+export const policies: { icon: IconName; title: string; body: string }[] = [
   {
+    icon: "tag",
     title: "Price first",
     body: "You'll know the price before any work starts.",
   },
   {
+    icon: "tape",
     title: "She measures you",
     body: "Sizes on the order form are only a rough guide.",
   },
   {
+    icon: "needle",
     title: "Free small fixes",
     body: "Small changes after your first try-on are free.",
   },
   {
+    icon: "cash",
     title: "Payment",
-    body: "TODO: confirm how she takes payment (cash, e-transfer, deposit up front?).",
+    body: "E-transfer or cash only.",
   },
 ];
 
@@ -451,6 +536,18 @@ export const gallery: GalleryItem[] = [
     garment: "sharara-palazzo",
   },
   {
+    src: "/gallery/placeholder-10.svg",
+    alt: "Illustration of a men's kurta pyjama",
+    caption: "Men's kurta pyjama",
+    garment: "kurta-pyjama",
+  },
+  {
+    src: "/gallery/placeholder-11.svg",
+    alt: "Illustration of Punjabi suits for a girl and a boy",
+    caption: "Kids' suits",
+    garment: "kids-suits",
+  },
+  {
     src: "/gallery/placeholder-7.svg",
     alt: "Illustration of a child's patka tied over the joora",
     caption: "Children's patkas",
@@ -461,6 +558,53 @@ export const gallery: GalleryItem[] = [
     alt: "Illustration of a tied turban with a length of cloth",
     caption: "Turbans",
     garment: "turbans-patkas",
+  },
+];
+
+/* ── Examples ──────────────────────────────────────────────── */
+
+/**
+ * Made-up examples, shown on the Gallery page, of how a job goes from what
+ * someone asks for to the finished result. They're labelled as examples on
+ * the page — not customer reviews — so keep them general.
+ */
+export const examples = [
+  {
+    id: "hem",
+    image: "/gallery/placeholder-9.svg",
+    title: "Pants too long",
+    asked: "New pants that are too long.",
+    steps: [
+      "She measures your leg.",
+      "She marks the right length.",
+      "She hems the pants.",
+    ],
+    result: "Pants that sit just right.",
+  },
+  {
+    id: "resize",
+    image: "/gallery/placeholder-9.svg",
+    title: "Pants don't fit any more",
+    asked: "You lost or gained weight, and your pants are too loose or too tight.",
+    steps: [
+      "You try them on and she pins them.",
+      "She takes them in, or lets them out.",
+      "You try them again to check.",
+    ],
+    result: "The same pants, fitting again.",
+  },
+  {
+    id: "suit",
+    image: "/gallery/placeholder-1.svg",
+    title: "A suit from a photo",
+    asked: "A Punjabi suit like one in a photo.",
+    steps: [
+      "You send the photo and bring your fabric.",
+      "She measures you in person.",
+      "She cuts and stitches the suit.",
+      "You try it on, and she fixes any small things.",
+    ],
+    result: "The suit you wanted, made to fit you.",
   },
 ];
 
@@ -482,6 +626,10 @@ export const faqs = [
   {
     q: "How long does it take?",
     a: "About two weeks for a suit. Book early in wedding season.",
+  },
+  {
+    q: "Do you only do Punjabi clothes?",
+    a: "Punjabi clothes are her main work, but she can alter and tailor other clothes too.",
   },
   {
     q: "How do turbans and patkas work?",

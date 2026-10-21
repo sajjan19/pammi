@@ -34,6 +34,7 @@ const en = {
     measuring: "Measuring",
     about: "About",
     contact: "Contact",
+    myOrder: "My order",
     order: "Start an order",
     openMenu: "Open menu",
     closeMenu: "Close menu",
@@ -85,6 +86,11 @@ const en = {
     ledeDrawn: "A few things she makes.",
     ledeReal: "Some of her finished work.",
     drawingsNotice: "These are drawings. Real photos are coming soon.",
+    examplesTitle: "For example",
+    examplesLede: "How a job goes, from what you ask for to the result.",
+    asked: "You ask for",
+    steps: "What she does",
+    result: "Result",
   },
 
   measuring: {
@@ -107,8 +113,10 @@ const en = {
   },
 
   about: {
-    titleNamed: (name: string) => `Meet ${name}`,
-    titleDefault: "About Pammi",
+    title: "Meet Pammi",
+    lede: (fullName: string) =>
+      `${fullName}. Everyone calls her Pammi Penji, and penji means sister in Punjabi.`,
+    factsTitle: "A few things about her",
   },
 
   contact: {
@@ -232,6 +240,7 @@ const en = {
     updated: "Last update",
     neededBy: "Needed by",
     price: "Price",
+    message: "Message from Pammi Penji",
     questions: "Questions? Contact her with your order number.",
     contact: "Contact",
     missing: "Please enter your order number and email.",
@@ -262,6 +271,7 @@ const pa: Dictionary = {
     measuring: "ਨਾਪ",
     about: "ਸਾਡੇ ਬਾਰੇ",
     contact: "ਸੰਪਰਕ",
+    myOrder: "ਮੇਰਾ ਆਰਡਰ",
     order: "ਆਰਡਰ ਦਿਓ",
     openMenu: "ਮੀਨੂ ਖੋਲ੍ਹੋ",
     closeMenu: "ਮੀਨੂ ਬੰਦ ਕਰੋ",
@@ -313,6 +323,11 @@ const pa: Dictionary = {
     ledeDrawn: "ਕੁਝ ਚੀਜ਼ਾਂ ਜੋ ਉਹ ਬਣਾਉਂਦੇ ਹਨ।",
     ledeReal: "ਉਨ੍ਹਾਂ ਦਾ ਕੁਝ ਤਿਆਰ ਕੰਮ।",
     drawingsNotice: "ਇਹ ਚਿੱਤਰ ਹਨ। ਅਸਲ ਫ਼ੋਟੋਆਂ ਜਲਦੀ ਆਉਣਗੀਆਂ।",
+    examplesTitle: "ਉਦਾਹਰਣਾਂ",
+    examplesLede: "ਕੰਮ ਕਿਵੇਂ ਹੁੰਦਾ ਹੈ, ਤੁਹਾਡੀ ਮੰਗ ਤੋਂ ਨਤੀਜੇ ਤੱਕ।",
+    asked: "ਤੁਸੀਂ ਮੰਗਦੇ ਹੋ",
+    steps: "ਉਹ ਕੀ ਕਰਦੇ ਹਨ",
+    result: "ਨਤੀਜਾ",
   },
 
   measuring: {
@@ -335,8 +350,9 @@ const pa: Dictionary = {
   },
 
   about: {
-    titleNamed: (name: string) => `${name} ਨੂੰ ਮਿਲੋ`,
-    titleDefault: "ਪੰਮੀ ਜੀ ਬਾਰੇ",
+    title: "ਪੰਮੀ ਜੀ ਨੂੰ ਮਿਲੋ",
+    lede: (fullName: string) => `${fullName}। ਸਾਰੇ ਉਨ੍ਹਾਂ ਨੂੰ ਪੰਮੀ ਭੈਣ ਜੀ ਕਹਿੰਦੇ ਹਨ।`,
+    factsTitle: "ਉਨ੍ਹਾਂ ਬਾਰੇ ਕੁਝ ਗੱਲਾਂ",
   },
 
   contact: {
@@ -460,6 +476,7 @@ const pa: Dictionary = {
     updated: "ਆਖ਼ਰੀ ਬਦਲਾਅ",
     neededBy: "ਕਦੋਂ ਤੱਕ ਚਾਹੀਦਾ",
     price: "ਕੀਮਤ",
+    message: "ਪੰਮੀ ਭੈਣ ਜੀ ਵੱਲੋਂ ਸੁਨੇਹਾ",
     questions: "ਕੋਈ ਸਵਾਲ? ਆਪਣੇ ਆਰਡਰ ਨੰਬਰ ਨਾਲ ਸੰਪਰਕ ਕਰੋ।",
     contact: "ਸੰਪਰਕ ਕਰੋ",
     missing: "ਕਿਰਪਾ ਕਰਕੇ ਆਰਡਰ ਨੰਬਰ ਅਤੇ ਈਮੇਲ ਦੋਵੇਂ ਲਿਖੋ।",

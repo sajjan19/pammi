@@ -83,6 +83,35 @@
   transform: rotate(-1deg);
 }
 
+/* Sewing tools tucked into the gaps between the pictures — top right above
+   the second print, bottom left and bottom right beside the third. */
+.tool {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.toolScissors {
+  top: 0;
+  right: 6%;
+  color: var(--wine);
+  transform: rotate(28deg);
+}
+
+.toolSpool {
+  bottom: 4%;
+  left: 3%;
+  color: var(--gold);
+  transform: rotate(-12deg);
+}
+
+.toolButton {
+  bottom: 2%;
+  right: 8%;
+  color: var(--wine);
+  transform: rotate(15deg);
+}
+
 /* A small lift on hover, so it feels like you could pick one up. */
 .collage:hover .frame0 {
   transform: rotate(-5deg) translateY(-4px);
@@ -212,23 +241,43 @@
   display: grid;
   gap: var(--sp-6);
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  counter-reset: step;
 }
 
 .step {
-  counter-increment: step;
   padding-top: var(--sp-5);
   border-top: 2px solid var(--sand);
 }
 
-.step::before {
-  content: "0" counter(step);
-  display: block;
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  color: var(--gold);
-  line-height: 1;
-  margin-bottom: var(--sp-3);
+/* Each step's tool in a white circle, with its number in a small badge so
+   the order still reads at a glance. */
+.stepIcon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: var(--sp-4);
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--wine);
+}
+
+.stepNumber {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--gold-bright);
+  color: var(--char);
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 .stepTitle {

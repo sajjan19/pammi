@@ -31,6 +31,7 @@ export type OrderRow = {
   status: OrderStatus;
   quoted_price: number | null;
   private_notes: string | null;
+  customer_message: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -99,77 +100,68 @@ export type NewOrder = {
 };
 
 /**
- * Writes the order and its photo records in one transaction, so a failure
- * halfway through can never leave an order without its reference photos.
- *
- * Built on demand rather than at module scope: preparing a statement opens
- * the database, and importing this file must not do that — see lib/db.ts.
+ * Writes the order and its photos in one transaction, so a failure halfway
+ * through can never leave an order without its reference photos.
  */
-function createOrderTx(order: NewOrder, reference: string): number {
-  const db = getDb();
+async function createOrderTx(order: NewOrder, reference: string): Promise<void> {
+  const db = await getDb();
+  const now = new Date().toISOString();
+  const tx = await db.transaction("write");
 
-  const insertOrder = db.prepare(`
-    INSERT INTO orders (
-      reference, garment_slug, garment_name, quantity, occasion, needed_by,
-      fabric_source, fabric_notes, neckline, sleeve_style, lining,
-      measurement_source, measurements, customer_name, email, phone,
-      contact_preference, notes, status, created_at, updated_at
-    ) VALUES (
-      @reference, @garmentSlug, @garmentName, @quantity, @occasion, @neededBy,
-      @fabricSource, @fabricNotes, @neckline, @sleeveStyle, @lining,
-      @measurementSource, @measurements, @name, @email, @phone,
-      @contactPreference, @notes, 'new', @now, @now
-    )
-  `);
-
-  const insertPhoto = db.prepare(`
-    INSERT INTO order_photos (order_id, filename, mime, bytes, created_at)
-    VALUES (?, ?, ?, ?, ?)
-  `);
-
-  const run = db.transaction(() => {
-    const now = new Date().toISOString();
-
-    const result = insertOrder.run({
-      reference,
-      garmentSlug: order.garmentSlug,
-      garmentName: order.garmentName,
-      quantity: order.quantity,
-      occasion: order.occasion || null,
-      neededBy: order.neededBy || null,
-      fabricSource: order.fabricSource,
-      fabricNotes: order.fabricNotes || null,
-      neckline: order.neckline || null,
-      sleeveStyle: order.sleeveStyle || null,
-      lining: order.lining ? 1 : 0,
-      measurementSource: order.measurementSource,
-      measurements: JSON.stringify(order.measurements),
-      name: order.name,
-      email: order.email,
-      phone: order.phone,
-      contactPreference: order.contactPreference || null,
-      notes: order.notes || null,
-      now,
+  try {
+    const result = await tx.execute({
+      sql: `INSERT INTO orders (
+        reference, garment_slug, garment_name, quantity, occasion, needed_by,
+        fabric_source, fabric_notes, neckline, sleeve_style, lining,
+        measurement_source, measurements, customer_name, email, phone,
+        contact_preference, notes, status, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'new', ?, ?)`,
+      args: [
+        reference,
+        order.garmentSlug,
+        order.garmentName,
+        order.quantity,
+        order.occasion || null,
+        order.neededBy || null,
+        order.fabricSource,
+        order.fabricNotes || null,
+        order.neckline || null,
+        order.sleeveStyle || null,
+        order.lining ? 1 : 0,
+        order.measurementSource,
+        JSON.stringify(order.measurements),
+        order.name,
+        order.email,
+        order.phone,
+        order.contactPreference || null,
+        order.notes || null,
+        now,
+        now,
+      ],
     });
 
     const orderId = Number(result.lastInsertRowid);
     for (const photo of order.photos) {
-      insertPhoto.run(orderId, photo.filename, photo.mime, photo.bytes, now);
+      await tx.execute({
+        sql: `INSERT INTO order_photos (order_id, filename, mime, bytes, data, created_at)
+              VALUES (?, ?, ?, ?, ?, ?)`,
+        args: [orderId, photo.filename, photo.mime, photo.bytes, photo.data, now],
+      });
     }
 
-    return orderId;
-  });
-
-  return run();
+    await tx.commit();
+  } finally {
+    tx.close();
+  }
 }
 
-export function createOrder(order: NewOrder): { reference: string } {
+export async function createOrder(order: NewOrder): Promise<{ reference: string }> {
   // A collision is vanishingly unlikely, but the column is UNIQUE — retry
   // rather than throwing a database error at the customer.
   for (let attempt = 0; attempt < 5; attempt++) {
     const reference = newReference();
     try {
-      createOrderTx(order, reference);
+      await createOrderTx(order, reference);
       return { reference };
     } catch (error) {
       const message = error instanceof Error ? error.message : "";
@@ -179,87 +171,134 @@ export function createOrder(order: NewOrder): { reference: string } {
   throw new Error("Could not allocate an order reference.");
 }
 
-export function updateOrderStatus(id: number, status: OrderStatus): void {
-  getDb().prepare(
-    `UPDATE orders SET status = ?, updated_at = ? WHERE id = ?`,
-  ).run(status, new Date().toISOString(), id);
+export async function updateOrderStatus(id: number, status: OrderStatus): Promise<void> {
+  await (await getDb()).execute({
+    sql: `UPDATE orders SET status = ?, updated_at = ? WHERE id = ?`,
+    args: [status, new Date().toISOString(), id],
+  });
 }
 
-export function updateOrderDetails(
+export async function updateOrderDetails(
   id: number,
-  { quotedPrice, privateNotes }: { quotedPrice: number | null; privateNotes: string },
-): void {
-  getDb().prepare(
-    `UPDATE orders SET quoted_price = ?, private_notes = ?, updated_at = ?
-     WHERE id = ?`,
-  ).run(quotedPrice, privateNotes || null, new Date().toISOString(), id);
+  {
+    quotedPrice,
+    privateNotes,
+    customerMessage,
+  }: { quotedPrice: number | null; privateNotes: string; customerMessage: string },
+): Promise<void> {
+  await (await getDb()).execute({
+    sql: `UPDATE orders SET quoted_price = ?, private_notes = ?, customer_message = ?,
+            updated_at = ?
+          WHERE id = ?`,
+    args: [
+      quotedPrice,
+      privateNotes || null,
+      customerMessage || null,
+      new Date().toISOString(),
+      id,
+    ],
+  });
 }
 
-/** Returns the photo filenames so the caller can delete them from disk. */
-export function deleteOrder(id: number): string[] {
-  const db = getDb();
-
-  const photos = db
-    .prepare(`SELECT filename FROM order_photos WHERE order_id = ?`)
-    .all(id) as { filename: string }[];
-
-  db.prepare(`DELETE FROM orders WHERE id = ?`).run(id);
-  return photos.map((p) => p.filename);
+/** Deletes the order and its photos together. */
+export async function deleteOrder(id: number): Promise<void> {
+  // Photos first, explicitly: a hosted database doesn't promise to enforce
+  // ON DELETE CASCADE.
+  await (await getDb()).batch(
+    [
+      { sql: `DELETE FROM order_photos WHERE order_id = ?`, args: [id] },
+      { sql: `DELETE FROM orders WHERE id = ?`, args: [id] },
+    ],
+    "write",
+  );
 }
 
 /* ── Reads ─────────────────────────────────────────────────── */
 
-function photosFor(orderId: number): PhotoRow[] {
-  return getDb()
-    .prepare(`SELECT * FROM order_photos WHERE order_id = ? ORDER BY id`)
-    .all(orderId) as PhotoRow[];
+/** Photo details without the image bytes, which only the photo route needs. */
+const PHOTO_COLUMNS = "id, order_id, filename, mime, bytes, created_at";
+
+// libsql returns rows as plain objects with these columns; this just tells
+// TypeScript which columns they are.
+function as<T>(rows: unknown[]): T[] {
+  return rows as T[];
 }
 
-export function listOrders(status?: OrderStatus | "all"): Order[] {
-  const db = getDb();
+async function photosFor(orderIds: number[]): Promise<Map<number, PhotoRow[]>> {
+  const byOrder = new Map<number, PhotoRow[]>();
+  if (orderIds.length === 0) return byOrder;
 
-  const rows = (
+  const { rows } = await (await getDb()).execute({
+    sql: `SELECT ${PHOTO_COLUMNS} FROM order_photos
+          WHERE order_id IN (${orderIds.map(() => "?").join(",")}) ORDER BY id`,
+    args: orderIds,
+  });
+
+  for (const photo of as<PhotoRow>(rows)) {
+    const list = byOrder.get(photo.order_id) ?? [];
+    list.push(photo);
+    byOrder.set(photo.order_id, list);
+  }
+  return byOrder;
+}
+
+async function withPhotos(rows: OrderRow[]): Promise<Order[]> {
+  const photos = await photosFor(rows.map((row) => row.id));
+  return rows.map((row) => hydrate(row, photos.get(row.id) ?? []));
+}
+
+export async function listOrders(status?: OrderStatus | "all"): Promise<Order[]> {
+  const db = await getDb();
+
+  const { rows } =
     !status || status === "all"
-      ? db.prepare(`SELECT * FROM orders ORDER BY created_at DESC`).all()
-      : db
-          .prepare(
-            `SELECT * FROM orders WHERE status = ? ORDER BY created_at DESC`,
-          )
-          .all(status)
-  ) as OrderRow[];
+      ? await db.execute(`SELECT * FROM orders ORDER BY created_at DESC`)
+      : await db.execute({
+          sql: `SELECT * FROM orders WHERE status = ? ORDER BY created_at DESC`,
+          args: [status],
+        });
 
-  return rows.map((row) => hydrate(row, photosFor(row.id)));
+  return withPhotos(as<OrderRow>(rows));
 }
 
-export function getOrder(id: number): Order | null {
-  const row = getDb().prepare(`SELECT * FROM orders WHERE id = ?`).get(id) as
-    | OrderRow
-    | undefined;
-  return row ? hydrate(row, photosFor(row.id)) : null;
+export async function getOrder(id: number): Promise<Order | null> {
+  const { rows } = await (await getDb()).execute({
+    sql: `SELECT * FROM orders WHERE id = ?`,
+    args: [id],
+  });
+  const [order] = await withPhotos(as<OrderRow>(rows));
+  return order ?? null;
 }
 
-export function getOrderByReference(reference: string): Order | null {
-  const row = getDb()
-    .prepare(`SELECT * FROM orders WHERE reference = ?`)
-    .get(reference.toUpperCase()) as OrderRow | undefined;
-  return row ? hydrate(row, photosFor(row.id)) : null;
+export async function getOrderByReference(reference: string): Promise<Order | null> {
+  const { rows } = await (await getDb()).execute({
+    sql: `SELECT * FROM orders WHERE reference = ?`,
+    args: [reference.toUpperCase()],
+  });
+  const [order] = await withPhotos(as<OrderRow>(rows));
+  return order ?? null;
 }
 
-export function getPhoto(id: number): PhotoRow | null {
-  const row = getDb()
-    .prepare(`SELECT * FROM order_photos WHERE id = ?`)
-    .get(id) as
-    | PhotoRow
-    | undefined;
-  return row ?? null;
+/** One photo, with its image bytes, for the admin photo route. */
+export async function getPhoto(
+  id: number,
+): Promise<(PhotoRow & { data: ArrayBuffer | null }) | null> {
+  const { rows } = await (await getDb()).execute({
+    sql: `SELECT ${PHOTO_COLUMNS}, data FROM order_photos WHERE id = ?`,
+    args: [id],
+  });
+  const [photo] = as<PhotoRow & { data: ArrayBuffer | null }>(rows);
+  return photo ?? null;
 }
 
-export function statusCounts(): Record<string, number> {
-  const rows = getDb()
-    .prepare(`SELECT status, COUNT(*) AS count FROM orders GROUP BY status`)
-    .all() as { status: string; count: number }[];
+export async function statusCounts(): Promise<Record<string, number>> {
+  const { rows } = await (await getDb()).execute(
+    `SELECT status, COUNT(*) AS count FROM orders GROUP BY status`,
+  );
 
   const counts: Record<string, number> = {};
-  for (const row of rows) counts[row.status] = row.count;
+  for (const row of as<{ status: string; count: number }>(rows)) {
+    counts[row.status] = Number(row.count);
+  }
   return counts;
 }

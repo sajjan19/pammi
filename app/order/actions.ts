@@ -7,7 +7,6 @@ import { groupsFor, parseMeasurements } from "@/lib/measurements";
 import { createOrder } from "@/lib/orders";
 import {
   MAX_PHOTOS,
-  deletePhotoFiles,
   savePhotos,
   type PhotoError,
 } from "@/lib/uploads";
@@ -108,8 +107,7 @@ export async function submitOrder(
     return { status: "error", message: e.checkFields, fieldErrors };
   }
 
-  // Photos are written only once everything else has passed, so a rejected
-  // form never leaves stray files on disk.
+  // Photos are read only once everything else has passed.
   const files = formData.getAll("photos").filter((f): f is File => f instanceof File);
   const saved = await savePhotos(files);
   if (!saved.ok) {
@@ -119,7 +117,7 @@ export async function submitOrder(
   try {
     // The English garment name is what's stored, so the admin page reads the
     // same whichever language the order came in.
-    const { reference } = createOrder({
+    const { reference } = await createOrder({
       garmentSlug: garment.slug,
       garmentName: garment.name,
       quantity,
@@ -142,8 +140,6 @@ export async function submitOrder(
 
     return { status: "success", reference };
   } catch {
-    // The order row never landed, so its photos are orphans — clean them up.
-    await deletePhotoFiles(saved.photos.map((p) => p.filename));
     return { status: "error", message: e.generic };
   }
 }

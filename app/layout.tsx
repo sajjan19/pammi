@@ -51,7 +51,9 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: {
       default: `${business.name} — ${business.tagline}`,
-      template: `%s — ${business.name}`,
+      // Inner pages use the short name: browser tabs cut long titles off,
+      // and "Gallery — Pammi Penji" survives that better.
+      template: `%s — ${business.shortName}`,
     },
     description: business.intro,
     openGraph: {

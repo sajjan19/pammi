@@ -10,7 +10,9 @@
  */
 
 import {
+  about,
   business,
+  examples,
   faqs,
   fabricSources,
   gallery,
@@ -26,7 +28,9 @@ import {
   type GalleryItem,
 } from "@/lib/content";
 import {
+  aboutPa,
   businessPa,
+  examplesPa,
   fabricSourcesPa,
   faqsPa,
   galleryPa,
@@ -81,21 +85,34 @@ export function getContent(lang: Lang) {
   return {
     business: pa ? { ...business, ...businessPa } : business,
 
+    about: {
+      story: pa ? aboutPa.story : about.story,
+      facts: about.facts.map((fact) =>
+        pa ? { ...fact, ...aboutPa.facts[fact.id] } : fact,
+      ),
+      photo: about.photo,
+      photoAlt: pa ? aboutPa.photoAlt : about.photoAlt,
+    },
+
     garments: garments.map((g) => localizeGarment(g, lang)),
 
-    steps: pa ? stepsPa : steps,
+    // Punjabi steps and policies hold only words; laying them over the
+    // English by position keeps each one's drawing.
+    steps: steps.map((step, i) => (pa ? { ...step, ...stepsPa[i] } : step)),
 
     // A policy still marked TODO isn't something to show a customer — this
     // is how the unfinished payment line stays off the Services page.
-    policies: (pa ? policiesPa : policies).filter(
-      (policy) => !isPlaceholder(policy.body),
-    ),
+    policies: policies
+      .map((policy, i) => (pa ? { ...policy, ...policiesPa[i] } : policy))
+      .filter((policy) => !isPlaceholder(policy.body)),
 
     gallery: gallery.map(
       (item): GalleryItem => (pa ? { ...item, ...galleryPa[item.src] } : item),
     ),
 
     faqs: pa ? faqsPa : faqs,
+
+    examples: examples.map((ex) => (pa ? { ...ex, ...examplesPa[ex.id] } : ex)),
 
     fabricSources: fabricSources.map((source) =>
       pa ? { ...source, ...fabricSourcesPa[source.value] } : source,

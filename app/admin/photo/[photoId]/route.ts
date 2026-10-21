@@ -1,11 +1,10 @@
 import { isAdmin } from "@/lib/auth";
 import { getPhoto } from "@/lib/orders";
-import { readPhoto } from "@/lib/uploads";
 
 /**
  * Serves a customer's reference photo.
  *
- * These live outside /public precisely so they can't be reached without a
+ * These are kept out of /public precisely so they can't be reached without a
  * session — inspiration photos are often pictures of the customer themselves.
  */
 export async function GET(
@@ -22,20 +21,15 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
-  const photo = getPhoto(id);
-  if (!photo) {
+  const photo = await getPhoto(id);
+  if (!photo?.data) {
     return new Response("Not found", { status: 404 });
   }
 
-  const data = await readPhoto(photo.filename);
-  if (!data) {
-    return new Response("Not found", { status: 404 });
-  }
-
-  return new Response(new Uint8Array(data), {
+  return new Response(new Uint8Array(photo.data), {
     headers: {
       "Content-Type": photo.mime,
-      "Content-Length": String(photo.bytes),
+      "Content-Length": String(photo.data.byteLength),
       // Private: these must never end up in a shared or CDN cache.
       "Cache-Control": "private, max-age=3600",
     },

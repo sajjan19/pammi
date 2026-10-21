@@ -11,6 +11,18 @@
   border-radius: var(--radius-lg);
 }
 
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: var(--sp-3);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--wine);
+}
+
 .pointTitle {
   font-size: 1.5rem;
   margin: 0 0 var(--sp-2);

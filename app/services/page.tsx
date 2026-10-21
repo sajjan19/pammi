@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
 import { getLang } from "@/lib/i18n-server";
 import { getContent } from "@/lib/localize";
+import { Icon } from "@/components/icon";
 import { Illustration } from "@/components/illustration";
 import { PageHeader } from "@/components/page-header";
 import styles from "./page.module.css";
@@ -75,6 +76,9 @@ export default async function ServicesPage() {
             <div className={styles.policies}>
               {policies.map((policy) => (
                 <div key={policy.title} className={styles.policy}>
+                  <span className={styles.policyIcon} aria-hidden="true">
+                    <Icon name={policy.icon} size={26} />
+                  </span>
                   <h3>{policy.title}</h3>
                   <p>{policy.body}</p>
                 </div>

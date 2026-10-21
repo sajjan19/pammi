@@ -1,20 +1,23 @@
 import "server-only";
 
 import crypto from "node:crypto";
-import fs from "node:fs/promises";
-import path from "node:path";
-import { uploadDir } from "@/lib/db";
 
 /**
  * Reference photos customers attach to an order.
  *
- * They're written outside /public and served only through the admin photo
- * route, because a customer's inspiration photo is often a picture of
- * themselves — it shouldn't be sitting on a guessable public URL.
+ * They're stored in the database with the order and served only through the
+ * admin photo route, because a customer's inspiration photo is often a
+ * picture of themselves — it shouldn't be sitting on a guessable public URL.
  */
 
 export const MAX_PHOTOS = 4;
-export const MAX_PHOTO_BYTES = 8 * 1024 * 1024; // 8 MB
+
+/**
+ * Vercel turns away any request over 4.5 MB, so all the photos together
+ * must fit under that. The order form shrinks photos in the browser before
+ * sending them, which keeps them well inside it — see lib/shrink-photo.ts.
+ */
+export const MAX_PHOTO_BYTES = 4 * 1024 * 1024;
 
 const ALLOWED: Record<string, string> = {
   "image/jpeg": ".jpg",
@@ -24,7 +27,12 @@ const ALLOWED: Record<string, string> = {
   "image/heif": ".heif",
 };
 
-export type SavedPhoto = { filename: string; mime: string; bytes: number };
+export type SavedPhoto = {
+  filename: string;
+  mime: string;
+  bytes: number;
+  data: Uint8Array;
+};
 
 /**
  * Why a set of photos was turned away. Codes rather than sentences, so the
@@ -36,12 +44,7 @@ export type PhotoError =
   | { code: "tooBig"; name: string }
   | { code: "saveFailed" };
 
-/**
- * Validates and writes uploaded files to disk.
- *
- * Nothing is written until every file has passed validation, so a rejected
- * third photo doesn't leave the first two orphaned on disk.
- */
+/** Checks the uploaded files and reads them, ready to store with the order. */
 export async function savePhotos(
   files: File[],
 ): Promise<{ ok: true; photos: SavedPhoto[] } | { ok: false; error: PhotoError }> {
@@ -52,7 +55,7 @@ export async function savePhotos(
     return { ok: false, error: { code: "tooMany" } };
   }
 
-  const staged: { filename: string; mime: string; buffer: Buffer }[] = [];
+  const photos: SavedPhoto[] = [];
 
   for (const file of real) {
     const ext = ALLOWED[file.type];
@@ -63,58 +66,18 @@ export async function savePhotos(
       return { ok: false, error: { code: "tooBig", name: file.name } };
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    staged.push({
-      filename: `${crypto.randomUUID()}${ext}`,
-      mime: file.type,
-      buffer,
-    });
-  }
-
-  await fs.mkdir(uploadDir, { recursive: true });
-
-  const written: SavedPhoto[] = [];
-  try {
-    for (const item of staged) {
-      await fs.writeFile(path.join(uploadDir, item.filename), item.buffer);
-      written.push({
-        filename: item.filename,
-        mime: item.mime,
-        bytes: item.buffer.byteLength,
+    try {
+      const data = new Uint8Array(await file.arrayBuffer());
+      photos.push({
+        filename: `${crypto.randomUUID()}${ext}`,
+        mime: file.type,
+        bytes: data.byteLength,
+        data,
       });
+    } catch {
+      return { ok: false, error: { code: "saveFailed" } };
     }
-  } catch {
-    await deletePhotoFiles(written.map((w) => w.filename));
-    return { ok: false, error: { code: "saveFailed" } };
   }
 
-  return { ok: true, photos: written };
-}
-
-export async function readPhoto(
-  filename: string,
-): Promise<Buffer | null> {
-  // Defence in depth: the filename always comes from our own database, but a
-  // path separator here would otherwise read anywhere on disk.
-  if (filename.includes("/") || filename.includes("\\") || filename.includes("..")) {
-    return null;
-  }
-  try {
-    return await fs.readFile(path.join(uploadDir, filename));
-  } catch {
-    return null;
-  }
-}
-
-export async function deletePhotoFiles(filenames: string[]): Promise<void> {
-  await Promise.all(
-    filenames.map(async (filename) => {
-      if (filename.includes("/") || filename.includes("\\")) return;
-      try {
-        await fs.unlink(path.join(uploadDir, filename));
-      } catch {
-        // Already gone — nothing to do.
-      }
-    }),
-  );
+  return { ok: true, photos };
 }

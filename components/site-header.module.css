@@ -16,8 +16,8 @@
   min-height: 72px;
 }
 
-/* The business name is long, so the brand block is allowed to shrink and
-   wrap rather than shoving the buttons off the side of a phone. */
+/* The brand never wraps — "Pammi Penji" over its trade line is short enough
+   to sit beside the buttons even on a small phone. */
 .brand {
   display: inline-flex;
   align-items: center;
@@ -34,25 +34,29 @@
   flex-shrink: 0;
 }
 
+/* The name as a lockup: "Pammi Penji" large, the trade small beneath. */
 .brandText {
   display: flex;
   flex-direction: column;
-  line-height: 1.1;
   min-width: 0;
 }
 
 .brandName {
   font-family: var(--font-display);
-  font-size: clamp(1rem, 3.6vw, 1.25rem);
-  letter-spacing: 0.01em;
-  line-height: 1.15;
+  font-size: clamp(1.375rem, 4.6vw, 1.625rem);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .brandTag {
-  font-size: 0.5625rem;
-  letter-spacing: 0.2em;
+  margin-top: 3px;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--stone);
+  color: var(--wine);
+  white-space: nowrap;
 }
 
 /* In the markup the buttons come before the menu (see site-header.tsx); on
@@ -171,11 +175,11 @@
 
 /* ── Phones and tablets: a full-screen menu ── */
 
-/* Measured, not guessed: in English the menu row needs about 560px, the
-   language switch about 100px, and the business name needs ~260px to sit
-   on two tidy lines. Below roughly 1000px wide that no longer fits, so from
-   1024px down the row folds into the menu button. Punjabi labels are
-   shorter, so the English figure is the one that decides it. */
+/* Measured, not guessed: in English the menu row needs about 560px and the
+   language switch about 100px, beside the name. Below roughly 1000px wide
+   that no longer fits comfortably, so from 1024px down the row folds into
+   the menu button. Punjabi labels are shorter, so the English figure is the
+   one that decides it. */
 @media (max-width: 1024px) {
   .toggle {
     display: inline-flex;
@@ -264,10 +268,11 @@
   }
 }
 
-/* On the narrowest phones the tagline is the first thing to go — the name
-   and reachable buttons matter more. */
+/* On the narrowest phones the trade line tightens its spacing rather than
+   disappearing — it's part of the name. */
 @media (max-width: 420px) {
   .brandTag {
-    display: none;
+    font-size: 0.5625rem;
+    letter-spacing: 0.08em;
   }
 }

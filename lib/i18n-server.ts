@@ -11,7 +11,14 @@ import { LANG_COOKIE, isLang, langFromAcceptLanguage, type Lang } from "@/lib/i1
  * build time. That's fine here: the site already needs a running server for
  * its database, and the pages are small.
  */
+const SWITCH_OFF = true;
+
 export async function getLang(): Promise<Lang> {
+  // The language switch is switched off for now, so the site is English
+  // only. Delete this line (and put <LanguageSwitch> back in the header) to
+  // bring Punjabi back.
+  if (SWITCH_OFF) return "en";
+
   const stored = (await cookies()).get(LANG_COOKIE)?.value;
   if (isLang(stored)) return stored;
 

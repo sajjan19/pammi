@@ -10,7 +10,6 @@ import {
 } from "@/lib/auth";
 import { statusValues, type OrderStatus } from "@/lib/content";
 import { deleteOrder, updateOrderDetails, updateOrderStatus } from "@/lib/orders";
-import { deletePhotoFiles } from "@/lib/uploads";
 
 export type LoginState = { error?: string };
 
@@ -60,7 +59,7 @@ export async function setStatus(formData: FormData): Promise<void> {
     throw new Error("Unknown status.");
   }
 
-  updateOrderStatus(id, status as OrderStatus);
+  await updateOrderStatus(id, status as OrderStatus);
   revalidatePath("/admin");
   revalidatePath(`/admin/${id}`);
 }
@@ -71,6 +70,9 @@ export async function saveDetails(formData: FormData): Promise<void> {
   const id = parseId(formData);
   const rawPrice = String(formData.get("quotedPrice") ?? "").trim();
   const privateNotes = String(formData.get("privateNotes") ?? "").trim();
+  const customerMessage = String(formData.get("customerMessage") ?? "")
+    .trim()
+    .slice(0, 1000);
 
   let quotedPrice: number | null = null;
   if (rawPrice) {
@@ -81,7 +83,7 @@ export async function saveDetails(formData: FormData): Promise<void> {
     quotedPrice = Math.round(parsed);
   }
 
-  updateOrderDetails(id, { quotedPrice, privateNotes });
+  await updateOrderDetails(id, { quotedPrice, privateNotes, customerMessage });
   revalidatePath(`/admin/${id}`);
 }
 
@@ -89,8 +91,7 @@ export async function removeOrder(formData: FormData): Promise<void> {
   await requireAdmin();
 
   const id = parseId(formData);
-  const filenames = deleteOrder(id);
-  await deletePhotoFiles(filenames);
+  await deleteOrder(id);
 
   revalidatePath("/admin");
   redirect("/admin");

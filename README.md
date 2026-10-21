@@ -1,9 +1,10 @@
-# Pammi's Tailoring & Alterations
+# Pammi Penji's Tailoring & Alterations
 
-A website and custom-order app for an Indian tailoring business. The stitching
-is women's Punjabi suits — salwar kameez, Patiala, Anarkali, sharara and
-palazzo, kurti — plus men's turbans and children's patkas made from cloth the
-customer brings, and small repairs and hemming on anything else they own.
+A website and custom-order app for a tailoring business whose main work is
+Punjabi clothes: suits for women (salwar kameez, Patiala, Anarkali, sharara
+and palazzo, kurti), men (kurta pyjama) and kids, plus turbans and patkas
+made from cloth the customer brings. She also alters and tailors any other
+clothes.
 
 Built with Next.js 16, React 19, TypeScript and SQLite. No external services:
 the whole thing runs from one folder.
@@ -104,12 +105,13 @@ change any wording, change its Punjabi in `lib/content-pa.ts` to match.
 Anything marked `TODO` in that file is a placeholder waiting on a real value.
 As of now that's:
 
-- her name as it should appear on the site
-- the city / service area
-- email, phone, WhatsApp and Instagram
 - **every price** — they're all `null` (shown as "Ask for a price") rather
   than invented numbers
-- the payment policy
+- real photos for the gallery (see below)
+
+WhatsApp and Instagram are `null`, so they're hidden; fill them in to show
+them. The street address stays private on purpose until an order is
+confirmed.
 
 Placeholders don't leak onto the site: `isPlaceholder()` hides any detail
 still marked `TODO` rather than printing it to a customer.
@@ -160,16 +162,25 @@ guessable public URL.
 
 ## Data
 
-Everything lives in `data/`:
+Orders and their reference photos are stored together in one SQLite
+database.
 
-- `data/pammi.db` — the SQLite database
-- `data/uploads/` — reference photos
+- **On Vercel** it's a hosted [Turso](https://turso.tech) database. Set
+  `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` (see `.env.example`). Vercel
+  has no lasting disk, so a local file there would lose every order.
+- **On your own computer**, with those left empty, it's the file
+  `data/pammi.db` (gitignored). To back up, copy it.
 
-Both are gitignored. To back up, copy the `data` folder.
+Photos are shrunk in the customer's browser before upload, because Vercel
+refuses any request over 4.5 MB.
 
-Because orders and photos are on the local disk, this needs a host with a
-persistent volume — a plain serverless deploy would lose them on every
-restart. Set `DATA_DIR` to a mounted disk when deploying.
+## Deploying to Vercel
+
+1. Create a Turso database and token (commands in `.env.example`).
+2. Import the GitHub repo at vercel.com/new.
+3. Add the environment variables: `ADMIN_PASSWORD`, `ADMIN_SECRET`,
+   `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`.
+4. Deploy. The tables are created on the first visit that needs them.
 
 ## Admin
 

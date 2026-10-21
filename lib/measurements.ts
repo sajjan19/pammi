@@ -101,7 +101,7 @@ export const measurementGroups: MeasurementGroup[] = [
   },
   {
     id: "kameez",
-    title: "Kameez / kurti",
+    title: "Kameez / kurta",
     description: "Measured from the shoulder.",
     fields: [
       {
@@ -136,7 +136,7 @@ export const measurementGroups: MeasurementGroup[] = [
   },
   {
     id: "bottom",
-    title: "Salwar / bottoms",
+    title: "Salwar / pyjama",
     description: "Under the kameez.",
     fields: [
       {

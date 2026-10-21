@@ -4,6 +4,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { getLang } from "@/lib/i18n-server";
 import { getContent } from "@/lib/localize";
 import { GalleryTile } from "@/components/gallery-tile";
+import { Icon } from "@/components/icon";
 import { Illustration } from "@/components/illustration";
 import styles from "./page.module.css";
 
@@ -48,6 +49,22 @@ export default async function Home() {
                 <Illustration src={garment.image} alt="" eager />
               </div>
             ))}
+            {/* A few tools left lying about the workroom. */}
+            <Icon
+              name="scissors"
+              size={46}
+              className={`${styles.tool} ${styles.toolScissors}`}
+            />
+            <Icon
+              name="spool"
+              size={42}
+              className={`${styles.tool} ${styles.toolSpool}`}
+            />
+            <Icon
+              name="button"
+              size={34}
+              className={`${styles.tool} ${styles.toolButton}`}
+            />
           </div>
         </div>
       </section>
@@ -89,8 +106,12 @@ export default async function Home() {
           </h2>
 
           <ol className={styles.steps}>
-            {steps.map((step) => (
+            {steps.map((step, i) => (
               <li key={step.title} className={styles.step}>
+                <span className={styles.stepIcon} aria-hidden="true">
+                  <Icon name={step.icon} size={30} />
+                  <span className={styles.stepNumber}>{i + 1}</span>
+                </span>
                 <h3 className={styles.stepTitle}>{step.title}</h3>
                 <p className={styles.stepBody}>{step.body}</p>
               </li>

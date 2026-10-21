@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { getDictionary } from "@/lib/dictionary";
 import { type Lang } from "@/lib/i18n";
 import { getContent } from "@/lib/localize";
-import { LanguageSwitch } from "@/components/language-switch";
 import { Logo } from "@/components/logo";
 import styles from "./site-header.module.css";
 
@@ -23,6 +22,7 @@ export function SiteHeader({ lang }: { lang: Lang }) {
     { href: "/measuring", label: t.nav.measuring },
     { href: "/about", label: t.nav.about },
     { href: "/contact", label: t.nav.contact },
+    { href: "/status", label: t.nav.myOrder },
   ];
 
   // Tapping any link closes the mobile menu — otherwise it stays open over
@@ -48,9 +48,9 @@ export function SiteHeader({ lang }: { lang: Lang }) {
           <span className={styles.brandMark}>
             <Logo size={44} />
           </span>
-          <span className={styles.brandText}>
-            <span className={styles.brandName}>{business.name}</span>
-            <span className={styles.brandTag}>{business.tagline}</span>
+          <span className={styles.brandText} lang="en">
+            <span className={styles.brandName}>{business.shortName}</span>
+            <span className={styles.brandTag}>{business.trade}</span>
           </span>
         </Link>
 
@@ -62,7 +62,6 @@ export function SiteHeader({ lang }: { lang: Lang }) {
           opens them in keyboard order.
         */}
         <div className={styles.actions}>
-          <LanguageSwitch lang={lang} />
 
           <button
             type="button"

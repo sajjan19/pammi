@@ -5,6 +5,9 @@ import { getDictionary } from "@/lib/dictionary";
 import { getLang } from "@/lib/i18n-server";
 import { getContent } from "@/lib/localize";
 import { GalleryTile } from "@/components/gallery-tile";
+import { Icon } from "@/components/icon";
+import { Illustration } from "@/components/illustration";
+import styles from "./gallery.module.css";
 import { PageHeader } from "@/components/page-header";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -14,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function GalleryPage() {
   const lang = await getLang();
   const t = getDictionary(lang);
-  const { gallery } = getContent(lang);
+  const { gallery, examples } = getContent(lang);
 
   return (
     <>
@@ -44,6 +47,39 @@ export default async function GalleryPage() {
           >
             {gallery.map((item) => (
               <GalleryTile key={item.src} item={item} />
+            ))}
+          </div>
+
+          <h2 className={styles.examplesTitle}>{t.gallery.examplesTitle}</h2>
+          <p className={styles.examplesLede}>{t.gallery.examplesLede}</p>
+
+          <div className={styles.examples}>
+            {examples.map((ex) => (
+              <article key={ex.id} className={styles.example}>
+                <Illustration src={ex.image} alt="" className={styles.exampleArt} />
+                <div className={styles.exampleBody}>
+                  <h3 className={styles.exampleName}>{ex.title}</h3>
+
+                  <p className={styles.label}>
+                    <Icon name="order" size={20} /> {t.gallery.asked}
+                  </p>
+                  <p className={styles.text}>{ex.asked}</p>
+
+                  <p className={styles.label}>
+                    <Icon name="needle" size={20} /> {t.gallery.steps}
+                  </p>
+                  <ol className={styles.steps}>
+                    {ex.steps.map((step) => (
+                      <li key={step}>{step}</li>
+                    ))}
+                  </ol>
+
+                  <p className={styles.label}>
+                    <Icon name="hanger" size={20} /> {t.gallery.result}
+                  </p>
+                  <p className={styles.result}>{ex.result}</p>
+                </div>
+              </article>
             ))}
           </div>
 

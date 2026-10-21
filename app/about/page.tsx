@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { isPlaceholder } from "@/lib/content";
 import { getDictionary } from "@/lib/dictionary";
 import { getLang } from "@/lib/i18n-server";
 import { getContent } from "@/lib/localize";
+import { Icon } from "@/components/icon";
 import { PageHeader } from "@/components/page-header";
+import styles from "./page.module.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: getDictionary(await getLang()).meta.about };
@@ -13,31 +15,53 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AboutPage() {
   const lang = await getLang();
   const t = getDictionary(lang);
-  const { business, steps } = getContent(lang);
+  const { business, about } = getContent(lang);
+
+  const story = about.story.map((paragraph) => (
+    <p key={paragraph} className="lede">
+      {paragraph}
+    </p>
+  ));
 
   return (
     <>
-      <PageHeader
-        title={
-          isPlaceholder(business.tailor)
-            ? t.about.titleDefault
-            : t.about.titleNamed(business.tailor)
-        }
-        lede={business.story}
-      />
+      <PageHeader title={t.about.title} lede={t.about.lede(business.tailor)} />
 
       <section className="section">
         <div className="container-narrow">
-          <h2 style={{ marginBottom: "var(--sp-5)" }}>{t.common.howItWorks}</h2>
-          <ol className="stack" style={{ paddingLeft: "1.2em" }}>
-            {steps.map((step) => (
-              <li key={step.title}>
-                <strong>{step.title}.</strong> {step.body}
-              </li>
-            ))}
-          </ol>
+          {/* With her photo, she sits beside her story. */}
+          {about.photo ? (
+            <div className={styles.intro}>
+              <figure className={styles.photo}>
+                <Image
+                  src={about.photo}
+                  alt={about.photoAlt}
+                  width={600}
+                  height={800}
+                  sizes="(max-width: 720px) 100vw, 300px"
+                  priority
+                />
+              </figure>
+              <div className={styles.story}>{story}</div>
+            </div>
+          ) : (
+            <div className={styles.story}>{story}</div>
+          )}
 
-          <p style={{ marginTop: "var(--sp-7)" }}>
+          <h2 className={styles.factsTitle}>{t.about.factsTitle}</h2>
+          <div className={styles.facts}>
+            {about.facts.map((fact) => (
+              <div key={fact.id} className={styles.fact}>
+                <span className={styles.icon} aria-hidden="true">
+                  <Icon name={fact.id} size={30} />
+                </span>
+                <h3 className={styles.factTitle}>{fact.title}</h3>
+                <p className={styles.factBody}>{fact.body}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className={styles.cta}>
             <Link href="/order" className="btn">
               {t.common.startOrder}
             </Link>

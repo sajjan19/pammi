@@ -47,7 +47,7 @@ export default async function AdminOrderPage({
   const orderId = Number(id);
   if (!Number.isInteger(orderId)) notFound();
 
-  const order = getOrder(orderId);
+  const order = await getOrder(orderId);
   if (!order) notFound();
 
   const status = getStatus(order.status);
@@ -329,7 +329,7 @@ export default async function AdminOrderPage({
             </section>
 
             <section className={styles.card}>
-              <p className={styles.cardTitle}>Quote &amp; private notes</p>
+              <p className={styles.cardTitle}>Quote, message &amp; notes</p>
               <form action={saveDetails}>
                 <input type="hidden" name="id" value={order.id} />
 
@@ -345,6 +345,21 @@ export default async function AdminOrderPage({
                     placeholder="—"
                   />
                   <p className="hint">Shown to the customer once saved.</p>
+                </label>
+
+                <label className="field">
+                  <span className="label">Message to the customer</span>
+                  <textarea
+                    className="textarea"
+                    name="customerMessage"
+                    rows={3}
+                    maxLength={1000}
+                    defaultValue={order.customer_message ?? ""}
+                    placeholder="Fabric received. Fitting on Saturday."
+                  />
+                  <p className="hint">
+                    The customer sees this when they check their order.
+                  </p>
                 </label>
 
                 <label className="field">

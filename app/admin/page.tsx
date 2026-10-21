@@ -46,8 +46,10 @@ export default async function AdminPage({
     ? (requested as OrderStatus)
     : "all";
 
-  const orders = listOrders(filter);
-  const counts = statusCounts();
+  const [orders, counts] = await Promise.all([
+    listOrders(filter),
+    statusCounts(),
+  ]);
   const total = Object.values(counts).reduce((sum, n) => sum + n, 0);
 
   return (

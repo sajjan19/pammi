@@ -20,13 +20,41 @@
  */
 
 export const businessPa = {
+  tailor: "ਪਰਮਜੀਤ ਕੌਰ ਸੱਜਣ",
   tagline: "ਪੰਜਾਬੀ ਸੂਟ, ਤੁਹਾਡੇ ਨਾਪ ਨਾਲ",
   intro:
-    "ਔਰਤਾਂ ਲਈ ਪੰਜਾਬੀ ਸੂਟ, ਤੁਹਾਡੇ ਮੇਚ ਦੇ। ਪੱਗਾਂ, ਪਟਕੇ ਅਤੇ ਛੋਟੀ-ਮੋਟੀ ਮੁਰੰਮਤ ਵੀ।",
-  story:
-    "ਪੰਮੀ ਜੀ ਹਰ ਸੂਟ ਆਪ ਸਿਊਂਦੇ ਹਨ, ਇੱਕ-ਇੱਕ ਕਰਕੇ। ਉਹ ਤੁਹਾਡਾ ਨਾਪ ਆਪ ਲੈਂਦੇ ਹਨ, ਤਾਂ ਜੋ ਸੂਟ ਪਹਿਲੀ ਵਾਰ ਹੀ ਠੀਕ ਆਵੇ।",
+    "ਔਰਤਾਂ, ਮਰਦਾਂ ਅਤੇ ਬੱਚਿਆਂ ਲਈ ਪੰਜਾਬੀ ਸੂਟ, ਤੁਹਾਡੇ ਮੇਚ ਦੇ। ਹਰ ਤਰ੍ਹਾਂ ਦੇ ਕੱਪੜਿਆਂ ਦੀ ਆਲਟਰੇਸ਼ਨ ਵੀ।",
+  city: "ਸਾਊਥ ਵੈਨਕੂਵਰ, ਬੀ ਸੀ",
   addressNote: "ਆਰਡਰ ਪੱਕਾ ਹੋਣ 'ਤੇ ਤੁਹਾਨੂੰ ਪਤਾ ਦੱਸਿਆ ਜਾਵੇਗਾ।",
   languages: ["ਪੰਜਾਬੀ", "ਹਿੰਦੀ", "ਅੰਗਰੇਜ਼ੀ"],
+};
+
+/** See `about` in lib/content.ts. Facts are keyed by their `id`. */
+export const aboutPa = {
+  story: [
+    "ਉਹ ਨਵਾਂਸ਼ਹਿਰ, ਪੰਜਾਬ ਵਿੱਚ ਜੰਮੇ-ਪਲੇ। ਛੋਟੀ ਉਮਰ ਤੋਂ ਹੀ ਉਨ੍ਹਾਂ ਨੂੰ ਸਿਲਾਈ ਦਾ ਸ਼ੌਕ ਸੀ, ਅਤੇ ਉਨ੍ਹਾਂ ਨੇ ਇਹ ਆਪਣੀ ਮਾਂ ਅਤੇ ਚਾਰ ਵੱਡੀਆਂ ਭੈਣਾਂ ਤੋਂ ਸਿੱਖੀ।",
+    "18 ਸਾਲ ਦੀ ਉਮਰ ਵਿੱਚ ਉਹ ਵੈਨਕੂਵਰ, ਕੈਨੇਡਾ ਆ ਗਏ। ਅੱਜ ਉਹ ਹਰ ਸੂਟ ਆਪ ਸਿਊਂਦੇ ਹਨ, ਇੱਕ-ਇੱਕ ਕਰਕੇ, ਅਤੇ ਤੁਹਾਡਾ ਨਾਪ ਆਪ ਲੈਂਦੇ ਹਨ ਤਾਂ ਜੋ ਸੂਟ ਪਹਿਲੀ ਵਾਰ ਹੀ ਠੀਕ ਆਵੇ।",
+  ],
+  facts: {
+    chai: {
+      title: "ਪਹਿਲਾਂ ਚਾਹ",
+      body: "ਹਰ ਸੂਟ ਤੋਂ ਪਹਿਲਾਂ, ਵਿੱਚ ਅਤੇ ਬਾਅਦ, ਇੱਕ ਕੱਪ ਚਾਹ ਜ਼ਰੂਰ।",
+    },
+    cooking: {
+      title: "ਖਾਣਾ ਬਣਾਉਣ ਦਾ ਸ਼ੌਕ",
+      body: "ਹਰ ਤਰ੍ਹਾਂ ਦਾ ਖਾਣਾ, ਪਰ ਪੰਜਾਬੀ ਖਾਣਾ ਸਭ ਤੋਂ ਵਧੀਆ।",
+    },
+    shopping: {
+      title: "ਖਰੀਦਦਾਰੀ ਦਾ ਸ਼ੌਕ",
+      body: "ਇੰਨੇ ਕੱਪੜੇ ਹਨ ਕਿ ਕੁਝ ਭੈਣ-ਭਰਾਵਾਂ ਦੇ ਘਰ ਰੱਖਣੇ ਪੈਂਦੇ ਹਨ।",
+    },
+    dramas: {
+      title: "ਪੰਜਾਬੀ ਡਰਾਮੇ",
+      body: "ਦੇਖਣ ਲਈ ਉਨ੍ਹਾਂ ਦੀ ਮਨਪਸੰਦ ਚੀਜ਼।",
+    },
+  } as Record<string, { title: string; body: string }>,
+  photoAlt:
+    "ਪਰਮਜੀਤ ਕੌਰ ਸੱਜਣ ਆਪਣਾ ਨੀਲਾ ਬਿਸਕੁਟਾਂ ਵਾਲਾ ਡੱਬਾ ਫੜੀ, ਜੋ ਧਾਗੇ ਦੀਆਂ ਰੀਲਾਂ ਨਾਲ ਭਰਿਆ ਹੈ।",
 };
 
 /** Keyed by garment slug — see `garments` in lib/content.ts. */
@@ -35,7 +63,7 @@ export const garmentsPa: Record<
   { name: string; otherNames?: string; summary: string }
 > = {
   "salwar-kameez": {
-    name: "ਪੰਜਾਬੀ ਸੂਟ",
+    name: "ਔਰਤਾਂ ਦਾ ਪੰਜਾਬੀ ਸੂਟ",
     otherNames: "ਸਲਵਾਰ ਕਮੀਜ਼",
     summary: "ਰੋਜ਼ਾਨਾ ਦਾ ਸੂਟ। ਕੋਈ ਵੀ ਗਲਾ, ਕੋਈ ਵੀ ਬਾਂਹ।",
   },
@@ -55,17 +83,27 @@ export const garmentsPa: Record<
     name: "ਕੁੜਤੀ / ਕੁੜਤਾ",
     summary: "ਸਿਰਫ਼ ਕੁੜਤੀ, ਕਿਸੇ ਵੀ ਡਿਜ਼ਾਈਨ ਜਾਂ ਲੰਬਾਈ ਦੀ।",
   },
+  "kurta-pyjama": {
+    name: "ਮਰਦਾਂ ਦਾ ਕੁੜਤਾ ਪਜਾਮਾ",
+    otherNames: "ਮਰਦਾਂ ਦਾ ਪੰਜਾਬੀ ਸੂਟ",
+    summary: "ਮਰਦਾਂ ਲਈ ਪੰਜਾਬੀ ਸੂਟ, ਤੁਹਾਡੇ ਮੇਚ ਦਾ।",
+  },
+  "kids-suits": {
+    name: "ਬੱਚਿਆਂ ਦੇ ਪੰਜਾਬੀ ਸੂਟ",
+    summary: "ਮੁੰਡਿਆਂ ਅਤੇ ਕੁੜੀਆਂ ਲਈ, ਹਰ ਉਮਰ ਦੇ।",
+  },
   "turbans-patkas": {
     name: "ਪੱਗਾਂ ਅਤੇ ਪਟਕੇ",
     otherNames: "ਦਸਤਾਰ",
     summary: "ਮਰਦਾਂ ਦੀਆਂ ਪੱਗਾਂ ਅਤੇ ਬੱਚਿਆਂ ਦੇ ਪਟਕੇ, ਤੁਹਾਡੇ ਕੱਪੜੇ ਤੋਂ।",
   },
   repairs: {
-    name: "ਮੁਰੰਮਤ ਅਤੇ ਤੁਰਪਾਈ",
-    summary: "ਛੋਟੇ ਪਾੜ, ਉੱਧੜੀ ਸਿਲਾਈ ਅਤੇ ਤੁਰਪਾਈ, ਕਿਸੇ ਵੀ ਕੱਪੜੇ ਦੀ।",
+    name: "ਆਲਟਰੇਸ਼ਨ ਅਤੇ ਮੁਰੰਮਤ",
+    summary: "ਕਿਸੇ ਵੀ ਕੱਪੜੇ ਨੂੰ ਤੰਗ, ਖੁੱਲ੍ਹਾ, ਛੋਟਾ ਜਾਂ ਠੀਕ ਕਰਵਾਓ।",
   },
 };
 
+/** Same order as `steps` in lib/content.ts — the drawings come from there. */
 export const stepsPa = [
   {
     title: "ਆਰਡਰ ਭੇਜੋ",
@@ -158,7 +196,7 @@ export const statusLabelsPa: Record<string, string> = {
   cancelled: "ਰੱਦ ਕੀਤਾ ਗਿਆ",
 };
 
-/** A policy whose body starts with "TODO" is hidden, as in English. */
+/** Same order as `policies` in lib/content.ts — the drawings come from there. */
 export const policiesPa = [
   {
     title: "ਪਹਿਲਾਂ ਕੀਮਤ",
@@ -174,7 +212,7 @@ export const policiesPa = [
   },
   {
     title: "ਭੁਗਤਾਨ",
-    body: "TODO: ਭੁਗਤਾਨ ਦਾ ਤਰੀਕਾ ਪੱਕਾ ਕਰਨਾ ਹੈ।",
+    body: "ਸਿਰਫ਼ ਈ-ਟ੍ਰਾਂਸਫ਼ਰ ਜਾਂ ਨਕਦ।",
   },
 ];
 
@@ -204,6 +242,14 @@ export const galleryPa: Record<string, { alt: string; caption: string }> = {
     alt: "ਪਲਾਜ਼ੋ ਸੂਟ ਦਾ ਚਿੱਤਰ",
     caption: "ਪਲਾਜ਼ੋ ਸੂਟ",
   },
+  "/gallery/placeholder-10.svg": {
+    alt: "ਮਰਦਾਂ ਦੇ ਕੁੜਤੇ ਪਜਾਮੇ ਦਾ ਚਿੱਤਰ",
+    caption: "ਮਰਦਾਂ ਦਾ ਕੁੜਤਾ ਪਜਾਮਾ",
+  },
+  "/gallery/placeholder-11.svg": {
+    alt: "ਇੱਕ ਕੁੜੀ ਅਤੇ ਇੱਕ ਮੁੰਡੇ ਦੇ ਪੰਜਾਬੀ ਸੂਟਾਂ ਦਾ ਚਿੱਤਰ",
+    caption: "ਬੱਚਿਆਂ ਦੇ ਸੂਟ",
+  },
   "/gallery/placeholder-7.svg": {
     alt: "ਜੂੜੇ ਉੱਤੇ ਬੰਨ੍ਹੇ ਬੱਚੇ ਦੇ ਪਟਕੇ ਦਾ ਚਿੱਤਰ",
     caption: "ਬੱਚਿਆਂ ਦੇ ਪਟਕੇ",
@@ -211,6 +257,44 @@ export const galleryPa: Record<string, { alt: string; caption: string }> = {
   "/gallery/placeholder-8.svg": {
     alt: "ਬੰਨ੍ਹੀ ਹੋਈ ਪੱਗ ਅਤੇ ਕੱਪੜੇ ਦਾ ਚਿੱਤਰ",
     caption: "ਪੱਗਾਂ",
+  },
+};
+
+/** Keyed by id — see `examples` in lib/content.ts. */
+export const examplesPa: Record<
+  string,
+  { title: string; asked: string; steps: string[]; result: string }
+> = {
+  hem: {
+    title: "ਪੈਂਟ ਬਹੁਤ ਲੰਮੀ",
+    asked: "ਨਵੀਂ ਪੈਂਟ ਜੋ ਬਹੁਤ ਲੰਮੀ ਹੈ।",
+    steps: [
+      "ਉਹ ਤੁਹਾਡੀ ਲੱਤ ਦਾ ਨਾਪ ਲੈਂਦੇ ਹਨ।",
+      "ਉਹ ਸਹੀ ਲੰਬਾਈ 'ਤੇ ਨਿਸ਼ਾਨ ਲਾਉਂਦੇ ਹਨ।",
+      "ਉਹ ਪੈਂਟ ਦੀ ਤੁਰਪਾਈ ਕਰਦੇ ਹਨ।",
+    ],
+    result: "ਬਿਲਕੁਲ ਠੀਕ ਲੰਬਾਈ ਦੀ ਪੈਂਟ।",
+  },
+  resize: {
+    title: "ਪੈਂਟ ਹੁਣ ਮੇਚ ਨਹੀਂ ਆਉਂਦੀ",
+    asked: "ਭਾਰ ਘਟਣ ਜਾਂ ਵਧਣ ਕਰਕੇ ਪੈਂਟ ਢਿੱਲੀ ਜਾਂ ਤੰਗ ਹੋ ਗਈ ਹੈ।",
+    steps: [
+      "ਤੁਸੀਂ ਪਾ ਕੇ ਦਿਖਾਉਂਦੇ ਹੋ, ਉਹ ਪਿੰਨ ਲਾਉਂਦੇ ਹਨ।",
+      "ਉਹ ਪੈਂਟ ਨੂੰ ਤੰਗ ਜਾਂ ਖੁੱਲ੍ਹਾ ਕਰਦੇ ਹਨ।",
+      "ਤੁਸੀਂ ਦੁਬਾਰਾ ਪਾ ਕੇ ਦੇਖਦੇ ਹੋ।",
+    ],
+    result: "ਉਹੀ ਪੈਂਟ, ਫਿਰ ਤੋਂ ਮੇਚ ਦੀ।",
+  },
+  suit: {
+    title: "ਫ਼ੋਟੋ ਵਰਗਾ ਸੂਟ",
+    asked: "ਕਿਸੇ ਫ਼ੋਟੋ ਵਰਗਾ ਪੰਜਾਬੀ ਸੂਟ।",
+    steps: [
+      "ਤੁਸੀਂ ਫ਼ੋਟੋ ਭੇਜਦੇ ਹੋ ਅਤੇ ਕੱਪੜਾ ਲਿਆਉਂਦੇ ਹੋ।",
+      "ਉਹ ਆਪ ਤੁਹਾਡਾ ਨਾਪ ਲੈਂਦੇ ਹਨ।",
+      "ਉਹ ਸੂਟ ਕੱਟ ਕੇ ਸਿਊਂਦੇ ਹਨ।",
+      "ਤੁਸੀਂ ਪਾ ਕੇ ਦੇਖਦੇ ਹੋ, ਉਹ ਛੋਟੀਆਂ ਤਬਦੀਲੀਆਂ ਕਰਦੇ ਹਨ।",
+    ],
+    result: "ਤੁਹਾਡੀ ਪਸੰਦ ਦਾ ਸੂਟ, ਤੁਹਾਡੇ ਮੇਚ ਦਾ।",
   },
 };
 
@@ -232,6 +316,10 @@ export const faqsPa = [
     a: "ਸੂਟ ਲਈ ਲਗਭਗ ਦੋ ਹਫ਼ਤੇ। ਵਿਆਹਾਂ ਦੇ ਸੀਜ਼ਨ ਵਿੱਚ ਜਲਦੀ ਦੱਸੋ।",
   },
   {
+    q: "ਕੀ ਤੁਸੀਂ ਸਿਰਫ਼ ਪੰਜਾਬੀ ਕੱਪੜੇ ਹੀ ਬਣਾਉਂਦੇ ਹੋ?",
+    a: "ਪੰਜਾਬੀ ਕੱਪੜੇ ਉਨ੍ਹਾਂ ਦਾ ਮੁੱਖ ਕੰਮ ਹਨ, ਪਰ ਉਹ ਹੋਰ ਕੱਪੜੇ ਵੀ ਸਿਊਂ ਅਤੇ ਠੀਕ ਕਰ ਸਕਦੇ ਹਨ।",
+  },
+  {
     q: "ਪੱਗਾਂ ਅਤੇ ਪਟਕੇ ਕਿਵੇਂ ਬਣਦੇ ਹਨ?",
     a: "ਕੱਪੜਾ ਲਿਆਓ। ਉਹ ਲੰਬਾਈ ਮੁਤਾਬਕ ਕੱਟ ਕੇ ਕਿਨਾਰੇ ਸਿਊਂ ਦਿੰਦੇ ਹਨ।",
   },
@@ -245,7 +333,7 @@ export const measurementGroupsPa: Record<
 > = {
   upper: { title: "ਸਰੀਰ", description: "ਅੰਦਾਜ਼ਾ ਹੀ ਕਾਫ਼ੀ ਹੈ।" },
   sleeve: { title: "ਬਾਂਹ", description: "ਬਾਂਹ ਢਿੱਲੀ ਛੱਡ ਕੇ।" },
-  kameez: { title: "ਕਮੀਜ਼ / ਕੁੜਤੀ", description: "ਮੋਢੇ ਤੋਂ ਨਾਪੋ।" },
+  kameez: { title: "ਕਮੀਜ਼ / ਕੁੜਤਾ", description: "ਮੋਢੇ ਤੋਂ ਨਾਪੋ।" },
   bottom: { title: "ਸਲਵਾਰ / ਪਜਾਮਾ", description: "ਕਮੀਜ਼ ਦੇ ਹੇਠਾਂ ਵਾਲਾ।" },
 };
 

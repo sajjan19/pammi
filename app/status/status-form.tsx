@@ -75,6 +75,15 @@ export function StatusForm({
           )}
         </dl>
 
+        {result.message && (
+          <div className="notice" style={{ marginTop: "var(--sp-6)" }}>
+            <strong>{t.message}</strong>
+            <p style={{ margin: "var(--sp-1) 0 0", whiteSpace: "pre-line" }}>
+              {result.message}
+            </p>
+          </div>
+        )}
+
         <p className="hint" style={{ marginTop: "var(--sp-6)" }}>
           {t.questions}
         </p>

@@ -9,10 +9,14 @@
   gap: var(--sp-2);
   min-height: 44px;
   padding: 0 var(--sp-4);
-  border: 1px solid var(--wine);
+  /* The site's yellow — the same as the yellow kurta in the logo and in the
+     illustrations. It stands apart from the magenta of everything else in
+     the header, so it's the first thing a Punjabi reader's eye lands on.
+     The deeper gold edge keeps it from fading into the cream behind it. */
+  border: 1px solid var(--gold);
   border-radius: 999px;
-  background: var(--wine-soft);
-  color: var(--wine-deep);
+  background: var(--gold-bright);
+  color: var(--char);
   font-family: var(--font-body);
   font-size: 0.9375rem;
   font-weight: 600;
@@ -22,8 +26,7 @@
 }
 
 .button:hover:not(:disabled) {
-  background: var(--wine);
-  color: var(--white);
+  background: var(--gold);
 }
 
 .button:disabled {
