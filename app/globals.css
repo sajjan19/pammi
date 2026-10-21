@@ -227,7 +227,13 @@ img {
 }
 
 .section {
-  padding: var(--sp-9) 0;
+  padding: var(--sp-8) 0;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: var(--sp-7) 0;
+  }
 }
 
 .section-sm {

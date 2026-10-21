@@ -1,7 +1,7 @@
 .header {
   background: var(--cream);
   border-bottom: var(--seam);
-  padding: var(--sp-8) 0 var(--sp-7);
+  padding: var(--sp-7) 0 var(--sp-6);
 }
 
 .inner {

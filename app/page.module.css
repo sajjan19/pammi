@@ -3,7 +3,7 @@
 .hero {
   background: var(--cream);
   border-bottom: var(--seam);
-  padding: var(--sp-9) 0 var(--sp-8);
+  padding: var(--sp-7) 0;
 }
 
 .heroGrid {
@@ -367,15 +367,18 @@
 
 /* ── Closing band ─────────────────────────── */
 
+/* The pink tint, so it stands apart from the dark footer below and keeps
+   the sections alternating. */
 .band {
-  background: var(--char);
-  color: var(--cream);
-  padding: var(--sp-9) 0;
+  background: var(--cream);
+  border-top: var(--seam);
+  color: var(--char);
+  padding: var(--sp-8) 0;
   text-align: center;
 }
 
 .bandTitle {
-  color: var(--white);
+  color: var(--char);
   margin: 0 auto;
   max-width: 20ch;
 }
@@ -383,7 +386,13 @@
 .bandLede {
   margin: var(--sp-5) auto 0;
   max-width: 52ch;
-  color: var(--khaki);
+  color: var(--slate);
+}
+
+@media (max-width: 640px) {
+  .band {
+    padding: var(--sp-7) 0;
+  }
 }
 
 /* Two buttons of the same width, side by side or stacked. */
