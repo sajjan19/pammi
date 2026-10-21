@@ -87,8 +87,8 @@ export const about = {
     },
     {
       id: "dramas",
-      title: "Punjabi dramas",
-      body: "Her favourite way to relax. Ask her what happened in the latest episode.",
+      title: "Punjabi movies and dramas",
+      body: "Her favourite way to relax after a long day of sewing.",
     },
     {
       id: "shopping",
