@@ -10,6 +10,7 @@
    ───────────────────────────────────────────── */
 
 :root {
+  --seam: 2px dashed var(--gold);
   /* Neutrals — the logo's cream through to near-black, tinted rose */
   --ivory: #fdf8f0;
   --cream: #fbe9ee;
@@ -233,10 +234,13 @@ img {
   padding: var(--sp-8) 0;
 }
 
+/* Sections alternate between the plain background and this pink tint, and
+   every join between them is a row of gold stitches — the same seam as
+   under the hero and each page's header. */
 .section-tinted {
   background: var(--cream);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  border-top: var(--seam);
+  border-bottom: var(--seam);
 }
 
 .eyebrow {

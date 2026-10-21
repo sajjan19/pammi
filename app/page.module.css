@@ -1,8 +1,8 @@
 /* ── Hero ─────────────────────────────────── */
 
 .hero {
-  background: linear-gradient(180deg, var(--cream) 0%, var(--ivory) 100%);
-  border-bottom: 1px solid var(--border);
+  background: var(--cream);
+  border-bottom: var(--seam);
   padding: var(--sp-9) 0 var(--sp-8);
 }
 

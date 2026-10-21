@@ -1,9 +1,0 @@
-/* Zero height, so it adds no space; the stitches sit on the join. */
-.seam {
-  position: relative;
-  z-index: 2;
-  height: 0;
-  border-top: 2px dashed var(--gold);
-  margin-top: -1px;
-  opacity: 0.8;
-}

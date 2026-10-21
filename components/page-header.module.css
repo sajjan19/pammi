@@ -1,6 +1,6 @@
 .header {
   background: var(--cream);
-  border-bottom: 1px solid var(--border);
+  border-bottom: var(--seam);
   padding: var(--sp-8) 0 var(--sp-7);
 }
 
