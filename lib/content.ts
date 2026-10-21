@@ -77,23 +77,23 @@ export const about = {
   facts: [
     {
       id: "chai",
-      title: "Chai first",
-      body: "A cup of Indian chai before, during and after every suit.",
+      title: "Always a cup of chai",
+      body: "Before, during and after every suit.",
     },
     {
       id: "cooking",
-      title: "A great cook",
-      body: "Food from all over, but Punjabi food is her best.",
+      title: "Loves to cook",
+      body: "Punjabi food is her speciality.",
     },
     {
       id: "dramas",
       title: "Punjabi dramas",
-      body: "Her favourite thing to watch.",
+      body: "Her favourite way to relax.",
     },
     {
       id: "shopping",
       title: "Loves shopping",
-      body: "So many clothes, some have to live at her siblings' houses.",
+      body: "So many clothes, some live at her siblings' houses.",
     },
   ] as {
     id: "chai" | "cooking" | "dramas" | "shopping";

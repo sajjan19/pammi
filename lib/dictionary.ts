@@ -129,7 +129,7 @@ const en = {
     title: "Meet Pammi",
     lede: (fullName: string) =>
       `${fullName}.\nEveryone calls her Pammi Penji.`,
-    factsTitle: "A few things about her",
+    factsTitle: "When she's not sewing",
   },
 
   contact: {
@@ -386,7 +386,7 @@ const pa: Dictionary = {
   about: {
     title: "ਪੰਮੀ ਜੀ ਨੂੰ ਮਿਲੋ",
     lede: (fullName: string) => `${fullName}।\nਸਾਰੇ ਉਨ੍ਹਾਂ ਨੂੰ ਪੰਮੀ ਭੈਣ ਜੀ ਕਹਿੰਦੇ ਹਨ।`,
-    factsTitle: "ਉਨ੍ਹਾਂ ਬਾਰੇ ਕੁਝ ਗੱਲਾਂ",
+    factsTitle: "ਜਦੋਂ ਉਹ ਸਿਲਾਈ ਨਹੀਂ ਕਰਦੇ",
   },
 
   contact: {

@@ -55,10 +55,12 @@ export default async function AboutPage() {
             {about.facts.map((fact) => (
               <div key={fact.id} className={styles.fact}>
                 <span className={styles.icon} aria-hidden="true">
-                  <Icon name={fact.id} size={30} />
+                  <Icon name={fact.id} size={24} />
                 </span>
-                <h3 className={styles.factTitle}>{fact.title}</h3>
-                <p className={styles.factBody}>{fact.body}</p>
+                <div>
+                  <h3 className={styles.factTitle}>{fact.title}</h3>
+                  <p className={styles.factBody}>{fact.body}</p>
+                </div>
               </div>
             ))}
           </div>

@@ -39,10 +39,11 @@
   margin: var(--sp-8) 0 var(--sp-5);
 }
 
-/* Four facts, so two by two — or one per row on a phone. */
+/* Four facts, two by two — one per row on a phone. Each is a small icon
+   beside its words, rather than a big card. */
 .facts {
   display: grid;
-  gap: var(--sp-4);
+  gap: var(--sp-5) var(--sp-6);
   grid-template-columns: repeat(2, 1fr);
 }
 
@@ -53,27 +54,27 @@
 }
 
 .fact {
-  padding: var(--sp-5);
-  background: var(--gold-soft);
-  border: 1px solid #f0dca8;
-  border-radius: var(--radius-lg);
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: var(--sp-4);
+  align-items: start;
 }
 
 .icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  margin-bottom: var(--sp-3);
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: var(--white);
+  background: var(--gold-soft);
+  border: 1px solid #f0dca8;
   color: var(--wine);
 }
 
 .factTitle {
-  font-size: 1.375rem;
-  margin: 0 0 var(--sp-1);
+  font-size: 1.25rem;
+  margin: 2px 0 var(--sp-1);
 }
 
 .factBody {
