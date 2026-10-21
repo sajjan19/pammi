@@ -78,7 +78,7 @@ export const about = {
     {
       id: "chai",
       title: "Always a cup of chai",
-      body: "Before, during and after every suit. The thread runs out before the chai does.",
+      body: "She always finds a reason for another cup. Starting a suit, finishing one, or just because.",
     },
     {
       id: "cooking",
