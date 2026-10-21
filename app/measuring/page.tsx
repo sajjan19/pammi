@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
 import { getLang } from "@/lib/i18n-server";
+import { DressForm } from "@/components/dress-form";
 import { Icon, type IconName } from "@/components/icon";
 import { PageHeader } from "@/components/page-header";
 import styles from "./page.module.css";
@@ -27,6 +28,13 @@ export default async function MeasuringPage() {
 
       <section className="section">
         <div className="container">
+          <figure className={styles.figure}>
+            <DressForm labels={t.measuring.figure} />
+            <figcaption className={styles.caption}>
+              {t.measuring.figure.caption}
+            </figcaption>
+          </figure>
+
           <div className={styles.points}>
             {t.measuring.points.map((point, i) => (
               <div key={point.title} className={styles.point}>

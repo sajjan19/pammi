@@ -76,6 +76,12 @@ const en = {
     alsoCalled: (names: string) => `Also called ${names}`,
     price: "Price",
     askForPrice: "Ask for a price",
+    forWho: {
+      women: "Women",
+      men: "Men",
+      kids: "Kids",
+      everyone: "Everyone",
+    },
     priceFrom: (amount: number) => `From $${amount}`,
     orderThis: "Order this",
     goodToKnow: "Good to know",
@@ -95,6 +101,13 @@ const en = {
 
   measuring: {
     title: "She measures you",
+    figure: {
+      caption: "What she measures at your fitting. You don't need to.",
+      chest: "Chest",
+      waist: "Waist",
+      hips: "Hips",
+      length: "Length",
+    },
     lede: "No tape measure needed. Pammi measures you in person, so your suit fits.",
     points: [
       {
@@ -245,6 +258,14 @@ const en = {
     contact: "Contact",
     missing: "Please enter your order number and email.",
     notFound: "We couldn't find that order. Check the number and email.",
+    stages: {
+      new: "Received",
+      quoted: "Price sent",
+      confirmed: "Confirmed",
+      stitching: "Stitching",
+      ready: "Ready",
+      collected: "Collected",
+    },
   },
 };
 
@@ -313,6 +334,12 @@ const pa: Dictionary = {
     alsoCalled: (names: string) => `ਇਸਨੂੰ ${names} ਵੀ ਕਹਿੰਦੇ ਹਨ`,
     price: "ਕੀਮਤ",
     askForPrice: "ਕੀਮਤ ਪੁੱਛੋ",
+    forWho: {
+      women: "ਔਰਤਾਂ",
+      men: "ਮਰਦ",
+      kids: "ਬੱਚੇ",
+      everyone: "ਸਾਰੇ",
+    },
     priceFrom: (amount: number) => `$${amount} ਤੋਂ ਸ਼ੁਰੂ`,
     orderThis: "ਇਹ ਆਰਡਰ ਕਰੋ",
     goodToKnow: "ਜਾਣਨ ਵਾਲੀਆਂ ਗੱਲਾਂ",
@@ -332,6 +359,13 @@ const pa: Dictionary = {
 
   measuring: {
     title: "ਨਾਪ ਉਹ ਆਪ ਲੈਂਦੇ ਹਨ",
+    figure: {
+      caption: "ਫਿਟਿੰਗ ਵੇਲੇ ਉਹ ਇਹ ਨਾਪ ਲੈਂਦੇ ਹਨ। ਤੁਹਾਨੂੰ ਲੈਣ ਦੀ ਲੋੜ ਨਹੀਂ।",
+      chest: "ਛਾਤੀ",
+      waist: "ਕਮਰ",
+      hips: "ਕੁੱਲ੍ਹੇ",
+      length: "ਲੰਬਾਈ",
+    },
     lede: "ਤੁਹਾਨੂੰ ਨਾਪ ਲੈਣ ਦੀ ਲੋੜ ਨਹੀਂ। ਪੰਮੀ ਜੀ ਆਪ ਤੁਹਾਡਾ ਨਾਪ ਲੈਂਦੇ ਹਨ, ਤਾਂ ਜੋ ਸੂਟ ਠੀਕ ਆਵੇ।",
     points: [
       {
@@ -481,6 +515,14 @@ const pa: Dictionary = {
     contact: "ਸੰਪਰਕ ਕਰੋ",
     missing: "ਕਿਰਪਾ ਕਰਕੇ ਆਰਡਰ ਨੰਬਰ ਅਤੇ ਈਮੇਲ ਦੋਵੇਂ ਲਿਖੋ।",
     notFound: "ਇਹ ਆਰਡਰ ਨਹੀਂ ਮਿਲਿਆ। ਨੰਬਰ ਅਤੇ ਈਮੇਲ ਦੁਬਾਰਾ ਦੇਖੋ।",
+    stages: {
+      new: "ਮਿਲ ਗਿਆ",
+      quoted: "ਕੀਮਤ ਭੇਜੀ",
+      confirmed: "ਪੱਕਾ",
+      stitching: "ਸਿਲਾਈ",
+      ready: "ਤਿਆਰ",
+      collected: "ਲੈ ਗਏ",
+    },
   },
 };
 

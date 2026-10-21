@@ -6,6 +6,7 @@ import { formatDay, formatTimestamp } from "@/lib/dates";
 import { getDictionary } from "@/lib/dictionary";
 import { dateLocale, type Lang } from "@/lib/i18n";
 import { customerStatusLabel, getLocalizedGarment } from "@/lib/localize";
+import { StatusTracker } from "./status-tracker";
 import { lookupOrder, type StatusFormState } from "./actions";
 
 const initialState: StatusFormState = { status: "idle" };
@@ -43,6 +44,8 @@ export function StatusForm({
             {customerStatusLabel(result.status, lang)}
           </span>
         </p>
+
+        <StatusTracker status={result.status} labels={t.stages} />
 
         <hr className="rule" />
 

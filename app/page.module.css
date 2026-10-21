@@ -25,19 +25,23 @@
   max-width: 44ch;
 }
 
-/* Both buttons always share one row, even on a small phone. */
+/* Both buttons share one row and stretch to fill it, even on a small
+   phone. */
 .heroActions {
   display: flex;
   gap: var(--sp-3);
   margin-top: var(--sp-7);
 }
 
+.heroActions :global(.btn) {
+  flex: 1;
+  white-space: nowrap;
+}
+
 @media (max-width: 480px) {
   .heroActions :global(.btn) {
-    flex: 1;
     padding-left: var(--sp-3);
     padding-right: var(--sp-3);
-    white-space: nowrap;
   }
 }
 

@@ -4,6 +4,7 @@ import { getDictionary } from "@/lib/dictionary";
 import { getLang } from "@/lib/i18n-server";
 import { getContent } from "@/lib/localize";
 import { GalleryTile } from "@/components/gallery-tile";
+import { Seam } from "@/components/seam";
 import { StepsNeedle } from "@/components/steps-needle";
 import { Icon } from "@/components/icon";
 import { Illustration } from "@/components/illustration";
@@ -21,7 +22,6 @@ export default async function Home() {
       <section className={styles.hero}>
         <div className={`container ${styles.heroGrid}`}>
           <div>
-            <p className="eyebrow">{business.tagline}</p>
             <h1 className={styles.heroTitle}>
               {t.home.heroLine1}
               <br />
@@ -70,6 +70,8 @@ export default async function Home() {
         </div>
       </section>
 
+      <Seam />
+
       <section className="section">
         <div className="container">
           <h2 className={styles.sectionTitle}>{t.home.makesTitle}</h2>
@@ -100,6 +102,8 @@ export default async function Home() {
         </div>
       </section>
 
+      <Seam />
+
       <section className="section section-tinted">
         <div className="container">
           <h2 className={`${styles.sectionTitle} ${styles.center}`}>
@@ -125,6 +129,8 @@ export default async function Home() {
           </ol>
         </div>
       </section>
+
+      <Seam />
 
       <section className="section">
         <div className="container">

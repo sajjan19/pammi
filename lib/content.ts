@@ -170,6 +170,8 @@ export type Garment = {
    *                 and a photo, not measurements.
    */
   kind: "stitching" | "headwear" | "repair";
+  /** Who it's for — shown as small badges on the services page. */
+  forWho: ("women" | "men" | "kids" | "everyone")[];
   /** Illustration shown on cards and in the order form's picker. */
   image: string;
   price: number | null;
@@ -188,6 +190,7 @@ export const garments: Garment[] = [
     name: "Women's Punjabi Suit",
     otherNames: "salwar kameez",
     kind: "stitching",
+    forWho: ["women"],
     image: "/gallery/placeholder-1.svg",
     price: 50,
     turnaroundDays: 14,
@@ -199,6 +202,7 @@ export const garments: Garment[] = [
     slug: "patiala-suit",
     name: "Patiala Suit",
     kind: "stitching",
+    forWho: ["women"],
     image: "/gallery/placeholder-2.svg",
     price: 60,
     turnaroundDays: 14,
@@ -209,6 +213,7 @@ export const garments: Garment[] = [
     slug: "anarkali",
     name: "Anarkali Suit",
     kind: "stitching",
+    forWho: ["women"],
     image: "/gallery/placeholder-3.svg",
     price: 80,
     turnaroundDays: 21,
@@ -219,6 +224,7 @@ export const garments: Garment[] = [
     slug: "sharara-palazzo",
     name: "Sharara & Palazzo Suit",
     kind: "stitching",
+    forWho: ["women"],
     image: "/gallery/placeholder-4.svg",
     price: 70,
     turnaroundDays: 18,
@@ -229,6 +235,7 @@ export const garments: Garment[] = [
     slug: "kurti",
     name: "Kurti / Kurta",
     kind: "stitching",
+    forWho: ["women", "men"],
     image: "/gallery/placeholder-5.svg",
     price: 35,
     turnaroundDays: 10,
@@ -240,6 +247,7 @@ export const garments: Garment[] = [
     name: "Men's Kurta Pyjama",
     otherNames: "men's Punjabi suit",
     kind: "stitching",
+    forWho: ["men"],
     image: "/gallery/placeholder-10.svg",
     price: 55,
     turnaroundDays: 14,
@@ -251,6 +259,7 @@ export const garments: Garment[] = [
     slug: "kids-suits",
     name: "Kids' Punjabi Suits",
     kind: "stitching",
+    forWho: ["kids"],
     image: "/gallery/placeholder-11.svg",
     price: 35,
     turnaroundDays: 10,
@@ -263,6 +272,7 @@ export const garments: Garment[] = [
     name: "Turbans & Patkas",
     otherNames: "pagg, dastaar",
     kind: "headwear",
+    forWho: ["men", "kids"],
     image: "/gallery/placeholder-8.svg",
     price: 10,
     turnaroundDays: 7,
@@ -275,6 +285,7 @@ export const garments: Garment[] = [
     slug: "repairs",
     name: "Alterations & Repairs",
     kind: "repair",
+    forWho: ["everyone"],
     image: "/gallery/placeholder-9.svg",
     price: 15,
     turnaroundDays: 5,

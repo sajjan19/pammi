@@ -27,7 +27,13 @@ export type IconName =
   | "mail"
   | "phone"
   | "pin"
-  | "languages";
+  | "languages"
+  | "clock"
+  | "camera"
+  | "fabric"
+  | "women"
+  | "men"
+  | "kids";
 
 /** A filled dot — for pin heads, button holes and pivots. */
 function Dot({ cx, cy, r }: { cx: number; cy: number; r: number }) {
@@ -186,6 +192,50 @@ const shapes: Record<IconName, React.ReactNode> = {
     <>
       <path d="M4 7.5a2.5 2.5 0 0 1 2.5-2.5h11A2.5 2.5 0 0 1 20 7.5v6a2.5 2.5 0 0 1-2.5 2.5H10l-4 3.5V16a2.5 2.5 0 0 1-2-2.5Z" />
       <path d="M23 12h2.5A2.5 2.5 0 0 1 28 14.5v6a2.5 2.5 0 0 1-2 2.5v3.5L22 23h-7.5A2.5 2.5 0 0 1 12 20.5V19" />
+    </>
+  ),
+
+  clock: (
+    <>
+      <circle cx="16" cy="16" r="11.5" />
+      <path d="M16 9v7l4.5 3" />
+    </>
+  ),
+
+  camera: (
+    <>
+      <path d="M4 11.5A2.5 2.5 0 0 1 6.5 9h3.5l2-3h8l2 3h3.5a2.5 2.5 0 0 1 2.5 2.5v12A2.5 2.5 0 0 1 25.5 26h-19A2.5 2.5 0 0 1 4 23.5Z" />
+      <circle cx="16" cy="17" r="4.5" />
+    </>
+  ),
+
+  // A bolt of cloth, partly unrolled.
+  fabric: (
+    <>
+      <ellipse cx="9" cy="10" rx="4" ry="5.5" />
+      <path d="M9 4.5h15a4 5.5 0 0 1 0 11H9" />
+      <path d="M13 15.5v12l4-2.5 4 2.5v-12" />
+    </>
+  ),
+
+  // A flared kameez — for women's suits.
+  women: (
+    <path d="M12.5 4h7l1.5 3.5 4.5 2-2 5-2.5-1V17l4 11H7l4-11v-3.5l-2.5 1-2-5 4.5-2Z" />
+  ),
+
+  // A straight kurta with a band collar — for men's.
+  men: (
+    <>
+      <path d="M12 4h8l5 3 2.5 7.5-3 1L23 13v15H9V13l-1.5 2.5-3-1L7 7Z" />
+      <path d="M16 4.5v8" />
+    </>
+  ),
+
+  // A little kurta — for kids.
+  kids: (
+    <>
+      <path d="M13 9h6l3.5 2.5 2 5-2.5 1-1.5-2V26h-9V15.5l-1.5 2-2.5-1 2-5Z" />
+      <circle cx="16" cy="5.5" r="2.2" />
     </>
   ),
 

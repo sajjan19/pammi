@@ -27,18 +27,33 @@
   border-bottom: 1px solid var(--border);
 }
 
-.stepNumber {
+.stepBadge {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.75rem;
+  height: 2.75rem;
   flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  color: var(--wine);
+}
+
+.stepNumber {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--wine);
   color: var(--white);
   font-weight: 700;
-  font-size: 0.9375rem;
+  font-size: 0.6875rem;
 }
 
 .stepTitle {

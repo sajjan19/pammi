@@ -5,6 +5,16 @@
   align-items: start;
 }
 
+/* Lets the columns shrink below their longest line on a narrow phone. */
+.grid > * {
+  min-width: 0;
+}
+
+/* Lets the columns shrink below their longest line on a narrow phone. */
+.grid > * {
+  min-width: 0;
+}
+
 @media (max-width: 820px) {
   .grid {
     grid-template-columns: 1fr;

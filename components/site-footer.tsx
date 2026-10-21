@@ -3,6 +3,7 @@ import { instagramUrl, isPlaceholder, whatsappUrl } from "@/lib/content";
 import { getDictionary } from "@/lib/dictionary";
 import type { Lang } from "@/lib/i18n";
 import { getContent } from "@/lib/localize";
+import { Icon } from "@/components/icon";
 import { Logo } from "@/components/logo";
 import styles from "./site-footer.module.css";
 
@@ -52,12 +53,19 @@ export function SiteFooter({ lang }: { lang: Lang }) {
               </li>
               {!isPlaceholder(business.email) && (
                 <li>
-                  <a href={`mailto:${business.email}`}>{business.email}</a>
+                  <a href={`mailto:${business.email}`} className={styles.withIcon}>
+                    <Icon name="mail" size={18} />
+                    {business.email}
+                  </a>
                 </li>
               )}
               {business.phone && (
                 <li>
-                  <a href={`tel:${business.phone.replace(/\s/g, "")}`}>
+                  <a
+                    href={`tel:${business.phone.replace(/\s/g, "")}`}
+                    className={styles.withIcon}
+                  >
+                    <Icon name="phone" size={18} />
                     {business.phone}
                   </a>
                 </li>

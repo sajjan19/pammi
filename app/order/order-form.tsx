@@ -6,6 +6,7 @@ import { getDictionary } from "@/lib/dictionary";
 import type { Lang } from "@/lib/i18n";
 import { getContent, localizedGroupsFor } from "@/lib/localize";
 import { shrinkPhotosIn } from "@/lib/shrink-photo";
+import { Icon, type IconName } from "@/components/icon";
 import { Illustration } from "@/components/illustration";
 import { submitOrder, type OrderFormState } from "./actions";
 import styles from "./order-form.module.css";
@@ -102,7 +103,7 @@ export function OrderForm({
       {/* ── 1. What ─────────────────────────────────────── */}
       <fieldset className={styles.step}>
         <div className={styles.stepHead}>
-          <span className={styles.stepNumber}>1</span>
+          <StepBadge n={1} icon={"hanger"} />
           <h2 className={styles.stepTitle}>{t.stepWhat}</h2>
         </div>
 
@@ -180,7 +181,7 @@ export function OrderForm({
       {/* ── 2. Fabric / cloth / the fix ──────────────────── */}
       <fieldset className={styles.step}>
         <div className={styles.stepHead}>
-          <span className={styles.stepNumber}>2</span>
+          <StepBadge n={2} icon={isRepair ? "needle" : isHeadwear ? "spool" : "fabric"} />
           <h2 className={styles.stepTitle}>
             {isRepair ? t.stepFix : isHeadwear ? t.stepCloth : t.stepFabric}
           </h2>
@@ -298,7 +299,7 @@ export function OrderForm({
       {/* ── 3. Sizing ───────────────────────────────────── */}
       <fieldset className={styles.step}>
         <div className={styles.stepHead}>
-          <span className={styles.stepNumber}>3</span>
+          <StepBadge n={3} icon={"tape"} />
           <h2 className={styles.stepTitle}>{t.stepSizing}</h2>
         </div>
 
@@ -418,7 +419,7 @@ export function OrderForm({
       {/* ── 4. Photo ────────────────────────────────────── */}
       <fieldset className={styles.step}>
         <div className={styles.stepHead}>
-          <span className={styles.stepNumber}>4</span>
+          <StepBadge n={4} icon={"camera"} />
           <h2 className={styles.stepTitle}>
             {isRepair ? t.stepPhotoFix : t.stepPhotoDesign}
           </h2>
@@ -459,7 +460,7 @@ export function OrderForm({
       {/* ── 5. Contact ──────────────────────────────────── */}
       <fieldset className={styles.step}>
         <div className={styles.stepHead}>
-          <span className={styles.stepNumber}>5</span>
+          <StepBadge n={5} icon={"phone"} />
           <h2 className={styles.stepTitle}>{t.stepDetails}</h2>
         </div>
 
@@ -527,5 +528,15 @@ export function OrderForm({
         </button>
       </div>
     </form>
+  );
+}
+
+/** A step's tool drawing, with its number in a small gold badge. */
+function StepBadge({ n, icon }: { n: number; icon: IconName }) {
+  return (
+    <span className={styles.stepBadge} aria-hidden="true">
+      <Icon name={icon} size={24} />
+      <span className={styles.stepNumber}>{n}</span>
+    </span>
   );
 }

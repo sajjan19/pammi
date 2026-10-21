@@ -1,0 +1,113 @@
+.tracker {
+  list-style: none;
+  margin: var(--sp-6) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  text-align: center;
+}
+
+/* The line joining each stage to the one before it. */
+.stage + .stage::before {
+  content: "";
+  position: absolute;
+  top: 19px;
+  right: 50%;
+  width: 100%;
+  border-top: 2px dashed var(--border);
+}
+
+.done::before,
+.current::before {
+  border-top-style: solid !important;
+  border-color: var(--gold) !important;
+}
+
+.dot {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--white);
+  color: var(--stone);
+}
+
+.done .dot {
+  border-color: var(--gold);
+  background: var(--gold-soft);
+  color: var(--wine);
+}
+
+.current .dot {
+  border-color: var(--wine);
+  background: var(--wine);
+  color: var(--white);
+  box-shadow: 0 0 0 4px rgba(197, 26, 104, 0.15);
+}
+
+.label {
+  font-size: 0.6875rem;
+  line-height: 1.25;
+  color: var(--stone);
+}
+
+.done .label {
+  color: var(--slate);
+}
+
+.current .label {
+  color: var(--wine);
+  font-weight: 700;
+}
+
+.todo {
+  opacity: 0.6;
+}
+
+/* On a narrow phone the six stages stack as a list instead. */
+@media (max-width: 440px) {
+  .tracker {
+    grid-template-columns: 1fr;
+    gap: var(--sp-3);
+  }
+
+  .stage {
+    flex-direction: row;
+    text-align: left;
+    gap: var(--sp-3);
+  }
+
+  .stage + .stage::before {
+    top: auto;
+    bottom: 100%;
+    right: auto;
+    left: 19px;
+    width: 0;
+    height: var(--sp-3);
+    border-top: none;
+    border-left: 2px dashed var(--border);
+  }
+
+  .done::before,
+  .current::before {
+    border-left-style: solid !important;
+    border-color: var(--gold) !important;
+  }
+
+  .label {
+    font-size: 0.875rem;
+  }
+}

@@ -1,0 +1,31 @@
+/* Zero height, so it adds no space; the stitches sit on the join. */
+.seam {
+  position: relative;
+  height: 0;
+  z-index: 2;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  transform: translateY(-50%);
+}
+
+.line {
+  flex: 1;
+  border-top: 2px dashed var(--gold);
+  opacity: 0.7;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--wine);
+}

@@ -35,6 +35,14 @@ export default async function ServicesPage() {
                 </div>
 
                 <div className={styles.body}>
+                  <ul className={styles.forWho}>
+                    {garment.forWho.map((who) => (
+                      <li key={who} className={styles.forBadge}>
+                        <Icon name={who === "everyone" ? "hanger" : who} size={16} />
+                        {t.services.forWho[who]}
+                      </li>
+                    ))}
+                  </ul>
                   <h2 className={styles.name}>{garment.name}</h2>
                   {garment.otherNames && (
                     <p className={styles.alt}>
