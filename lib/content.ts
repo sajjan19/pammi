@@ -78,17 +78,17 @@ export const about = {
     {
       id: "chai",
       title: "Always a cup of chai",
-      body: "Before, during and after every suit.",
+      body: "Before, during and after every suit. The thread runs out before the chai does.",
     },
     {
       id: "cooking",
       title: "Loves to cook",
-      body: "Punjabi food is her speciality.",
+      body: "Punjabi food is her speciality. Nobody leaves her house hungry.",
     },
     {
       id: "dramas",
       title: "Punjabi dramas",
-      body: "Her favourite way to relax.",
+      body: "Her favourite way to relax. Ask her what happened in the latest episode.",
     },
     {
       id: "shopping",
