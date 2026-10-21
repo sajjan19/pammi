@@ -386,34 +386,11 @@
   color: var(--khaki);
 }
 
+/* Two buttons of the same width, side by side or stacked. */
 .bandActions {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 300px));
   gap: var(--sp-3);
   justify-content: center;
   margin-top: var(--sp-7);
-}
-
-.bandBtn {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: var(--char);
-}
-
-.bandBtn:hover:not(:disabled) {
-  background: var(--gold-bright);
-  border-color: var(--gold-bright);
-  color: var(--char);
-}
-
-.bandBtnGhost {
-  background: transparent;
-  border-color: rgba(253, 241, 204, 0.4);
-  color: var(--cream);
-}
-
-.bandBtnGhost:hover:not(:disabled) {
-  background: rgba(253, 241, 204, 0.14);
-  border-color: var(--gold-soft);
-  color: var(--white);
 }

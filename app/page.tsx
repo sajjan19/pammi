@@ -159,10 +159,10 @@ export default async function Home() {
           <h2 className={styles.bandTitle}>{t.home.bandTitle}</h2>
           <p className={styles.bandLede}>{t.home.bandText}</p>
           <div className={styles.bandActions}>
-            <Link href="/order" className={`btn ${styles.bandBtn}`}>
+            <Link href="/order" className="btn">
               {t.common.startOrder}
             </Link>
-            <Link href="/measuring" className={`btn ${styles.bandBtnGhost}`}>
+            <Link href="/measuring" className="btn btn-outline">
               {t.home.howMeasuring}
             </Link>
           </div>

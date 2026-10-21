@@ -323,14 +323,17 @@ img {
   cursor: not-allowed;
 }
 
+/* Secondary buttons are the site's yellow. */
 .btn-outline {
-  background: transparent;
-  color: var(--wine);
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
+  color: var(--char);
 }
 
 .btn-outline:hover:not(:disabled) {
-  background: var(--wine);
-  color: var(--white);
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--char);
 }
 
 .btn-ghost {

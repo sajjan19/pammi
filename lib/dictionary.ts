@@ -128,7 +128,7 @@ const en = {
   about: {
     title: "Meet Pammi",
     lede: (fullName: string) =>
-      `${fullName}. Everyone calls her Pammi Penji, and penji means sister in Punjabi.`,
+      `${fullName}. Everyone calls her Pammi Penji.`,
     factsTitle: "A few things about her",
   },
 
