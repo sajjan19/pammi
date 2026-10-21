@@ -11,6 +11,7 @@ import { getLang } from "@/lib/i18n-server";
 import { getContent } from "@/lib/localize";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { StickyOrder } from "@/components/sticky-order";
 
 // A soft old-style serif — it reads as handmade rather than corporate.
 const serif = Cormorant_Garamond({
@@ -90,6 +91,7 @@ export default async function RootLayout({
           {children}
         </main>
         <SiteFooter lang={lang} />
+        <StickyOrder label={t.common.startOrder} />
       </body>
     </html>
   );

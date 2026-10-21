@@ -1,7 +1,9 @@
 .footer {
   background: var(--char);
   color: var(--cream);
-  padding: var(--sp-8) 0 var(--sp-6);
+  /* Extra room at the bottom so the pinned "Start an order" button never
+     covers the last line. */
+  padding: var(--sp-8) 0 calc(var(--sp-6) + 72px);
   margin-top: auto;
 }
 
