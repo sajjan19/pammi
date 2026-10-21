@@ -4,6 +4,7 @@ import { instagramUrl, isPlaceholder, whatsappUrl } from "@/lib/content";
 import { getDictionary } from "@/lib/dictionary";
 import { getLang } from "@/lib/i18n-server";
 import { getContent } from "@/lib/localize";
+import { Icon, type IconName } from "@/components/icon";
 import { PageHeader } from "@/components/page-header";
 import styles from "./page.module.css";
 
@@ -18,17 +19,23 @@ export default async function ContactPage() {
   const whatsapp = whatsappUrl();
   const instagram = instagramUrl();
 
-  const methods: { label: string; value: React.ReactNode }[] = [];
+  const methods: {
+    label: string;
+    value: React.ReactNode;
+    icon?: IconName;
+  }[] = [];
 
   if (!isPlaceholder(business.email)) {
     methods.push({
       label: t.contact.email,
+      icon: "mail",
       value: <a href={`mailto:${business.email}`}>{business.email}</a>,
     });
   }
   if (business.phone) {
     methods.push({
       label: t.contact.phone,
+      icon: "phone",
       value: (
         <a href={`tel:${business.phone.replace(/\s/g, "")}`}>
           {business.phone}
@@ -39,6 +46,7 @@ export default async function ContactPage() {
   if (whatsapp) {
     methods.push({
       label: t.contact.whatsapp,
+      icon: "phone",
       value: (
         <a href={whatsapp} target="_blank" rel="noreferrer">
           {t.contact.whatsappLink}
@@ -57,13 +65,18 @@ export default async function ContactPage() {
     });
   }
   if (!isPlaceholder(business.city)) {
-    methods.push({ label: t.contact.area, value: business.city });
+    methods.push({ label: t.contact.area, icon: "pin", value: business.city });
   }
   if (business.showAddress && !isPlaceholder(business.address)) {
-    methods.push({ label: t.contact.address, value: business.address });
+    methods.push({
+      label: t.contact.address,
+      icon: "pin",
+      value: business.address,
+    });
   }
   methods.push({
     label: t.contact.languages,
+    icon: "languages",
     value: business.languages.join(", "),
   });
 
@@ -78,7 +91,14 @@ export default async function ContactPage() {
               <div className={styles.methods}>
                 {methods.map((method) => (
                   <div key={method.label} className={styles.method}>
-                    <span className={styles.methodLabel}>{method.label}</span>
+                    <span className={styles.methodLabel}>
+                      {method.icon && (
+                        <span className={styles.methodIcon}>
+                          <Icon name={method.icon} size={20} />
+                        </span>
+                      )}
+                      {method.label}
+                    </span>
                     <span className={styles.methodValue}>{method.value}</span>
                   </div>
                 ))}

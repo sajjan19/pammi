@@ -23,7 +23,11 @@ export type IconName =
   | "chai"
   | "cooking"
   | "dramas"
-  | "shopping";
+  | "shopping"
+  | "mail"
+  | "phone"
+  | "pin"
+  | "languages";
 
 /** A filled dot — for pin heads, button holes and pivots. */
 function Dot({ cx, cy, r }: { cx: number; cy: number; r: number }) {
@@ -153,6 +157,35 @@ const shapes: Record<IconName, React.ReactNode> = {
     <>
       <path d="M7 11h18l-1.5 16.5a1.6 1.6 0 0 1-1.6 1.5H10.1a1.6 1.6 0 0 1-1.6-1.5Z" />
       <path d="M12 14v-4a4 4 0 0 1 8 0v4" />
+    </>
+  ),
+
+  // An envelope.
+  mail: (
+    <>
+      <rect x="4" y="7.5" width="24" height="17" rx="2.5" />
+      <path d="m5 9 11 8.5L27 9" />
+    </>
+  ),
+
+  // A phone handset.
+  phone: (
+    <path d="M11.5 4.5H8a2.5 2.5 0 0 0-2.5 2.7C6.6 18.3 13.7 25.4 24.8 26.5a2.5 2.5 0 0 0 2.7-2.5v-3.5l-5.5-2.5-2.8 2.8a14 14 0 0 1-7-7l2.8-2.8Z" />
+  ),
+
+  // A map pin.
+  pin: (
+    <>
+      <path d="M16 28.5s9-8.4 9-15.5a9 9 0 0 0-18 0c0 7.1 9 15.5 9 15.5Z" />
+      <circle cx="16" cy="13" r="3.2" />
+    </>
+  ),
+
+  // Two speech bubbles — for the languages she speaks.
+  languages: (
+    <>
+      <path d="M4 7.5a2.5 2.5 0 0 1 2.5-2.5h11A2.5 2.5 0 0 1 20 7.5v6a2.5 2.5 0 0 1-2.5 2.5H10l-4 3.5V16a2.5 2.5 0 0 1-2-2.5Z" />
+      <path d="M23 12h2.5A2.5 2.5 0 0 1 28 14.5v6a2.5 2.5 0 0 1-2 2.5v3.5L22 23h-7.5A2.5 2.5 0 0 1 12 20.5V19" />
     </>
   ),
 

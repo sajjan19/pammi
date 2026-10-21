@@ -18,7 +18,7 @@
 
 .method {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: var(--sp-4);
   padding: var(--sp-4) var(--sp-5);
@@ -28,6 +28,9 @@
 }
 
 .methodLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
   font-size: 0.625rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -35,7 +38,21 @@
   font-weight: 600;
 }
 
+/* The icon in a small round gold badge. */
+.methodIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  color: var(--wine);
+}
+
 .methodValue {
+  text-align: right;
   font-size: 1rem;
   color: var(--char);
 }
