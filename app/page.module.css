@@ -188,23 +188,38 @@
 
 /* ── Garment cards ────────────────────────── */
 
-/* Exactly three featured suits, so the grid is three-across or one-across —
-   never two, which would leave the third card stranded on a row alone. */
+/* Four suits: four across on a wide screen, two by two on a phone. */
 .garmentGrid {
   display: grid;
   gap: var(--sp-5);
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .garmentGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-3);
+  }
+}
+
+/* Smaller cards on a phone, so two fit side by side. */
+@media (max-width: 560px) {
+  .garmentCard {
+    padding: var(--sp-4);
   }
 
-  /* Full-width on a phone, so a shorter crop keeps each card from being
-     mostly picture. */
-  .garmentArt {
-    aspect-ratio: 16 / 10;
+  .garmentCard .garmentArt {
+    margin: calc(var(--sp-4) * -1) calc(var(--sp-4) * -1) var(--sp-3);
+    aspect-ratio: 1 / 1;
+  }
+
+  .garmentCard .garmentName {
+    font-size: 1.125rem;
+    line-height: 1.2;
+  }
+
+  .garmentCard .garmentFoot {
+    font-size: 0.75rem;
   }
 }
 

@@ -217,6 +217,7 @@ export const garments: Garment[] = [
     turnaroundDays: 21,
     summary: "Fitted on top, flared from the waist.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
+    popular: true,
   },
   {
     slug: "sharara-palazzo",

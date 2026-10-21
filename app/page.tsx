@@ -14,7 +14,12 @@ export default async function Home() {
   const t = getDictionary(lang);
   const { business, garments, gallery, steps } = getContent(lang);
 
-  const featured = garments.filter((g) => g.popular).slice(0, 3);
+  // Four suits in the grid below; the first women's, men's and kids' suits
+  // also make up the picture at the top.
+  const featured = garments.filter((g) => g.popular).slice(0, 4);
+  const pictured = ["salwar-kameez", "kurta-pyjama", "kids-suits"]
+    .map((slug) => garments.find((g) => g.slug === slug))
+    .filter((g) => g !== undefined);
 
   return (
     <>
@@ -38,10 +43,10 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Decorative: the same three suits are named in text below, so
-              screen readers skip this rather than hear them twice. */}
+          {/* Decorative: the same suits are named in text below, so screen
+              readers skip this rather than hear them twice. */}
           <div className={styles.collage} aria-hidden="true">
-            {featured.map((garment, i) => (
+            {pictured.map((garment, i) => (
               <div
                 key={garment.slug}
                 className={`${styles.frame} ${styles[`frame${i}`]}`}
