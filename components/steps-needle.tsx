@@ -7,6 +7,8 @@ import styles from "./steps-needle.module.css";
  * A needle that sews its way through the "How it works" steps, stopping at
  * 1, then 2, 3 and 4, with gold thread trailing behind it.
  *
+ * After the last step it runs on to the end of the line.
+ *
  * Sits inside the steps list. It finds each step's icon (marked with
  * `data-step-icon`) and measures where they are, so it follows the steps
  * across a row on a wide screen or down a column on a phone. It starts once
@@ -34,14 +36,13 @@ export function StepsNeedle() {
 
       // Side by side if the first two icons share a row.
       const vertical = Math.abs(icons[0].top - icons[1].top) > 4;
-      setLayout({
-        vertical,
-        stops: icons.map((icon) =>
-          vertical
-            ? icon.top - box.top
-            : icon.left + icon.width / 2 - box.left,
-        ),
-      });
+      const stops = icons.map((icon) =>
+        vertical ? icon.top - box.top : icon.left + icon.width / 2 - box.left,
+      );
+      // Across a row, the needle carries on past the last step to the end
+      // of the line; down a column it stops at the last step.
+      stops.push(vertical ? stops[stops.length - 1] : box.width);
+      setLayout({ vertical, stops });
     };
 
     measure();

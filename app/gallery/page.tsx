@@ -38,13 +38,7 @@ export default async function GalleryPage() {
             </p>
           )}
 
-          <div
-            style={{
-              display: "grid",
-              gap: "var(--sp-5)",
-              gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-            }}
-          >
+          <div className={styles.grid}>
             {gallery.map((item) => (
               <GalleryTile key={item.src} item={item} />
             ))}

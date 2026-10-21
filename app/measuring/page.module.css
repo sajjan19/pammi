@@ -1,5 +1,21 @@
+/* The drawing on the left, the three points stacked beside it; one above
+   the other on a phone. */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 420px) 1fr;
+  gap: var(--sp-8);
+  align-items: center;
+}
+
+@media (max-width: 820px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: var(--sp-7);
+  }
+}
+
 .figure {
-  margin: 0 0 var(--sp-8);
+  margin: 0;
   max-width: 420px;
   padding: var(--sp-6) var(--sp-5) var(--sp-5);
   background: var(--surface);
@@ -16,8 +32,7 @@
 /* Each point is a small icon beside its words, rather than a big card. */
 .points {
   display: grid;
-  gap: var(--sp-5) var(--sp-6);
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--sp-6);
 }
 
 .point {

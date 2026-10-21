@@ -28,25 +28,27 @@ export default async function MeasuringPage() {
 
       <section className="section">
         <div className="container">
-          <figure className={styles.figure}>
-            <DressForm labels={t.measuring.figure} />
-            <figcaption className={styles.caption}>
-              {t.measuring.figure.caption}
-            </figcaption>
-          </figure>
+          <div className={styles.layout}>
+            <figure className={styles.figure}>
+              <DressForm labels={t.measuring.figure} />
+              <figcaption className={styles.caption}>
+                {t.measuring.figure.caption}
+              </figcaption>
+            </figure>
 
-          <div className={styles.points}>
-            {t.measuring.points.map((point, i) => (
-              <div key={point.title} className={styles.point}>
-                <span className={styles.icon} aria-hidden="true">
-                  <Icon name={pointIcons[i]} size={28} />
-                </span>
-                <div>
-                  <h2 className={styles.pointTitle}>{point.title}</h2>
-                  <p>{point.body}</p>
+            <div className={styles.points}>
+              {t.measuring.points.map((point, i) => (
+                <div key={point.title} className={styles.point}>
+                  <span className={styles.icon} aria-hidden="true">
+                    <Icon name={pointIcons[i]} size={28} />
+                  </span>
+                  <div>
+                    <h2 className={styles.pointTitle}>{point.title}</h2>
+                    <p>{point.body}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <p style={{ marginTop: "var(--sp-8)" }}>
