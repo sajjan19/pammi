@@ -78,17 +78,17 @@ export const about = {
     {
       id: "chai",
       title: "Always a cup of chai",
-      body: "She always finds a reason for another cup. Starting a suit, finishing one, or just because.",
+      body: "She always finds a reason for another cup. Starting a suit, finishing one or just because.",
     },
     {
       id: "cooking",
       title: "Loves to cook",
-      body: "She makes all kinds of dishes, but Punjabi food is her speciality.",
+      body: "She makes all kinds of dishes but Punjabi food is her speciality.",
     },
     {
       id: "dramas",
       title: "Punjabi movies and dramas",
-      body: "Her favourite way to relax after a long day of sewing.",
+      body: "Her favourite way to relax after a long day.",
     },
     {
       id: "shopping",
@@ -598,7 +598,7 @@ export const examples = [
     asked: "You lost or gained weight, and your pants are too loose or too tight.",
     steps: [
       "You try them on and she pins them.",
-      "She takes them in, or lets them out.",
+      "She takes them in or lets them out.",
       "You try them again to check.",
     ],
     result: "The same pants, fitting again.",
@@ -639,7 +639,7 @@ export const faqs = [
   },
   {
     q: "Do you only do Punjabi clothes?",
-    a: "Punjabi clothes are her main work, but she can alter and tailor other clothes too.",
+    a: "Punjabi clothes are her main work but she can alter and tailor other clothes too.",
   },
   {
     q: "How do turbans and patkas work?",

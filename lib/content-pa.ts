@@ -48,7 +48,7 @@ export const aboutPa = {
     },
     dramas: {
       title: "ਪੰਜਾਬੀ ਫ਼ਿਲਮਾਂ ਅਤੇ ਡਰਾਮੇ",
-      body: "ਸਿਲਾਈ ਦੇ ਲੰਮੇ ਦਿਨ ਤੋਂ ਬਾਅਦ ਆਰਾਮ ਕਰਨ ਦਾ ਉਨ੍ਹਾਂ ਦਾ ਮਨਪਸੰਦ ਤਰੀਕਾ।",
+      body: "ਲੰਮੇ ਦਿਨ ਤੋਂ ਬਾਅਦ ਆਰਾਮ ਕਰਨ ਦਾ ਉਨ੍ਹਾਂ ਦਾ ਮਨਪਸੰਦ ਤਰੀਕਾ।",
     },
   } as Record<string, { title: string; body: string }>,
   photoAlt:

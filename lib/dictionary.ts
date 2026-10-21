@@ -229,9 +229,9 @@ const en = {
       phoneBad: "That phone number looks too short.",
       notesLong: "Please keep this under 2000 characters.",
       checkFields: "Please check the boxes marked in red.",
-      notNumber: "Please enter a number, or leave it blank.",
+      notNumber: "Please enter a number or leave it blank.",
       outOfRange: (min: number, max: number) =>
-        `Between ${min} and ${max} inches, or leave it blank.`,
+        `Between ${min} and ${max} inches or leave it blank.`,
       tooManyPhotos: (max: number) => `Please add up to ${max} photos.`,
       badPhoto: (name: string) =>
         `"${name}" isn't a photo we can use. Please use JPG or PNG.`,
