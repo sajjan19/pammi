@@ -151,9 +151,9 @@ export function instagramUrl(): string | null {
  * `price` is in whole dollars and is the *starting* price. Set it to `null`
  * to show "On request" instead of a number.
  *
- * TODO: every price below is a placeholder. She needs to confirm her real
- * charges before this site goes live — leave them as `null` rather than
- * guessing.
+ * TODO: these starting prices were proposed from what other tailors in
+ * Surrey, Brampton, Calgary and Toronto list publicly (October 2026). She
+ * still needs to confirm them.
  */
 export type Garment = {
   slug: string;
@@ -189,7 +189,7 @@ export const garments: Garment[] = [
     otherNames: "salwar kameez",
     kind: "stitching",
     image: "/gallery/placeholder-1.svg",
-    price: null,
+    price: 50,
     turnaroundDays: 14,
     summary: "The everyday suit. Any neckline, any sleeve.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
@@ -200,7 +200,7 @@ export const garments: Garment[] = [
     name: "Patiala Suit",
     kind: "stitching",
     image: "/gallery/placeholder-2.svg",
-    price: null,
+    price: 60,
     turnaroundDays: 14,
     summary: "With a full, pleated Patiala salwar.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
@@ -210,7 +210,7 @@ export const garments: Garment[] = [
     name: "Anarkali Suit",
     kind: "stitching",
     image: "/gallery/placeholder-3.svg",
-    price: null,
+    price: 80,
     turnaroundDays: 21,
     summary: "Fitted on top, flared from the waist.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
@@ -220,7 +220,7 @@ export const garments: Garment[] = [
     name: "Sharara & Palazzo Suit",
     kind: "stitching",
     image: "/gallery/placeholder-4.svg",
-    price: null,
+    price: 70,
     turnaroundDays: 18,
     summary: "Wide-legged bottoms with a short or long kameez.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
@@ -230,7 +230,7 @@ export const garments: Garment[] = [
     name: "Kurti / Kurta",
     kind: "stitching",
     image: "/gallery/placeholder-5.svg",
-    price: null,
+    price: 35,
     turnaroundDays: 10,
     summary: "Just the top, in any style or length.",
     measurementGroups: ["upper", "sleeve", "kameez"],
@@ -241,7 +241,7 @@ export const garments: Garment[] = [
     otherNames: "men's Punjabi suit",
     kind: "stitching",
     image: "/gallery/placeholder-10.svg",
-    price: null,
+    price: 55,
     turnaroundDays: 14,
     summary: "The men's Punjabi suit, made to fit.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
@@ -252,7 +252,7 @@ export const garments: Garment[] = [
     name: "Kids' Punjabi Suits",
     kind: "stitching",
     image: "/gallery/placeholder-11.svg",
-    price: null,
+    price: 35,
     turnaroundDays: 10,
     summary: "For boys and girls, any age.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
@@ -264,7 +264,7 @@ export const garments: Garment[] = [
     otherNames: "pagg, dastaar",
     kind: "headwear",
     image: "/gallery/placeholder-8.svg",
-    price: null,
+    price: 10,
     turnaroundDays: 7,
     summary: "Men's turbans and children's patkas, from cloth you bring.",
     // Nothing to measure — she works from the cloth you bring and the length
@@ -276,7 +276,7 @@ export const garments: Garment[] = [
     name: "Alterations & Repairs",
     kind: "repair",
     image: "/gallery/placeholder-9.svg",
-    price: null,
+    price: 15,
     turnaroundDays: 5,
     summary: "Take in, let out, hem or fix any clothes.",
     // Nothing to measure — a repair needs a description and a photo, and the
