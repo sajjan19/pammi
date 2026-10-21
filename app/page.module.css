@@ -181,12 +181,6 @@
   margin: 0 0 var(--sp-7);
 }
 
-.center {
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}
-
 /* The single button under a grid of cards. */
 .after {
   margin: var(--sp-6) 0 0;
@@ -401,17 +395,16 @@
   border-top: var(--seam);
   color: var(--char);
   padding: var(--sp-8) 0;
-  text-align: center;
 }
 
 .bandTitle {
   color: var(--char);
-  margin: 0 auto;
+  margin: 0;
   max-width: 20ch;
 }
 
 .bandLede {
-  margin: var(--sp-5) auto 0;
+  margin: var(--sp-5) 0 0;
   max-width: 52ch;
   color: var(--slate);
 }
@@ -425,8 +418,9 @@
 /* Two buttons of the same width, side by side or stacked. */
 .bandActions {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 300px));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  max-width: 640px;
   gap: var(--sp-3);
-  justify-content: center;
+  justify-content: start;
   margin-top: var(--sp-7);
 }

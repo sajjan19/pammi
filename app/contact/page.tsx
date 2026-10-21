@@ -129,7 +129,7 @@ export default async function ContactPage() {
               <Link href="/order" className="btn btn-block">
                 {t.common.startOrder}
               </Link>
-              <p style={{ margin: "var(--sp-4) 0 0", textAlign: "center" }}>
+              <p style={{ margin: "var(--sp-4) 0 0" }}>
                 <Link href="/status" className="hint">
                   {t.contact.alreadyOrdered} →
                 </Link>

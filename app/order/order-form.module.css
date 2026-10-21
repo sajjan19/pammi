@@ -329,12 +329,11 @@
 .drop {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--sp-3);
   border: 1px dashed var(--khaki);
   border-radius: var(--radius-lg);
   padding: var(--sp-6);
-  text-align: center;
   background: var(--cream);
   cursor: pointer;
   transition: border-color 0.16s ease;
@@ -383,7 +382,6 @@
 /* ── Success ──────────────────────────────── */
 
 .done {
-  text-align: center;
   padding: var(--sp-8) var(--sp-6);
   background: var(--surface);
   border: 1px solid var(--border);
@@ -393,7 +391,7 @@
 .doneMark {
   width: 56px;
   height: 56px;
-  margin: 0 auto var(--sp-5);
+  margin: 0 0 var(--sp-5);
   border-radius: 50%;
   background: var(--success-bg);
   color: var(--success);
@@ -420,6 +418,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--sp-3);
-  justify-content: center;
+  justify-content: flex-start;
   margin-top: var(--sp-5);
 }

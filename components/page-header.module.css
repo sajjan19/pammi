@@ -17,6 +17,8 @@
   font-size: 1.125rem;
   color: var(--slate);
   line-height: 1.7;
+  /* Lets a lede break onto a new line where its text has one. */
+  white-space: pre-line;
 }
 
 .stitch {

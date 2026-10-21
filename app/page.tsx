@@ -103,7 +103,7 @@ export default async function Home() {
 
       <section className="section section-tinted">
         <div className="container">
-          <h2 className={`${styles.sectionTitle} ${styles.center}`}>
+          <h2 className={styles.sectionTitle}>
             {t.common.howItWorks}
           </h2>
 

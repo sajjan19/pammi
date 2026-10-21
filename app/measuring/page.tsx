@@ -47,7 +47,7 @@ export default async function MeasuringPage() {
             ))}
           </div>
 
-          <p style={{ textAlign: "center", marginTop: "var(--sp-8)" }}>
+          <p style={{ marginTop: "var(--sp-8)" }}>
             <Link href="/order" className="btn">
               {t.common.startOrder}
             </Link>

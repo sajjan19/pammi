@@ -83,7 +83,7 @@ export default async function GalleryPage() {
             ))}
           </div>
 
-          <p style={{ marginTop: "var(--sp-8)", textAlign: "center" }}>
+          <p style={{ marginTop: "var(--sp-8)" }}>
             <Link href="/order" className="btn">
               {t.common.startOrder}
             </Link>

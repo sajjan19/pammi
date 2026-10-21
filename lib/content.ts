@@ -67,10 +67,20 @@ export const business = {
 /* ── About her ─────────────────────────────────────────────── */
 
 export const about = {
-  /** A couple of short paragraphs. */
+  /** Her story as a short timeline: when, where, and a line or two. */
   story: [
-    "Born and raised in Nawanshahr, Punjab, she loved sewing from a very young age. She learned from her mother and her four older sisters.",
-    "At 18 she moved to Vancouver, Canada. Today she sews every suit herself, one at a time, and measures you in person so it fits the first time.",
+    {
+      icon: "spool" as IconName,
+      when: "Where it began",
+      place: "Nawanshahr, Punjab",
+      body: "She loved sewing from a very young age. She learned from her mother and her four older sisters.",
+    },
+    {
+      icon: "machine" as IconName,
+      when: "From age 18",
+      place: "Vancouver, Canada",
+      body: "Today she sews every suit herself, one at a time, and measures you in person so it fits the first time.",
+    },
   ],
   /**
    * Small things about her, each with a little drawing. `id` picks the
