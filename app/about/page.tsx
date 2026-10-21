@@ -17,22 +17,12 @@ export default async function AboutPage() {
   const t = getDictionary(lang);
   const { business, about } = getContent(lang);
 
-  // Her story as a timeline: each stop with its tool, joined by stitches.
+  // Her story in her own words, as a quote.
   const story = (
-    <ol className={styles.timeline}>
-      {about.story.map((chapter) => (
-        <li key={chapter.place} className={styles.stop}>
-          <span className={styles.stopIcon} aria-hidden="true">
-            <Icon name={chapter.icon} size={24} />
-          </span>
-          <div>
-            <p className={styles.when}>{chapter.when}</p>
-            <h2 className={styles.place}>{chapter.place}</h2>
-            <p className={styles.stopBody}>{chapter.body}</p>
-          </div>
-        </li>
-      ))}
-    </ol>
+    <blockquote className={styles.quote}>
+      <p>{about.quote}</p>
+      <footer lang="en">— {business.shortName}</footer>
+    </blockquote>
   );
 
   return (

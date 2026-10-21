@@ -67,21 +67,9 @@ export const business = {
 /* ── About her ─────────────────────────────────────────────── */
 
 export const about = {
-  /** Her story as a short timeline: when, where, and a line or two. */
-  story: [
-    {
-      icon: "spool" as IconName,
-      when: "Where it began",
-      place: "Nawanshahr, Punjab",
-      body: "She loved sewing from a very young age. She learned from her mother and her four older sisters.",
-    },
-    {
-      icon: "machine" as IconName,
-      when: "From age 18",
-      place: "Vancouver, Canada",
-      body: "Today she sews every suit herself, one at a time, and measures you in person so it fits the first time.",
-    },
-  ],
+  /** Her story, in her own words, shown as a quote. */
+  quote:
+    "I learned to sew from my mother and my four older sisters in Nawanshahr, Punjab. Since moving to Vancouver at 18, I've sewn every suit myself, one at a time.",
   /**
    * Small things about her, each with a little drawing. `id` picks the
    * drawing and links each fact to its Punjabi in lib/content-pa.ts.

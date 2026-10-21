@@ -86,9 +86,7 @@ export function getContent(lang: Lang) {
     business: pa ? { ...business, ...businessPa } : business,
 
     about: {
-      story: about.story.map((chapter, i) =>
-        pa ? { ...chapter, ...aboutPa.story[i] } : chapter,
-      ),
+      quote: pa ? aboutPa.quote : about.quote,
       facts: about.facts.map((fact) =>
         pa ? { ...fact, ...aboutPa.facts[fact.id] } : fact,
       ),
