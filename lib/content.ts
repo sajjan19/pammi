@@ -30,10 +30,10 @@ export const business = {
   trade: "Tailoring & Alterations",
   /** Her full name. "Pammi" is what everyone calls her. */
   tailor: "Parmjit Kaur Sajjan",
-  tagline: "Punjabi Suits, Stitched to Measure",
+  tagline: "Indian Suits, Stitched to Measure",
   /** Shown in the hero, the footer and search results. Keep it short. */
   intro:
-    "Punjabi suits for women, men and kids, made to fit you. Alterations on any clothes too.",
+    "She makes all kinds of suits, mostly Indian suits for women, men and kids. Alterations on any clothes too.",
   /** Shown on the Contact page and in the footer. */
   city: "South Vancouver, BC",
 
