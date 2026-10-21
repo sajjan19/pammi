@@ -57,8 +57,8 @@ const en = {
   },
 
   home: {
-    heroLine1: "Suits that fit",
-    heroLine2: "the way they should",
+    heroLine1: "Every kind of suit,",
+    heroLine2: "made to fit you",
     seeWork: "See her work",
     makesTitle: "Punjabi suits, made for you",
     seeAll: "See everything she makes",

@@ -25,11 +25,20 @@
   max-width: 44ch;
 }
 
+/* Both buttons always share one row, even on a small phone. */
 .heroActions {
   display: flex;
-  flex-wrap: wrap;
   gap: var(--sp-3);
   margin-top: var(--sp-7);
+}
+
+@media (max-width: 480px) {
+  .heroActions :global(.btn) {
+    flex: 1;
+    padding-left: var(--sp-3);
+    padding-right: var(--sp-3);
+    white-space: nowrap;
+  }
 }
 
 /* Three of the suits, pinned up like prints on a workroom wall. Each sits in
