@@ -92,8 +92,8 @@ export const about = {
     },
     {
       id: "shopping",
-      title: "Loves shopping",
-      body: "So many clothes, some live at her siblings' houses.",
+      title: "Loves suit shopping",
+      body: "Her suits fill her house, and her siblings' houses too.",
     },
   ] as {
     id: "chai" | "cooking" | "dramas" | "shopping";
