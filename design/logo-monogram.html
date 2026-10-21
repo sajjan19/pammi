@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monogram Logo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600&family=Karla:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#fdf8f0; color:#2a1f24; font-family:Karla, sans-serif; padding:32px 16px; }
+  h1 { font-family:Cormorant, serif; font-weight:500; font-size:2.2rem; text-align:center; margin:0 0 4px; }
+  p.lede { text-align:center; color:#6b5a60; margin:0 0 28px; }
+  .grid { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); max-width:1000px; margin:0 auto; }
+  .card { background:#fff; border:1px solid #ead9c8; border-radius:14px; padding:24px; text-align:center; }
+  .big { width:220px; height:220px; }
+  .num { font-weight:600; font-size:.8rem; letter-spacing:.15em; text-transform:uppercase; color:#c51a68; margin-top:12px; }
+  .desc { color:#6b5a60; font-size:.92rem; margin:4px 0 16px; }
+  .row { display:flex; gap:18px; justify-content:center; align-items:center; flex-wrap:wrap; }
+  .row small { font-size:.7rem; color:#8a7a80; display:block; margin-top:4px; }
+</style>
+</head>
+<body>
+<h1>PP monogram, sewn</h1>
+<p class="lede">The gold stitches underline PP, and the thread runs into the needle, as if she's sewing it right now.</p>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="disc" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" fill="#c51a68"/>
+      <circle cx="50" cy="50" r="40" fill="none" stroke="#f5c842" stroke-width="1.4" stroke-dasharray="3.5 3"/>
+      <text x="50" y="57" text-anchor="middle" font-family="Cormorant, serif" font-size="38" font-weight="600" fill="#fdf8f0">PP</text>
+    </symbol>
+
+    <!-- A: the needle carries on along the underline -->
+    <symbol id="A" viewBox="0 0 100 100">
+      <use href="#disc" width="100" height="100"/>
+      <!-- sewn stitches -->
+      <path d="M22 69H50" stroke="#f5c842" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="5 3.5"/>
+      <!-- thread still attached, through the eye -->
+      <path d="M50 69c3 0 5-1 7-2.4c1.6-1.1 1.6 2.6-.4 2.4" fill="none" stroke="#f5c842" stroke-width="1.4" stroke-linecap="round"/>
+      <!-- needle, tip pointing on along the line -->
+      <path d="M80 69 74 67.4H58.5a1.6 1.6 0 0 0 0 3.2H74Z" fill="#fdf8f0"/>
+      <ellipse cx="61" cy="69" rx="2.3" ry=".7" fill="#c51a68"/>
+    </symbol>
+
+    <!-- B: the needle has just come up through the cloth -->
+    <symbol id="B" viewBox="0 0 100 100">
+      <use href="#disc" width="100" height="100"/>
+      <path d="M20 69H50" stroke="#f5c842" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="5 3.5"/>
+      <!-- thread from the last stitch up into the eye -->
+      <path d="M50 69c5 0 8-1 10.5-4.5" fill="none" stroke="#f5c842" stroke-width="1.6" stroke-linecap="round"/>
+      <g transform="translate(60 66) rotate(-50)">
+        <path d="M0 0H18L24 1.6 18 3.2H0A1.6 1.6 0 0 1 0 0Z" fill="#fdf8f0"/>
+        <ellipse cx="3" cy="1.6" rx="2.2" ry=".65" fill="#c51a68"/>
+      </g>
+    </symbol>
+
+    <!-- C: like B, with a little loop of slack thread -->
+    <symbol id="C" viewBox="0 0 100 100">
+      <use href="#disc" width="100" height="100"/>
+      <path d="M20 69H48" stroke="#f5c842" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="5 3.5"/>
+      <path d="M48 69c6 0 10 6 14 3s0-8 0-8" fill="none" stroke="#f5c842" stroke-width="1.6" stroke-linecap="round"/>
+      <g transform="translate(61 65) rotate(-60)">
+        <path d="M0 0H18L24 1.6 18 3.2H0A1.6 1.6 0 0 1 0 0Z" fill="#fdf8f0"/>
+        <ellipse cx="3" cy="1.6" rx="2.2" ry=".65" fill="#c51a68"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="grid">
+  <div class="card">
+    <svg class="big"><use href="#A" width="220" height="220"/></svg>
+    <div class="num">A · Needle on the line</div>
+    <p class="desc">The needle keeps going along the underline.</p>
+    <div class="row">
+      <div><svg width="64" height="64"><use href="#A" width="64" height="64"/></svg><small>Header</small></div>
+      <div><svg width="32" height="32"><use href="#A" width="32" height="32"/></svg><small>Tab icon</small></div>
+    </div>
+  </div>
+  <div class="card">
+    <svg class="big"><use href="#B" width="220" height="220"/></svg>
+    <div class="num">B · Needle pulling up</div>
+    <p class="desc">The needle has just come up through the cloth.</p>
+    <div class="row">
+      <div><svg width="64" height="64"><use href="#B" width="64" height="64"/></svg><small>Header</small></div>
+      <div><svg width="32" height="32"><use href="#B" width="32" height="32"/></svg><small>Tab icon</small></div>
+    </div>
+  </div>
+  <div class="card">
+    <svg class="big"><use href="#C" width="220" height="220"/></svg>
+    <div class="num">C · With a loop of thread</div>
+    <p class="desc">Like B, with a little slack in the thread.</p>
+    <div class="row">
+      <div><svg width="64" height="64"><use href="#C" width="64" height="64"/></svg><small>Header</small></div>
+      <div><svg width="32" height="32"><use href="#C" width="32" height="32"/></svg><small>Tab icon</small></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

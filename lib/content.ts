@@ -61,7 +61,7 @@ export const business = {
    * wording inside it reads as texture rather than text — that's expected,
    * and the name is still spelled out beside it.
    */
-  logoSrc: "/logo.jpeg" as string | null,
+  logoSrc: null as string | null,
 };
 
 /* ── About her ─────────────────────────────────────────────── */
