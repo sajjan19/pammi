@@ -45,10 +45,14 @@
   --text-muted: var(--stone);
   --border: var(--sand);
 
-  /* Type */
-  --font-display: var(--font-serif), "Georgia", "Times New Roman", serif;
-  --font-body: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  /* Type. Each stack runs Latin font → Gurmukhi font → system fallbacks:
+     the Latin fonts contain no Gurmukhi, so Punjabi text falls through to
+     the Noto font automatically, letter by letter. */
+  --font-display: var(--font-serif), var(--font-serif-pa), "Georgia",
+    serif;
+  --font-body: var(--font-sans), var(--font-sans-pa), -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --heading-lh: 1.14;
 
   /* Space */
   --sp-1: 0.25rem;
@@ -125,10 +129,41 @@ h3,
 h4 {
   font-family: var(--font-display);
   font-weight: 400;
-  line-height: 1.14;
+  line-height: var(--heading-lh);
   letter-spacing: -0.005em;
   margin: 0;
   color: var(--char);
+  /* Spread heading lines evenly, so a wrap never strands one word alone. */
+  text-wrap: balance;
+}
+
+/* Same idea for running text, more gently: avoid a lone last word. */
+p,
+li {
+  text-wrap: pretty;
+}
+
+/*
+ * Gurmukhi needs room and no tracking.
+ *
+ * Its vowel signs sit above and below the line, so tight heading line
+ * heights would clip them into the line above. And letter-spacing pulls apart
+ * marks that are meant to join their letter — the wide tracking used on
+ * labels and buttons would visibly break words. Turned off everywhere, with
+ * !important because component styles set tracking on dozens of classes.
+ */
+html:lang(pa) {
+  --heading-lh: 1.45;
+}
+
+html:lang(pa) body {
+  line-height: 1.85;
+}
+
+html:lang(pa) *,
+html:lang(pa) *::before,
+html:lang(pa) *::after {
+  letter-spacing: normal !important;
 }
 
 h1 {

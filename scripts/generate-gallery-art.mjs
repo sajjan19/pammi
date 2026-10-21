@@ -303,11 +303,46 @@ const turban = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" wi
 </svg>
 `;
 
+/**
+ * Repairs and hemming: a trouser leg with a fresh hem being stitched, the
+ * needle still in it, and a pair of scissors. The one job that isn't a
+ * finished garment, so it gets the tools rather than the clothes.
+ */
+const repair = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img">
+  <rect width="600" height="800" fill="${C.cream}"/>
+  ${weave(C.magenta)}
+  <circle cx="300" cy="400" r="270" fill="${C.blush}"/>
+  ${lotus(300, 62, 1.4, C.magenta, 0.4)}
+
+  <path d="M214 170 L346 170 L372 600 L250 600 Z" fill="${C.magentaDeep}"/>
+  <path d="M250 548 L370 548 L372 600 L250 600 Z" fill="${C.magenta}"/>
+  <path d="M252 540 L369 540" stroke="${C.goldBright}" stroke-width="5"
+        stroke-dasharray="12 9" stroke-linecap="round"/>
+  <path d="M280 170 L286 450" stroke="${C.magenta}" stroke-width="3" stroke-opacity="0.6"/>
+
+  <path d="M369 540 C420 520 448 470 440 400 C434 352 404 330 382 338"
+        fill="none" stroke="${C.goldBright}" stroke-width="4" stroke-linecap="round"/>
+  <path d="M376 344 L470 218" stroke="#8d7c86" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="465" cy="225" rx="3" ry="9" transform="rotate(37 465 225)" fill="${C.cream}"/>
+
+  <g transform="translate(150 640) rotate(-18)">
+    <circle cx="0" cy="0" r="26" fill="none" stroke="${C.gold}" stroke-width="9"/>
+    <circle cx="54" cy="20" r="26" fill="none" stroke="${C.gold}" stroke-width="9"/>
+    <path d="M18 -6 L170 -60 L176 -48 L36 6 Z" fill="#a89aa1"/>
+    <path d="M38 30 L176 -32 L172 -18 L44 42 Z" fill="#8d7c86"/>
+    <circle cx="34" cy="10" r="6" fill="${C.magentaDeep}"/>
+  </g>
+
+  ${lotus(300, 758, 1.2, C.magenta, 0.45)}
+</svg>
+`;
+
 fs.mkdirSync(OUT, { recursive: true });
 for (const { file, svg } of tiles) {
   fs.writeFileSync(path.join(OUT, file), svg);
 }
 fs.writeFileSync(path.join(OUT, "placeholder-7.svg"), patka);
 fs.writeFileSync(path.join(OUT, "placeholder-8.svg"), turban);
+fs.writeFileSync(path.join(OUT, "placeholder-9.svg"), repair);
 
-console.log(`wrote ${tiles.length + 2} illustrations to public/gallery`);
+console.log(`wrote ${tiles.length + 3} illustrations to public/gallery`);

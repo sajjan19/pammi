@@ -1,0 +1,48 @@
+.form {
+  display: flex;
+  margin: 0;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding: 0 var(--sp-4);
+  border: 1px solid var(--wine);
+  border-radius: 999px;
+  background: var(--wine-soft);
+  color: var(--wine-deep);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--wine);
+  color: var(--white);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+/* On the narrowest phones the long business name needs the room; the globe
+   alone would be a guessing game, so it's the icon that goes, not the word. */
+@media (max-width: 380px) {
+  .icon {
+    display: none;
+  }
+
+  .button {
+    padding: 0 var(--sp-3);
+  }
+}

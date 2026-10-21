@@ -1,22 +1,23 @@
+/* A solid background rather than a translucent blur. backdrop-filter would
+   make this header the containing box for anything position: fixed inside
+   it — which would shrink the full-screen phone menu to the header's size. */
 .header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(253, 248, 240, 0.94);
-  backdrop-filter: blur(10px);
+  background: var(--ivory);
   border-bottom: 1px solid var(--border);
 }
 
 .inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--sp-5);
+  gap: var(--sp-4);
   min-height: 72px;
 }
 
 /* The business name is long, so the brand block is allowed to shrink and
-   wrap rather than shoving the menu button off the side of a phone. */
+   wrap rather than shoving the buttons off the side of a phone. */
 .brand {
   display: inline-flex;
   align-items: center;
@@ -54,34 +55,64 @@
   color: var(--stone);
 }
 
+/* In the markup the buttons come before the menu (see site-header.tsx); on
+   a wide screen they're moved to the far right, after it. */
 .nav {
+  order: 1;
+  margin-left: auto;
   display: flex;
   align-items: center;
-  gap: var(--sp-2);
+  gap: var(--sp-1);
 }
 
+.actions {
+  order: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-shrink: 0;
+}
+
+/* A menu label must never break onto two lines — it reads as a layout
+   fault. When the row can't fit, the header switches to the menu button
+   instead (see the breakpoint below). */
 .link {
+  position: relative;
+  white-space: nowrap;
   font-size: 0.8125rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   color: var(--slate);
   text-decoration: none;
-  padding: var(--sp-2) var(--sp-3);
-  border-radius: var(--radius);
-  transition: color 0.18s ease, background 0.18s ease;
+  padding: var(--sp-2);
+  transition: color 0.18s ease;
 }
 
+/* Hover is a colour change only — a filled block stays drawn on whatever
+   was just clicked, since the pointer is still resting there. */
 .link:hover {
-  color: var(--char);
-  background: var(--cream);
+  color: var(--wine);
 }
 
+/* The current page: in the accent colour, underlined. Not bolded, because
+   bold text is wider and would nudge the whole row each time you navigate. */
 .linkActive {
   color: var(--wine);
-  font-weight: 600;
+}
+
+.linkActive::after {
+  content: "";
+  position: absolute;
+  left: var(--sp-2);
+  right: var(--sp-2);
+  bottom: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
 }
 
 .cta {
   margin-left: var(--sp-3);
+  white-space: nowrap;
 }
 
 .toggle {
@@ -138,28 +169,53 @@
   transform: translateY(-5.25px) rotate(-45deg);
 }
 
-@media (max-width: 860px) {
+/* ── Phones and tablets: a full-screen menu ── */
+
+/* Measured, not guessed: in English the menu row needs about 560px, the
+   language switch about 100px, and the business name needs ~260px to sit
+   on two tidy lines. Below roughly 1000px wide that no longer fits, so from
+   1024px down the row folds into the menu button. Punjabi labels are
+   shorter, so the English figure is the one that decides it. */
+@media (max-width: 1024px) {
   .toggle {
     display: inline-flex;
   }
 
   .inner {
-    gap: var(--sp-4);
+    gap: var(--sp-3);
+  }
+
+  /* The menu is out of the flow on a phone, so the buttons push themselves
+     to the right instead. */
+  .actions {
+    margin-left: auto;
+  }
+
+  /* The open menu covers the whole screen. The brand and the buttons sit on
+     top of it, so the close button and the language switch are still right
+     where they were. */
+  .brand,
+  .actions {
+    position: relative;
+    z-index: 2;
   }
 
   .nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: none;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    padding: var(--sp-3) var(--sp-5) var(--sp-5);
+    margin: 0;
+    /* Clears the header bar, which stays on top. */
+    padding: 6.5rem var(--sp-5) var(--sp-7);
     background: var(--ivory);
-    border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    display: none;
+    /* If a short phone held sideways can't fit every link, the menu itself
+       scrolls — and that scroll never leaks through to the page behind. */
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .navOpen {
@@ -168,18 +224,48 @@
 
   .link {
     padding: var(--sp-4) var(--sp-2);
-    font-size: 1rem;
+    font-family: var(--font-display);
+    font-size: 1.625rem;
+    letter-spacing: 0;
+    color: var(--char);
     border-bottom: 1px solid var(--border);
     border-radius: 0;
   }
 
+  .link:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .link:hover {
+    color: var(--wine);
+  }
+
+  /* The current page keeps its colour here — the rule above would otherwise
+     paint it like the rest — but drops the underline, since the full-screen
+     menu already rules a line under every link. */
+  .linkActive {
+    color: var(--wine);
+  }
+
+  .linkActive::after {
+    display: none;
+  }
+
   .cta {
-    margin: var(--sp-5) 0 0;
+    margin: var(--sp-6) 0 0;
+    padding-top: var(--sp-4);
+    padding-bottom: var(--sp-4);
+    font-size: 0.8125rem;
+  }
+
+  /* While the menu is open, the page behind it can't scroll. */
+  :global(html):has(.navOpen) {
+    overflow: hidden;
   }
 }
 
 /* On the narrowest phones the tagline is the first thing to go — the name
-   and a reachable menu button matter more. */
+   and reachable buttons matter more. */
 @media (max-width: 420px) {
   .brandTag {
     display: none;

@@ -39,40 +39,40 @@ export const measurementGroups: MeasurementGroup[] = [
   {
     id: "upper",
     title: "Body",
-    description: "Roughly, over a top that fits you reasonably well.",
+    description: "Roughly is fine.",
     fields: [
       {
         id: "bust",
         label: "Bust / chest",
-        hint: "Around the fullest part of the chest.",
+        hint: "Around the fullest part.",
         min: 20,
         max: 70,
       },
       {
         id: "waist",
         label: "Waist",
-        hint: "Around the narrowest part, usually just above the belly button.",
+        hint: "Around the narrowest part.",
         min: 18,
         max: 70,
       },
       {
         id: "hips",
         label: "Hips",
-        hint: "Around the fullest part of the hips and seat.",
+        hint: "Around the fullest part.",
         min: 20,
         max: 80,
       },
       {
         id: "shoulder",
         label: "Shoulder width",
-        hint: "Across the back, from the tip of one shoulder to the other.",
+        hint: "Across the back, tip to tip.",
         min: 8,
         max: 30,
       },
       {
         id: "armhole",
         label: "Armhole",
-        hint: "Around the top of the arm where a sleeve would be joined.",
+        hint: "Around the top of the arm.",
         min: 8,
         max: 30,
       },
@@ -81,19 +81,19 @@ export const measurementGroups: MeasurementGroup[] = [
   {
     id: "sleeve",
     title: "Sleeves",
-    description: "With your arm relaxed at your side.",
+    description: "Arm relaxed.",
     fields: [
       {
         id: "sleeveLength",
         label: "Sleeve length",
-        hint: "From the shoulder tip down to where you'd like the sleeve to end.",
+        hint: "Shoulder to where the sleeve ends.",
         min: 2,
         max: 36,
       },
       {
         id: "sleeveRound",
         label: "Sleeve round at the hem",
-        hint: "Around your arm at the point the sleeve will end.",
+        hint: "Around the arm where it ends.",
         min: 5,
         max: 30,
       },
@@ -102,33 +102,33 @@ export const measurementGroups: MeasurementGroup[] = [
   {
     id: "kameez",
     title: "Kameez / kurti",
-    description: "The top itself — lengths run from the shoulder down.",
+    description: "Measured from the shoulder.",
     fields: [
       {
         id: "kameezLength",
         label: "Kameez length",
-        hint: "From the shoulder seam down to about where you'd like the hem.",
+        hint: "Shoulder to where the hem sits.",
         min: 15,
         max: 65,
       },
       {
         id: "frontNeckDepth",
         label: "Front neck depth",
-        hint: "From the base of the neck down to where the neckline should sit.",
+        hint: "How low the front neckline goes.",
         min: 1,
         max: 20,
       },
       {
         id: "backNeckDepth",
         label: "Back neck depth",
-        hint: "The same measurement down the back.",
+        hint: "How low the back neckline goes.",
         min: 1,
         max: 20,
       },
       {
         id: "slitLength",
         label: "Side slit length",
-        hint: "How far up from the hem the side slits should open.",
+        hint: "How high the side slits go.",
         min: 0,
         max: 30,
       },
@@ -137,33 +137,33 @@ export const measurementGroups: MeasurementGroup[] = [
   {
     id: "bottom",
     title: "Salwar / bottoms",
-    description: "Whatever you're wearing under the kameez.",
+    description: "Under the kameez.",
     fields: [
       {
         id: "bottomLength",
         label: "Bottom length",
-        hint: "From your waist down to the ankle, along the outside of the leg.",
+        hint: "Waist to ankle.",
         min: 20,
         max: 55,
       },
       {
         id: "bottomWaist",
         label: "Waist for the bottoms",
-        hint: "Where you actually tie or wear them — often lower than your natural waist.",
+        hint: "Where you tie them.",
         min: 18,
         max: 70,
       },
       {
         id: "thigh",
         label: "Thigh",
-        hint: "Around the fullest part of one thigh.",
+        hint: "Around the fullest part.",
         min: 12,
         max: 45,
       },
       {
         id: "bottomOpening",
         label: "Ankle opening",
-        hint: "How wide you'd like the leg opening at the ankle.",
+        hint: "How wide at the ankle.",
         min: 6,
         max: 40,
       },
@@ -196,22 +196,22 @@ export const measurementSources = [
   {
     value: "in-person",
     label: "Pammi will measure me",
-    hint: "The usual way. She takes them properly when you drop your fabric off.",
+    hint: "The usual way.",
   },
   {
     value: "sample",
-    label: "Copy a suit that already fits me",
-    hint: "Bring a suit you like the fit of and it gets measured and copied.",
+    label: "Copy a suit that fits me",
+    hint: "Bring it when you drop off your fabric.",
   },
   {
     value: "onfile",
-    label: "She already has my measurements",
-    hint: "For returning customers. Mention anything that's changed in the notes.",
+    label: "She has my measurements",
+    hint: "For returning customers.",
   },
   {
     value: "not-needed",
     label: "Not needed for this job",
-    hint: "Used for repairs and hemming.",
+    hint: "For repairs.",
   },
 ];
 
@@ -224,10 +224,17 @@ export type MeasurementValues = Record<string, number>;
  * can't post a salwar length onto a kurti order. Blank fields are skipped,
  * and nothing here is ever required — a wildly wrong number is worth
  * catching, a missing one is not.
+ *
+ * The caller supplies the error wording, so it comes back in the customer's
+ * own language.
  */
 export function parseMeasurements(
   formData: FormData,
   groups: MeasurementGroup[],
+  messages: {
+    notNumber: string;
+    outOfRange: (min: number, max: number) => string;
+  },
 ): { values: MeasurementValues; errors: Record<string, string> } {
   const values: MeasurementValues = {};
   const errors: Record<string, string> = {};
@@ -239,9 +246,9 @@ export function parseMeasurements(
 
       const value = Number(raw);
       if (!Number.isFinite(value)) {
-        errors[field.id] = "Please enter a number in inches, or leave it blank.";
+        errors[field.id] = messages.notNumber;
       } else if (value < field.min || value > field.max) {
-        errors[field.id] = `That should be between ${field.min} and ${field.max} inches — or leave it blank and she'll measure.`;
+        errors[field.id] = messages.outOfRange(field.min, field.max);
       } else {
         values[field.id] = Math.round(value * 4) / 4; // nearest quarter inch
       }

@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  business,
-  faqs,
-  instagramUrl,
-  isPlaceholder,
-  whatsappUrl,
-} from "@/lib/content";
+import { instagramUrl, isPlaceholder, whatsappUrl } from "@/lib/content";
+import { getDictionary } from "@/lib/dictionary";
+import { getLang } from "@/lib/i18n-server";
+import { getContent } from "@/lib/localize";
 import { PageHeader } from "@/components/page-header";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
-  title: "Contact",
-  description: `Get in touch with ${business.name}.`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: getDictionary(await getLang()).meta.contact };
+}
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const lang = await getLang();
+  const t = getDictionary(lang);
+  const { business, faqs } = getContent(lang);
   const whatsapp = whatsappUrl();
   const instagram = instagramUrl();
 
@@ -23,13 +22,13 @@ export default function ContactPage() {
 
   if (!isPlaceholder(business.email)) {
     methods.push({
-      label: "Email",
+      label: t.contact.email,
       value: <a href={`mailto:${business.email}`}>{business.email}</a>,
     });
   }
   if (business.phone) {
     methods.push({
-      label: "Phone",
+      label: t.contact.phone,
       value: (
         <a href={`tel:${business.phone.replace(/\s/g, "")}`}>
           {business.phone}
@@ -39,17 +38,17 @@ export default function ContactPage() {
   }
   if (whatsapp) {
     methods.push({
-      label: "WhatsApp",
+      label: t.contact.whatsapp,
       value: (
         <a href={whatsapp} target="_blank" rel="noreferrer">
-          Message on WhatsApp
+          {t.contact.whatsappLink}
         </a>
       ),
     });
   }
   if (instagram) {
     methods.push({
-      label: "Instagram",
+      label: t.contact.instagram,
       value: (
         <a href={instagram} target="_blank" rel="noreferrer">
           @{business.instagram?.replace(/^@/, "")}
@@ -58,28 +57,27 @@ export default function ContactPage() {
     });
   }
   if (!isPlaceholder(business.city)) {
-    methods.push({ label: "Area", value: business.city });
+    methods.push({ label: t.contact.area, value: business.city });
   }
   if (business.showAddress && !isPlaceholder(business.address)) {
-    methods.push({ label: "Address", value: business.address });
+    methods.push({ label: t.contact.address, value: business.address });
   }
-  methods.push({ label: "Languages", value: business.languages.join(", ") });
+  methods.push({
+    label: t.contact.languages,
+    value: business.languages.join(", "),
+  });
 
   return (
     <>
-      <PageHeader
-        eyebrow="Contact"
-        title="Get in touch"
-        lede="The order form is the quickest way to get a quote — it asks for everything she needs in one go. For anything else, reach her directly."
-      />
+      <PageHeader title={t.contact.title} lede={t.contact.lede} />
 
       <section className="section">
         <div className="container">
           <div className={styles.grid}>
             <div>
               <div className={styles.methods}>
-                {methods.map((method, i) => (
-                  <div key={i} className={styles.method}>
+                {methods.map((method) => (
+                  <div key={method.label} className={styles.method}>
                     <span className={styles.methodLabel}>{method.label}</span>
                     <span className={styles.methodValue}>{method.value}</span>
                   </div>
@@ -93,9 +91,8 @@ export default function ContactPage() {
               )}
 
               <div className={styles.faq}>
-                <h2>Common questions</h2>
-                <hr className="thread" />
-                <div style={{ marginTop: "var(--sp-6)" }}>
+                <h2>{t.contact.questions}</h2>
+                <div style={{ marginTop: "var(--sp-5)" }}>
                   {faqs.map((faq) => (
                     <details key={faq.q} className={styles.faqItem}>
                       <summary>{faq.q}</summary>
@@ -107,18 +104,14 @@ export default function ContactPage() {
             </div>
 
             <aside className={styles.aside}>
-              <h3>Ready to order?</h3>
-              <p>
-                Tell her what you&rsquo;d like made, add your measurements and
-                a photo of the design, and she&rsquo;ll come back with a price
-                and a date.
-              </p>
+              <h3>{t.contact.readyTitle}</h3>
+              <p>{t.contact.readyText}</p>
               <Link href="/order" className="btn btn-block">
-                Start an order
+                {t.common.startOrder}
               </Link>
               <p style={{ margin: "var(--sp-4) 0 0", textAlign: "center" }}>
                 <Link href="/status" className="hint">
-                  Already ordered? Check your order →
+                  {t.contact.alreadyOrdered} →
                 </Link>
               </p>
             </aside>

@@ -20,14 +20,18 @@ const DAY_FORMAT: Intl.DateTimeFormatOptions = {
   year: "numeric",
 };
 
-/** Formats a calendar day ("2026-10-15") without shifting it by timezone. */
-export function formatDay(value: string): string {
+/**
+ * Formats a calendar day ("2026-10-15") without shifting it by timezone.
+ * `locale` picks the language of the month name; leave it out for the
+ * reader's own default.
+ */
+export function formatDay(value: string, locale?: string): string {
   if (!DAY_RE.test(value)) return value;
   // The time suffix makes this parse in local time rather than as UTC.
-  return new Date(`${value}T00:00:00`).toLocaleDateString(undefined, DAY_FORMAT);
+  return new Date(`${value}T00:00:00`).toLocaleDateString(locale, DAY_FORMAT);
 }
 
 /** Formats a full ISO timestamp as a day. */
-export function formatTimestamp(iso: string): string {
-  return new Date(iso).toLocaleDateString(undefined, DAY_FORMAT);
+export function formatTimestamp(iso: string, locale?: string): string {
+  return new Date(iso).toLocaleDateString(locale, DAY_FORMAT);
 }

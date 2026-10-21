@@ -1,15 +1,14 @@
 import Link from "next/link";
-import {
-  business,
-  garments,
-  isPlaceholder,
-  instagramUrl,
-  whatsappUrl,
-} from "@/lib/content";
+import { instagramUrl, isPlaceholder, whatsappUrl } from "@/lib/content";
+import { getDictionary } from "@/lib/dictionary";
+import type { Lang } from "@/lib/i18n";
+import { getContent } from "@/lib/localize";
 import { Logo } from "@/components/logo";
 import styles from "./site-footer.module.css";
 
-export function SiteFooter() {
+export function SiteFooter({ lang }: { lang: Lang }) {
+  const t = getDictionary(lang);
+  const { business, garments } = getContent(lang);
   const whatsapp = whatsappUrl();
   const instagram = instagramUrl();
 
@@ -26,7 +25,7 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <p className={styles.heading}>Stitching</p>
+            <p className={styles.heading}>{t.footer.stitching}</p>
             <ul className={styles.list}>
               {garments.slice(0, 5).map((garment) => (
                 <li key={garment.slug}>
@@ -34,19 +33,19 @@ export function SiteFooter() {
                 </li>
               ))}
               <li>
-                <Link href="/services">Everything else</Link>
+                <Link href="/services">{t.footer.seeAll}</Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <p className={styles.heading}>Get in touch</p>
+            <p className={styles.heading}>{t.footer.getInTouch}</p>
             <ul className={styles.list}>
               <li>
-                <Link href="/order">Start an order</Link>
+                <Link href="/order">{t.footer.startOrder}</Link>
               </li>
               <li>
-                <Link href="/status">Check your order</Link>
+                <Link href="/status">{t.footer.checkOrder}</Link>
               </li>
               {!isPlaceholder(business.email) && (
                 <li>
@@ -63,14 +62,14 @@ export function SiteFooter() {
               {whatsapp && (
                 <li>
                   <a href={whatsapp} target="_blank" rel="noreferrer">
-                    WhatsApp
+                    {t.contact.whatsapp}
                   </a>
                 </li>
               )}
               {instagram && (
                 <li>
                   <a href={instagram} target="_blank" rel="noreferrer">
-                    Instagram
+                    {t.contact.instagram}
                   </a>
                 </li>
               )}
@@ -83,7 +82,7 @@ export function SiteFooter() {
             © {new Date().getFullYear()} {business.name}
             {!isPlaceholder(business.city) && ` · ${business.city}`}
           </span>
-          <Link href="/admin">Orders</Link>
+          <Link href="/admin">{t.footer.admin}</Link>
         </div>
       </div>
     </footer>

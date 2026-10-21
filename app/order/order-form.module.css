@@ -6,17 +6,21 @@
 
 /* ── Step block ───────────────────────────── */
 
+/* Each step is a <fieldset>. Browsers give fieldsets a min-width of their
+   content by default, which lets a wide row push a phone screen sideways;
+   min-width: 0 stops that. */
 .step {
+  margin: 0;
+  min-width: 0;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--sp-6);
-  counter-increment: step;
 }
 
 .stepHead {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: var(--sp-4);
   margin-bottom: var(--sp-5);
   padding-bottom: var(--sp-4);
@@ -24,11 +28,17 @@
 }
 
 .stepNumber {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  color: var(--gold);
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
   flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--wine);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.9375rem;
 }
 
 .stepTitle {
@@ -45,9 +55,14 @@
 }
 
 @media (max-width: 600px) {
+  .step {
+    padding: var(--sp-5);
+  }
+
   .stepHead {
     flex-wrap: wrap;
   }
+
   .stepNote {
     margin-left: 0;
     text-align: left;
@@ -60,13 +75,18 @@
 .garments {
   display: grid;
   gap: var(--sp-3);
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
 }
 
+/* A picture, then the name and days. The picture does most of the work:
+   it's how someone tells a Patiala from an Anarkali at a glance. */
 .garment {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
   position: relative;
-  padding: var(--sp-4) var(--sp-5);
+  padding: var(--sp-2);
+  padding-right: var(--sp-4);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   cursor: pointer;
@@ -83,10 +103,37 @@
   pointer-events: none;
 }
 
+/* The real radio is invisible, so keyboard focus is shown on the card. */
+.garment:has(input:focus-visible) {
+  outline: 2px solid var(--wine);
+  outline-offset: 2px;
+}
+
 .garmentSelected {
   border-color: var(--wine);
   background: var(--wine-soft);
   box-shadow: inset 0 0 0 1px var(--wine);
+}
+
+.garmentThumb {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--cream);
+}
+
+.garmentThumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.garmentText {
+  min-width: 0;
 }
 
 .garmentName {
@@ -100,7 +147,7 @@
   display: block;
   font-size: 0.8125rem;
   color: var(--text-muted);
-  margin-top: var(--sp-1);
+  margin-top: 2px;
 }
 
 /* ── Field layout ─────────────────────────── */
@@ -108,7 +155,12 @@
 .row {
   display: grid;
   gap: var(--sp-5);
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.field {
+  margin: 0;
+  min-width: 0;
 }
 
 .choices {
@@ -159,80 +211,6 @@
   margin-top: 2px;
 }
 
-/* ── Measurements ─────────────────────────── */
-
-.mGroup {
-  margin-bottom: var(--sp-6);
-}
-
-.mGroupHead {
-  margin-bottom: var(--sp-4);
-}
-
-.mGroupTitle {
-  margin: 0;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.mGroupDesc {
-  margin: var(--sp-1) 0 0;
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-}
-
-.mFields {
-  display: grid;
-  gap: var(--sp-4);
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-.mField {
-  margin: 0;
-}
-
-.mLabel {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--sp-2);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--slate);
-  margin-bottom: var(--sp-2);
-}
-
-.mRequired {
-  color: var(--wine);
-  font-size: 0.6875rem;
-}
-
-.mInputWrap {
-  position: relative;
-}
-
-.mInputWrap .input {
-  padding-right: 3.25rem;
-}
-
-.mUnit {
-  position: absolute;
-  right: var(--sp-4);
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  pointer-events: none;
-}
-
-.mHint {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin: var(--sp-2) 0 0;
-  line-height: 1.45;
-}
-
 /* ── Rough sizes (collapsed by default) ───── */
 
 .roughBox {
@@ -273,30 +251,95 @@
   border-top: 1px solid var(--border);
 }
 
+.mGroup {
+  margin-top: var(--sp-5);
+}
+
+.mGroupTitle {
+  margin: 0 0 var(--sp-3);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.mGroupDesc {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.mFields {
+  display: grid;
+  gap: var(--sp-4);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.mLabel {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--slate);
+  margin-bottom: var(--sp-2);
+}
+
+.mInputWrap {
+  position: relative;
+  display: block;
+}
+
+.mInputWrap :global(.input) {
+  padding-right: 3.25rem;
+}
+
+.mUnit {
+  position: absolute;
+  right: var(--sp-4);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.mHint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: var(--sp-2) 0 0;
+  line-height: 1.45;
+}
+
 /* ── Photos ───────────────────────────────── */
 
+/* The whole box is the click target; the browser's file input inside it is
+   hidden, because its button text can't be translated. */
 .drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
   border: 1px dashed var(--khaki);
   border-radius: var(--radius-lg);
   padding: var(--sp-6);
   text-align: center;
   background: var(--cream);
+  cursor: pointer;
+  transition: border-color 0.16s ease;
 }
 
-.drop input {
-  display: block;
-  margin: var(--sp-4) auto 0;
-  max-width: 100%;
-  font-size: 0.875rem;
+.drop:hover {
+  border-color: var(--wine);
+}
+
+.drop:focus-within {
+  outline: 2px solid var(--wine);
+  outline-offset: 2px;
 }
 
 .fileList {
   list-style: none;
-  margin: var(--sp-4) 0 0;
+  margin: var(--sp-2) 0 0;
   padding: 0;
   display: grid;
-  gap: var(--sp-2);
-  text-align: left;
+  gap: var(--sp-1);
   font-size: 0.875rem;
   color: var(--slate);
 }
@@ -316,9 +359,9 @@
 
 .submitNote {
   flex: 1;
-  min-width: 240px;
+  min-width: 220px;
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: var(--slate);
 }
 

@@ -1,80 +1,22 @@
-.intro {
+.points {
   display: grid;
-  gap: var(--sp-6);
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  margin-bottom: var(--sp-8);
+  gap: var(--sp-5);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
-.tip {
-  padding: var(--sp-5);
+.point {
+  padding: var(--sp-6);
   background: var(--gold-soft);
   border: 1px solid #f0dca8;
   border-radius: var(--radius-lg);
 }
 
-.tip h3 {
-  font-size: 1.125rem;
+.pointTitle {
+  font-size: 1.5rem;
   margin: 0 0 var(--sp-2);
 }
 
-.tip p {
+.point p {
   margin: 0;
-  font-size: 0.9375rem;
-  color: var(--slate);
-}
-
-.roughIntro {
-  max-width: 62ch;
-  margin: 0 0 var(--sp-8);
-  padding-top: var(--sp-7);
-  border-top: 1px solid var(--border);
-}
-
-.group {
-  margin-bottom: var(--sp-8);
-}
-
-.groupHead {
-  display: flex;
-  align-items: baseline;
-  gap: var(--sp-4);
-  padding-bottom: var(--sp-3);
-  border-bottom: 2px solid var(--sand);
-  margin-bottom: var(--sp-5);
-}
-
-.groupTitle {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: 1.625rem;
-}
-
-.groupDesc {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-}
-
-.fields {
-  display: grid;
-  gap: var(--sp-4);
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
-
-.field {
-  padding: var(--sp-5);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-}
-
-.fieldName {
-  margin: 0 0 var(--sp-2);
-  font-weight: 700;
-  font-size: 0.9375rem;
-}
-
-.fieldHint {
-  margin: 0;
-  font-size: 0.9375rem;
   color: var(--slate);
 }

@@ -1,36 +1,37 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { gallery, galleryIsIllustrated } from "@/lib/content";
+import { galleryIsIllustrated } from "@/lib/content";
+import { getDictionary } from "@/lib/dictionary";
+import { getLang } from "@/lib/i18n-server";
+import { getContent } from "@/lib/localize";
 import { GalleryTile } from "@/components/gallery-tile";
 import { PageHeader } from "@/components/page-header";
 
-export const metadata: Metadata = {
-  title: "Gallery",
-  description: "The Punjabi suits, turbans and patkas she makes.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return { title: getDictionary(await getLang()).meta.gallery };
+}
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+  const lang = await getLang();
+  const t = getDictionary(lang);
+  const { gallery } = getContent(lang);
+
   return (
     <>
       <PageHeader
-        eyebrow={galleryIsIllustrated ? "What she makes" : "Her work"}
-        title="Gallery"
-        lede={
-          galleryIsIllustrated
-            ? "The kinds of thing she makes. Seen something here you'd like in your own fabric? Mention it when you order."
-            : "Pieces she's finished for customers. Seen something here you'd like made in your own fabric? Mention it when you order."
-        }
+        title={t.gallery.title}
+        lede={galleryIsIllustrated ? t.gallery.ledeDrawn : t.gallery.ledeReal}
       />
 
       <section className="section">
         <div className="container">
+          {/* Drawings shouldn't pass for photos of finished commissions. */}
           {galleryIsIllustrated && (
             <p
               className="notice notice-warn"
               style={{ maxWidth: "60ch", marginBottom: "var(--sp-7)" }}
             >
-              These are drawings, not photographs — real photos of her finished
-              work will replace them.
+              {t.gallery.drawingsNotice}
             </p>
           )}
 
@@ -48,7 +49,7 @@ export default function GalleryPage() {
 
           <p style={{ marginTop: "var(--sp-8)", textAlign: "center" }}>
             <Link href="/order" className="btn">
-              Start an order
+              {t.common.startOrder}
             </Link>
           </p>
         </div>

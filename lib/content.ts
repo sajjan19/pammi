@@ -3,8 +3,14 @@
  *  EDIT THIS FILE TO CHANGE THE SITE.
  *
  *  Everything a non-developer would want to change lives here:
- *  business details, garments, prices, hours and policy text.
- *  Nothing else needs to be touched.
+ *  business details, garments, prices and policy text.
+ *
+ *  The Punjabi words live alongside in lib/content-pa.ts. Prices,
+ *  days and pictures are only ever set here, so changing one here
+ *  changes it in both languages.
+ *
+ *  Keep the words short. Many visitors read slowly or in their
+ *  second language — one plain sentence beats a paragraph.
  *
  *  Anything marked TODO is a placeholder — swap in the real value.
  * ─────────────────────────────────────────────────────────────
@@ -15,12 +21,12 @@ export const business = {
   // TODO: confirm how she wants her name shown on the site.
   tailor: "TODO: full name",
   tagline: "Punjabi Suits, Stitched to Measure",
-  /** Shown in the hero. One or two sentences. */
+  /** Shown in the hero, the footer and search results. Keep it short. */
   intro:
-    "Punjabi suits for women, stitched by hand to fit you. Salwar kameez, Patiala and Anarkali. She also makes turbans and children's patkas from cloth you bring, and does small repairs on anything else you own.",
-  /** Longer paragraph for the About page. */
+    "Punjabi suits for women, made to fit you. Also turbans, patkas and small repairs.",
+  /** Shown on the About page. */
   story:
-    "Punjabi suits are the whole of the work: every one cut and stitched by hand, one at a time. Bring your own fabric, or a suit you already love the fit of. She measures you herself before anything is cut — and it comes back the way you asked for it, with the neckline you wanted, a sleeve length that actually works, and a fit that sits right the first time.",
+    "Pammi stitches every suit herself, one at a time. She measures you in person, so it fits the first time.",
 
   // TODO: replace with her real city / service area.
   city: "TODO: city",
@@ -29,7 +35,7 @@ export const business = {
   // once she's happy for it to be public.
   showAddress: false,
   address: "TODO: address",
-  addressNote: "The address is shared once your order is confirmed.",
+  addressNote: "You'll get the address once your order is confirmed.",
 
   // TODO: replace with her real contact details.
   // Set any of these to null to hide them across the site.
@@ -87,13 +93,12 @@ export function instagramUrl(): string | null {
  * see lib/measurements.ts for what each group contains. They're optional
  * hints for planning fabric, never the numbers she cuts from.
  *
- * `price` is in whole dollars and is the *starting* price for stitching only
- * (customer supplies the fabric). Set it to `null` to show "Price on request"
- * instead of a number.
+ * `price` is in whole dollars and is the *starting* price. Set it to `null`
+ * to show "On request" instead of a number.
  *
  * TODO: every price below is a placeholder. She needs to confirm her real
- * stitching charges before this site goes live — leave them as `null` rather
- * than guessing.
+ * charges before this site goes live — leave them as `null` rather than
+ * guessing.
  */
 export type Garment = {
   slug: string;
@@ -110,10 +115,12 @@ export type Garment = {
    *                 and a photo, not measurements.
    */
   kind: "stitching" | "headwear" | "repair";
+  /** Illustration shown on cards and in the order form's picker. */
+  image: string;
   price: number | null;
   turnaroundDays: number;
+  /** One short line. */
   summary: string;
-  includes: string[];
   measurementGroups: MeasurementGroupId[];
   popular?: boolean;
 };
@@ -126,16 +133,10 @@ export const garments: Garment[] = [
     name: "Punjabi Suit",
     otherNames: "salwar kameez",
     kind: "stitching",
+    image: "/gallery/placeholder-1.svg",
     price: null,
     turnaroundDays: 14,
-    summary:
-      "The everyday suit and the thing she makes most — kameez, salwar and matching dupatta finishing. Any neckline, any sleeve, straight or flared.",
-    includes: [
-      "Kameez stitched to your measurements",
-      "Salwar with drawstring or elastic waist",
-      "Dupatta hemmed and finished",
-      "Side slits, piping and lining as you like",
-    ],
+    summary: "The everyday suit. Any neckline, any sleeve.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
     popular: true,
   },
@@ -143,15 +144,10 @@ export const garments: Garment[] = [
     slug: "patiala-suit",
     name: "Patiala Suit",
     kind: "stitching",
+    image: "/gallery/placeholder-2.svg",
     price: null,
     turnaroundDays: 14,
-    summary:
-      "Deeply pleated Patiala salwar with a kameez cut to sit right above the pleats.",
-    includes: [
-      "Full Patiala salwar with hand-set pleats",
-      "Kameez to your chosen length",
-      "Dupatta hemmed and finished",
-    ],
+    summary: "With a full, pleated Patiala salwar.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
     popular: true,
   },
@@ -159,16 +155,10 @@ export const garments: Garment[] = [
     slug: "anarkali",
     name: "Anarkali Suit",
     kind: "stitching",
+    image: "/gallery/placeholder-3.svg",
     price: null,
     turnaroundDays: 21,
-    summary:
-      "Fitted through the bodice and flared from the waist down, with as much or as little flare as you want.",
-    includes: [
-      "Fitted, lined bodice",
-      "Flared skirt with your chosen number of panels",
-      "Churidar or straight bottoms",
-      "Dupatta hemmed and finished",
-    ],
+    summary: "Fitted on top, flared from the waist.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
     popular: true,
   },
@@ -176,30 +166,20 @@ export const garments: Garment[] = [
     slug: "sharara-palazzo",
     name: "Sharara & Palazzo Suit",
     kind: "stitching",
+    image: "/gallery/placeholder-4.svg",
     price: null,
     turnaroundDays: 18,
-    summary:
-      "Wide-legged sharara, gharara or palazzo bottoms with a short or long kameez.",
-    includes: [
-      "Sharara, gharara or palazzo bottoms",
-      "Kameez or short kurti",
-      "Dupatta hemmed and finished",
-    ],
+    summary: "Wide-legged bottoms with a short or long kameez.",
     measurementGroups: ["upper", "sleeve", "kameez", "bottom"],
   },
   {
     slug: "kurti",
     name: "Kurti / Kurta",
     kind: "stitching",
+    image: "/gallery/placeholder-5.svg",
     price: null,
     turnaroundDays: 10,
-    summary:
-      "A standalone kurti or kurta — straight, A-line or high-low, in any length.",
-    includes: [
-      "Kurti stitched to your measurements",
-      "Your choice of neckline and sleeve",
-      "Optional lining",
-    ],
+    summary: "Just the top, in any style or length.",
     measurementGroups: ["upper", "sleeve", "kameez"],
   },
   {
@@ -207,16 +187,10 @@ export const garments: Garment[] = [
     name: "Turbans & Patkas",
     otherNames: "pagg, dastaar",
     kind: "headwear",
+    image: "/gallery/placeholder-8.svg",
     price: null,
     turnaroundDays: 7,
-    summary:
-      "Men's turbans and children's patkas. You bring the cloth and she cuts it to length and finishes the edges.",
-    includes: [
-      "Turban cloth cut to the length you want",
-      "Patkas made up to size for children",
-      "Edges hemmed or rolled all round",
-      "Whole sets done in one colour for a function",
-    ],
+    summary: "Men's turbans and children's patkas, from cloth you bring.",
     // Nothing to measure — she works from the cloth you bring and the length
     // you ask for, so the order form skips sizing entirely.
     measurementGroups: [],
@@ -225,16 +199,10 @@ export const garments: Garment[] = [
     slug: "repairs",
     name: "Repairs & Hemming",
     kind: "repair",
+    image: "/gallery/placeholder-9.svg",
     price: null,
     turnaroundDays: 5,
-    summary:
-      "Small fixes on clothes you already own — a split seam, a little rip, a hem that needs taking up. Any kind of garment, not just suits.",
-    includes: [
-      "Trousers, skirts and dresses hemmed",
-      "Split seams and small rips closed up",
-      "Sleeves shortened",
-      "Buttons, hooks and simple zip fixes",
-    ],
+    summary: "Small rips, split seams and hems, on any clothes.",
     // Nothing to measure — a repair needs a description and a photo, and the
     // order form asks for exactly that instead.
     measurementGroups: [],
@@ -250,19 +218,19 @@ export function getGarment(slug: string): Garment | undefined {
 export const steps = [
   {
     title: "Send your order",
-    body: "Pick what you'd like made, describe the design, and add a photo of something you like. It takes about five minutes — no measuring needed.",
+    body: "Tell her what you want. Add a photo if you have one.",
   },
   {
-    title: "She confirms the details",
-    body: "You'll hear back with the price, the fabric you need to supply, and a realistic date. Nothing is started until you say yes.",
+    title: "Get a price",
+    body: "She'll message you with the price and a date.",
   },
   {
-    title: "Come in to be measured",
-    body: "Bring your fabric and she'll measure you properly, in person. It takes a few minutes and it's the reason the fit comes out right.",
+    title: "Get measured",
+    body: "Bring your fabric. She measures you in person.",
   },
   {
-    title: "Collect your finished suit",
-    body: "You'll get a message when it's ready. Small adjustments after the first try-on are always free.",
+    title: "Collect it",
+    body: "Small fixes after you try it on are free.",
   },
 ];
 
@@ -272,18 +240,18 @@ export const steps = [
 export const fabricSources = [
   {
     value: "customer",
-    label: "I'll supply the fabric",
-    hint: "Most orders. Bring or post it once your order is confirmed.",
+    label: "I'll bring my own fabric",
+    hint: "Most people do.",
   },
   {
     value: "tailor",
-    label: "Please source the fabric for me",
-    hint: "She'll suggest options and the cost is added to your quote.",
+    label: "Please get the fabric for me",
+    hint: "The cost is added to your price.",
   },
   {
     value: "unsure",
     label: "Not sure yet",
-    hint: "That's fine — you can decide when you drop things off.",
+    hint: "You can decide later.",
   },
   {
     // Never shown as a choice; the order form sets it for repair jobs so the
@@ -293,6 +261,13 @@ export const fabricSources = [
     hint: "",
   },
 ];
+
+/*
+ * The dropdown options below are also the values saved with an order, so
+ * they stay in English whichever language the customer used — the admin
+ * page reads the same either way. Their Punjabi labels are in
+ * lib/content-pa.ts.
+ */
 
 export const necklines = [
   "Round",
@@ -338,19 +313,19 @@ export const orderStatuses = [
   {
     value: "new",
     label: "New request",
-    customerLabel: "Received — waiting to be confirmed",
+    customerLabel: "Received, waiting to be confirmed",
     tone: "pending",
   },
   {
     value: "quoted",
     label: "Quoted",
-    customerLabel: "Quoted — check your messages",
+    customerLabel: "Price sent, check your messages",
     tone: "pending",
   },
   {
     value: "confirmed",
     label: "Confirmed",
-    customerLabel: "Confirmed — waiting on your fabric",
+    customerLabel: "Confirmed, waiting for your fabric",
     tone: "confirmed",
   },
   {
@@ -368,7 +343,7 @@ export const orderStatuses = [
   {
     value: "collected",
     label: "Collected",
-    customerLabel: "Collected — thank you!",
+    customerLabel: "Collected, thank you!",
     tone: "done",
   },
   {
@@ -389,27 +364,22 @@ export function getStatus(value: string) {
 
 /* ── Policies ──────────────────────────────────────────────── */
 
-/** TODO: confirm these with her — they're sensible defaults, not her words. */
+/**
+ * TODO: confirm these with her — they're sensible defaults, not her words.
+ * A policy whose body starts with "TODO" is hidden from customers.
+ */
 export const policies = [
   {
-    title: "Quotes",
-    body: "Every order is quoted before any work starts. The price depends on the garment, the lining and any hand-finishing — you'll always know it before you commit.",
+    title: "Price first",
+    body: "You'll know the price before any work starts.",
   },
   {
-    title: "Fabric",
-    body: "Most customers supply their own fabric. Bring a little more than you think you need — heavy embroidery and matching prints both eat into the yardage.",
+    title: "She measures you",
+    body: "Sizes on the order form are only a rough guide.",
   },
   {
-    title: "Measuring",
-    body: "She measures you herself before anything is cut — it takes a few minutes and it's the reason the fit comes out right. Any sizes you put on the order form are only a rough guide for planning fabric.",
-  },
-  {
-    title: "Fittings & adjustments",
-    body: "Small adjustments after your first try-on are free. Changes to the design after cutting has started may be charged separately.",
-  },
-  {
-    title: "Timing",
-    body: "Turnaround times on this site are typical, not guaranteed. Wedding season books up quickly — please ask early.",
+    title: "Free small fixes",
+    body: "Small changes after your first try-on are free.",
   },
   {
     title: "Payment",
@@ -447,19 +417,19 @@ export const gallery: GalleryItem[] = [
   {
     src: "/gallery/placeholder-1.svg",
     alt: "Illustration of an embroidered salwar kameez",
-    caption: "Embroidered salwar kameez",
+    caption: "Salwar kameez",
     garment: "salwar-kameez",
   },
   {
     src: "/gallery/placeholder-2.svg",
     alt: "Illustration of a Patiala suit",
-    caption: "Patiala suit with pleated salwar",
+    caption: "Patiala suit",
     garment: "patiala-suit",
   },
   {
     src: "/gallery/placeholder-3.svg",
     alt: "Illustration of a floor-length Anarkali",
-    caption: "Floor-length Anarkali",
+    caption: "Anarkali",
     garment: "anarkali",
   },
   {
@@ -471,7 +441,7 @@ export const gallery: GalleryItem[] = [
   {
     src: "/gallery/placeholder-5.svg",
     alt: "Illustration of an A-line kurti",
-    caption: "A-line kurti",
+    caption: "Kurti",
     garment: "kurti",
   },
   {
@@ -498,35 +468,23 @@ export const gallery: GalleryItem[] = [
 
 export const faqs = [
   {
-    q: "How much fabric should I buy?",
-    a: "For a straight salwar kameez, about 5 metres covers the kameez, salwar and dupatta. Anarkalis and shararas need more — 7 metres or above depending on the flare. Message before you buy if you're unsure; it's much easier than being half a metre short.",
+    q: "How much fabric do I need?",
+    a: "About 5 metres for a salwar kameez. Around 7 metres for an Anarkali or sharara.",
   },
   {
-    q: "Do I need to measure myself before I order?",
-    a: "No — please don't. She measures you herself before anything is cut, and that's the whole reason the fit comes out right. The order form asks for rough sizes only, and only so she can work out how much fabric you'll need. Leave them blank if you'd rather.",
+    q: "Do I need to measure myself?",
+    a: "No. She measures you in person.",
   },
   {
-    q: "What if I can't come in to be measured?",
-    a: "Bring or send a suit that already fits you well and it'll be measured and copied. That's the next best thing to measuring you in person.",
+    q: "What if I can't come in?",
+    a: "Send a suit that fits you well and she'll copy it.",
   },
   {
-    q: "How long does an order take?",
-    a: "Everyday suits are usually around two weeks, Anarkalis a little longer. Wedding season is the busy period, so give as much notice as you can.",
-  },
-  {
-    q: "Can you copy a design from a photo?",
-    a: "Yes — that's very common. Attach the photo to your order form and it will be matched as closely as the fabric allows.",
-  },
-  {
-    q: "Do you only do Punjabi suits?",
-    a: "For stitching from scratch, yes — that's the work, and it's what she's quick and good at. She also does men's turbans and children's patkas from cloth you bring, and small repairs and hemming on anything else you own: a split seam, a little rip, trousers that need taking up.",
+    q: "How long does it take?",
+    a: "About two weeks for a suit. Book early in wedding season.",
   },
   {
     q: "How do turbans and patkas work?",
-    a: "You bring the cloth — she cuts it to the length you want and finishes the edges. Say how many you need and what length on the order form, and whether they're for an adult or a child. Whole sets in one colour for a function are a common request before weddings.",
-  },
-  {
-    q: "Do you stitch for children?",
-    a: "Suits for girls are done regularly — choose the closest option on the order form and mention their age in the notes.",
+    a: "Bring the cloth. She cuts it to length and finishes the edges.",
   },
 ];

@@ -5,9 +5,11 @@ import { getOrderByReference } from "@/lib/orders";
 
 export type StatusResult = {
   reference: string;
+  garmentSlug: string;
+  /** The English name stored with the order — a fallback if the slug's gone. */
   garmentName: string;
   quantity: number;
-  statusLabel: string;
+  status: string;
   tone: string;
   placedOn: string;
   updatedOn: string;
@@ -15,9 +17,13 @@ export type StatusResult = {
   quotedPrice: number | null;
 };
 
+/**
+ * Codes and raw values rather than sentences: the form puts them into words
+ * itself, so switching language while a result is on screen re-labels it.
+ */
 export type StatusFormState = {
   status: "idle" | "error" | "found";
-  message?: string;
+  error?: "missing" | "notFound";
   result?: StatusResult;
 };
 
@@ -34,35 +40,26 @@ export async function lookupOrder(
   const email = String(formData.get("email") ?? "").trim();
 
   if (!reference || !email) {
-    return {
-      status: "error",
-      message: "Please enter both your reference and your email.",
-    };
+    return { status: "error", error: "missing" };
   }
 
   const order = getOrderByReference(reference);
 
-  // Deliberately the same message either way, so this can't be used to work
+  // Deliberately the same answer either way, so this can't be used to work
   // out which references exist.
-  const notFound: StatusFormState = {
-    status: "error",
-    message:
-      "No order found with that reference and email. Check both and try again, or get in touch directly.",
-  };
-
-  if (!order) return notFound;
-  if (order.email.toLowerCase() !== email.toLowerCase()) return notFound;
-
-  const status = getStatus(order.status);
+  if (!order || order.email.toLowerCase() !== email.toLowerCase()) {
+    return { status: "error", error: "notFound" };
+  }
 
   return {
     status: "found",
     result: {
       reference: order.reference,
+      garmentSlug: order.garment_slug,
       garmentName: order.garment_name,
       quantity: order.quantity,
-      statusLabel: status.customerLabel,
-      tone: status.tone,
+      status: order.status,
+      tone: getStatus(order.status).tone,
       placedOn: order.created_at,
       updatedOn: order.updated_at,
       neededBy: order.needed_by,

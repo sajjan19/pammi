@@ -1,71 +1,65 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { garments, policies } from "@/lib/content";
+import { getDictionary } from "@/lib/dictionary";
+import { getLang } from "@/lib/i18n-server";
+import { getContent } from "@/lib/localize";
+import { Illustration } from "@/components/illustration";
 import { PageHeader } from "@/components/page-header";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
-  title: "What she makes",
-  description:
-    "Salwar kameez, Patiala suits, Anarkalis, shararas, lehengas, saree blouses and alterations — all stitched to measure.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getLang();
+  return {
+    title: getDictionary(lang).meta.services,
+    description: getContent(lang).business.intro,
+  };
+}
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const lang = await getLang();
+  const t = getDictionary(lang);
+  const { garments, policies } = getContent(lang);
+
   return (
     <>
-      <PageHeader
-        eyebrow="Stitching"
-        title="What she makes"
-        lede="Everything below is cut to your own measurements. Most customers supply their own fabric — bring it along once your order is confirmed."
-      />
+      <PageHeader title={t.services.title} lede={t.services.lede} />
 
       <section className="section">
         <div className="container">
           <div className={styles.list}>
             {garments.map((garment) => (
               <article key={garment.slug} id={garment.slug} className={styles.item}>
-                <div>
-                  <div className={styles.head}>
-                    <h2 className={styles.name}>{garment.name}</h2>
-                    {garment.otherNames && (
-                      <span className={styles.alt}>
-                        also called a {garment.otherNames}
-                      </span>
-                    )}
-                  </div>
+                <div className={styles.art}>
+                  <Illustration src={garment.image} alt="" />
+                </div>
 
+                <div className={styles.body}>
+                  <h2 className={styles.name}>{garment.name}</h2>
+                  {garment.otherNames && (
+                    <p className={styles.alt}>
+                      {t.services.alsoCalled(garment.otherNames)}
+                    </p>
+                  )}
                   <p className={styles.summary}>{garment.summary}</p>
-
-                  <ul className={styles.includes}>
-                    {garment.includes.map((line) => (
-                      <li key={line}>{line}</li>
-                    ))}
-                  </ul>
                 </div>
 
                 <aside className={styles.aside}>
                   <div>
-                    <p className={styles.priceLabel}>Stitching from</p>
+                    <p className={styles.priceLabel}>{t.services.price}</p>
                     <p className={styles.price}>
-                      {garment.price === null ? "On request" : `$${garment.price}`}
-                    </p>
-                    <p className={styles.priceNote}>
                       {garment.price === null
-                        ? "Quoted once she's seen the design and fabric."
-                        : "Stitching only — you supply the fabric."}
+                        ? t.services.askForPrice
+                        : t.services.priceFrom(garment.price)}
                     </p>
                   </div>
-
                   <p className={styles.turnaround}>
-                    Usually ready in about{" "}
-                    <strong>{garment.turnaroundDays} days</strong>.
+                    {t.common.aboutDays(garment.turnaroundDays)}
                   </p>
-
                   <Link
                     href={`/order?garment=${garment.slug}`}
                     className="btn btn-outline btn-sm"
                   >
-                    Order this
+                    {t.services.orderThis}
                   </Link>
                 </aside>
               </article>
@@ -74,24 +68,21 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="section section-tinted">
-        <div className="container">
-          <div style={{ maxWidth: "58ch", marginBottom: "var(--sp-7)" }}>
-            <p className="eyebrow">Good to know</p>
-            <h2>How orders work</h2>
-            <hr className="thread" />
+      {policies.length > 0 && (
+        <section className="section section-tinted">
+          <div className="container">
+            <h2 className={styles.policiesTitle}>{t.services.goodToKnow}</h2>
+            <div className={styles.policies}>
+              {policies.map((policy) => (
+                <div key={policy.title} className={styles.policy}>
+                  <h3>{policy.title}</h3>
+                  <p>{policy.body}</p>
+                </div>
+              ))}
+            </div>
           </div>
-
-          <div className={styles.policies}>
-            {policies.map((policy) => (
-              <div key={policy.title} className={styles.policy}>
-                <h3>{policy.title}</h3>
-                <p>{policy.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
     </>
   );
 }

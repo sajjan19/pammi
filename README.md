@@ -70,11 +70,36 @@ questions for each:
 | `headwear`  | Length, colour and who it's for. No fabric choice, no sizing    |
 | `repair`    | What's broken and where. No fabric choice, no sizing            |
 
+## Two languages
+
+The whole customer-facing site is in **English and Punjabi**. A switch in
+the top-right corner flips between them and remembers the choice in a cookie.
+On a first visit, a phone that ranks Punjabi above English gets Punjabi
+straight away.
+
+Where the words live:
+
+| File | What's in it |
+| ---- | ------------ |
+| `lib/content.ts` | English content, plus everything that isn't words — prices, days, pictures |
+| `lib/content-pa.ts` | Punjabi content only. Missing entries fall back to English |
+| `lib/dictionary.ts` | Buttons, headings, labels and messages, in both languages |
+
+`dictionary.ts` is type-checked: adding an English line without its Punjabi
+twin fails the build. **The Punjabi should be read over by a native speaker
+before launch** — Pammi is the ideal reviewer, especially for tailoring words.
+
+The admin pages stay in English. Orders are always saved with English values,
+so the admin view reads the same whichever language the customer used.
+
+Keep the wording short. Many visitors read slowly or in their second
+language, so one plain sentence beats a paragraph.
+
 ## Editing the content
 
 **`lib/content.ts` is the file to edit.** Business details, garments, prices,
-turnaround times, policies, gallery captions and the FAQ all live there, and
-nothing else needs touching to change them.
+turnaround times, policies, gallery captions and the FAQ all live there. If you
+change any wording, change its Punjabi in `lib/content-pa.ts` to match.
 
 Anything marked `TODO` in that file is a placeholder waiting on a real value.
 As of now that's:
@@ -82,8 +107,8 @@ As of now that's:
 - her name as it should appear on the site
 - the city / service area
 - email, phone, WhatsApp and Instagram
-- **every price** — they're all `null` ("Price on request") rather than
-  invented numbers
+- **every price** — they're all `null` (shown as "Ask for a price") rather
+  than invented numbers
 - the payment policy
 
 Placeholders don't leak onto the site: `isPlaceholder()` hides any detail

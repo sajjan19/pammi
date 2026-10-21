@@ -26,7 +26,15 @@ const ALLOWED: Record<string, string> = {
 
 export type SavedPhoto = { filename: string; mime: string; bytes: number };
 
-export type PhotoError = { message: string };
+/**
+ * Why a set of photos was turned away. Codes rather than sentences, so the
+ * caller can say it in the customer's own language.
+ */
+export type PhotoError =
+  | { code: "tooMany" }
+  | { code: "badType"; name: string }
+  | { code: "tooBig"; name: string }
+  | { code: "saveFailed" };
 
 /**
  * Validates and writes uploaded files to disk.
@@ -36,12 +44,12 @@ export type PhotoError = { message: string };
  */
 export async function savePhotos(
   files: File[],
-): Promise<{ ok: true; photos: SavedPhoto[] } | { ok: false } & PhotoError> {
+): Promise<{ ok: true; photos: SavedPhoto[] } | { ok: false; error: PhotoError }> {
   const real = files.filter((f) => f && f.size > 0);
   if (real.length === 0) return { ok: true, photos: [] };
 
   if (real.length > MAX_PHOTOS) {
-    return { ok: false, message: `Please attach at most ${MAX_PHOTOS} photos.` };
+    return { ok: false, error: { code: "tooMany" } };
   }
 
   const staged: { filename: string; mime: string; buffer: Buffer }[] = [];
@@ -49,16 +57,10 @@ export async function savePhotos(
   for (const file of real) {
     const ext = ALLOWED[file.type];
     if (!ext) {
-      return {
-        ok: false,
-        message: `"${file.name}" isn't an image we can read. Please use JPG, PNG or WEBP.`,
-      };
+      return { ok: false, error: { code: "badType", name: file.name } };
     }
     if (file.size > MAX_PHOTO_BYTES) {
-      return {
-        ok: false,
-        message: `"${file.name}" is larger than 8 MB. Please send a smaller version.`,
-      };
+      return { ok: false, error: { code: "tooBig", name: file.name } };
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
@@ -83,7 +85,7 @@ export async function savePhotos(
     }
   } catch {
     await deletePhotoFiles(written.map((w) => w.filename));
-    return { ok: false, message: "Your photos couldn't be saved. Please try again." };
+    return { ok: false, error: { code: "saveFailed" } };
   }
 
   return { ok: true, photos: written };
