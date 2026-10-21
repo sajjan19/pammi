@@ -1,18 +1,22 @@
+/* A grid of cards: three across on a wide screen, two by two on a
+   tablet or phone. Picture on top, then the words, then the price. */
 .list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: var(--sp-5);
+  grid-template-columns: repeat(3, 1fr);
 }
 
-/* Picture | name and one line | price. Each card is short now, so the
-   picture is a small square crop rather than a tall portrait that would
-   tower over the text beside it. */
+@media (max-width: 900px) {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-3);
+  }
+}
+
 .item {
-  display: grid;
-  grid-template-columns: 132px 1fr 220px;
-  gap: var(--sp-6);
-  align-items: center;
-  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -36,8 +40,7 @@
   aspect-ratio: 1 / 1;
   overflow: hidden;
   background: var(--cream);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-bottom: 1px solid var(--border);
 }
 
 .art img {
@@ -50,12 +53,15 @@
 
 .body {
   min-width: 0;
+  padding: var(--sp-5) var(--sp-5) 0;
+  flex: 1;
 }
 
 .name {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+  line-height: 1.15;
 }
 
 .alt {
@@ -69,67 +75,73 @@
   color: var(--slate);
 }
 
+/* Price and days on one line, the button under them, at the foot of the
+   card so every card's button lines up. */
 .aside {
-  border-left: 1px solid var(--border);
-  padding-left: var(--sp-6);
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--sp-3);
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-3);
+  margin: var(--sp-4) var(--sp-5) var(--sp-5);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+}
+
+.aside :global(.btn) {
+  width: 100%;
 }
 
 .priceLabel {
-  font-size: 0.625rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--stone);
-  font-weight: 600;
-  margin: 0 0 var(--sp-1);
+  display: none;
 }
 
 .price {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.375rem;
   color: var(--wine);
   line-height: 1.1;
   margin: 0;
 }
 
 .turnaround {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--slate);
   margin: 0;
 }
 
-/* Tablet: the price drops under the text rather than squeezing three
-   columns into the space, and its divider moves from left to top. */
-@media (max-width: 980px) {
-  .item {
-    grid-template-columns: 120px 1fr;
+/* Smaller type and padding on a phone, so two cards fit side by side. */
+@media (max-width: 560px) {
+  .body {
+    padding: var(--sp-3) var(--sp-3) 0;
+  }
+
+  .name {
+    font-size: 1.125rem;
+  }
+
+  .alt,
+  .summary {
+    font-size: 0.8125rem;
+    line-height: 1.5;
   }
 
   .aside {
-    grid-column: 2;
-    border-left: 0;
-    border-top: 1px solid var(--border);
-    padding-left: 0;
-    padding-top: var(--sp-4);
-  }
-}
-
-/* Phone: everything stacks, with a wide, short crop of the picture on top. */
-@media (max-width: 620px) {
-  .item {
-    grid-template-columns: 1fr;
-    gap: var(--sp-4);
+    margin: var(--sp-3);
+    padding-top: var(--sp-3);
   }
 
-  .aside {
-    grid-column: auto;
+  .price {
+    font-size: 1.0625rem;
   }
 
-  .art {
-    aspect-ratio: 16 / 9;
+  .turnaround {
+    font-size: 0.75rem;
+  }
+
+  .aside :global(.btn) {
+    padding-left: var(--sp-2);
+    padding-right: var(--sp-2);
   }
 }
 
