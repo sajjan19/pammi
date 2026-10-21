@@ -111,15 +111,15 @@ const en = {
     lede: "No tape measure needed. Pammi measures you in person, so your suit fits.",
     points: [
       {
-        title: "Five minutes",
-        body: "Usually when you drop off your fabric.",
+        title: "Takes five minutes",
+        body: "She measures you when you drop off your fabric.",
       },
       {
         title: "Bring a suit you like",
-        body: "She can copy one that already fits you.",
+        body: "She can copy a suit that already fits you.",
       },
       {
-        title: "Only once",
+        title: "Measured once",
         body: "She keeps your measurements for next time.",
       },
     ],

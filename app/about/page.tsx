@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
 import { getLang } from "@/lib/i18n-server";
+import { about as aboutEn } from "@/lib/content";
+import { aboutPa } from "@/lib/content-pa";
 import { getContent } from "@/lib/localize";
 import { Icon } from "@/components/icon";
 import { PageHeader } from "@/components/page-header";
@@ -17,10 +19,14 @@ export default async function AboutPage() {
   const t = getDictionary(lang);
   const { business, about } = getContent(lang);
 
-  // Her story in her own words, as a quote.
+  // Her story in her own words: in Punjabi first, as she'd say it, with the
+  // English underneath.
   const story = (
     <blockquote className={styles.quote}>
-      <p>{about.quote}</p>
+      <p lang="pa">{aboutPa.quote}</p>
+      <p className={styles.translation} lang="en">
+        {aboutEn.quote}
+      </p>
       <footer lang="en">— {business.shortName}</footer>
     </blockquote>
   );

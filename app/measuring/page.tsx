@@ -41,8 +41,10 @@ export default async function MeasuringPage() {
                 <span className={styles.icon} aria-hidden="true">
                   <Icon name={pointIcons[i]} size={28} />
                 </span>
-                <h2 className={styles.pointTitle}>{point.title}</h2>
-                <p>{point.body}</p>
+                <div>
+                  <h2 className={styles.pointTitle}>{point.title}</h2>
+                  <p>{point.body}</p>
+                </div>
               </div>
             ))}
           </div>
