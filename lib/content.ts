@@ -83,7 +83,7 @@ export const about = {
     {
       id: "cooking",
       title: "Loves to cook",
-      body: "Punjabi food is her speciality. Nobody leaves her house hungry.",
+      body: "She makes all kinds of dishes, but Punjabi food is her speciality.",
     },
     {
       id: "dramas",
