@@ -69,7 +69,7 @@ export const business = {
 export const about = {
   /** Her story, in her own words, shown as a quote. */
   quote:
-    "I learned to sew from my mother and my four older sisters in Nawanshahr, Punjab. Since moving to Vancouver at 18, I've sewn every suit myself, one at a time.",
+    "I learned to sew from my mother and my four older sisters in Nawanshahr, Punjab. I moved to Vancouver at 18 and I still sew every suit myself.",
   /**
    * Small things about her, each with a little drawing. `id` picks the
    * drawing and links each fact to its Punjabi in lib/content-pa.ts.

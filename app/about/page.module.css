@@ -105,30 +105,42 @@
 
 .intro {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: var(--sp-6);
-  align-items: start;
+  grid-template-columns: minmax(0, 360px) 1fr;
+  gap: var(--sp-8);
+  align-items: center;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 760px) {
   .intro {
     grid-template-columns: 1fr;
+    gap: var(--sp-7);
   }
 }
 
+/* Straight, with a soft pink block set just behind and below it, and a
+   gold stitched edge — like a photo pinned to fabric. */
 .photo {
-  margin: 0;
-  padding: var(--sp-2);
-  background: var(--white);
-  border: 1px solid var(--border);
+  position: relative;
+  margin: 0 var(--sp-4) var(--sp-4) 0;
+}
+
+.photo::before {
+  content: "";
+  position: absolute;
+  inset: var(--sp-4) calc(var(--sp-4) * -1) calc(var(--sp-4) * -1) var(--sp-4);
+  background: var(--cream);
+  border: 2px dashed var(--gold);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
-  transform: rotate(-1.5deg);
 }
 
 .photo img {
+  position: relative;
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 4px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
 }
