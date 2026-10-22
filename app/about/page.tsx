@@ -36,8 +36,8 @@ export default async function AboutPage() {
                 <Image
                   src={about.photo}
                   alt={about.photoAlt}
-                  width={800}
-                  height={934}
+                  width={1086}
+                  height={1448}
                   sizes="(max-width: 760px) 90vw, 360px"
                   priority
                 />

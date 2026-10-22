@@ -78,45 +78,30 @@
   }
 }
 
-/* She stands on a fabric patch: an arch of the pink tint with a row of
-   gold stitches just inside its edge, as if sewn onto the page. The photo
-   is a cut-out, so she stands in front of the patch with nothing behind
-   her. */
+/* The photo, straight, with a row of gold stitches running just inside its
+   edge — as if it's been sewn onto the page. */
 .photo {
   position: relative;
   margin: 0;
-  padding-top: var(--sp-6);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
 }
 
-.photo::before,
 .photo::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 18%;
-  border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
-}
-
-.photo::before {
-  background: var(--cream);
-  border: 1px solid var(--border);
-}
-
-/* The stitching, just inside the patch's edge. */
-.photo::after {
-  inset: calc(18% + 10px) 10px 10px 10px;
-  border: 2px dashed var(--gold);
-  border-radius: 999px 999px calc(var(--radius-lg) - 6px) calc(var(--radius-lg) - 6px);
+  inset: 10px;
+  border: 2px dashed var(--gold-bright);
+  border-radius: calc(var(--radius-lg) - 4px);
   pointer-events: none;
 }
 
 .photo img {
-  position: relative;
-  z-index: 1;
   display: block;
-  width: 88%;
+  width: 100%;
   height: auto;
-  margin: 0 auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 20%;
 }

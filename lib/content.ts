@@ -109,8 +109,7 @@ export const about = {
    * which strips the location data phones hide in photos. (This one was
    * checked: it carries none.)
    */
-  // Cut out from parmjit-photo.jpeg, so she sits on a stitched patch.
-  photo: "/parmjit-cutout.webp" as string | null,
+  photo: "/parmjit-photo.jpeg" as string | null,
   photoAlt:
     "Parmjit Kaur Sajjan holding her blue cookie tin, open and full of thread spools.",
 };
