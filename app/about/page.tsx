@@ -3,8 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { getDictionary } from "@/lib/dictionary";
 import { getLang } from "@/lib/i18n-server";
-import { about as aboutEn } from "@/lib/content";
-import { aboutPa } from "@/lib/content-pa";
 import { getContent } from "@/lib/localize";
 import { Icon } from "@/components/icon";
 import { PageHeader } from "@/components/page-header";
@@ -19,17 +17,11 @@ export default async function AboutPage() {
   const t = getDictionary(lang);
   const { business, about } = getContent(lang);
 
-  // Her story in her own words: in Punjabi first, as she'd say it, with the
-  // English underneath.
-  const story = (
-    <blockquote className={styles.quote}>
-      <p lang="pa">{aboutPa.quote}</p>
-      <p className={styles.translation} lang="en">
-        {aboutEn.quote}
-      </p>
-      <footer lang="en">— {business.shortName}</footer>
-    </blockquote>
-  );
+  const story = about.story.map((paragraph) => (
+    <p key={paragraph} className={styles.storyText}>
+      {paragraph}
+    </p>
+  ));
 
   return (
     <>
@@ -44,9 +36,9 @@ export default async function AboutPage() {
                 <Image
                   src={about.photo}
                   alt={about.photoAlt}
-                  width={600}
-                  height={800}
-                  sizes="(max-width: 720px) 100vw, 300px"
+                  width={800}
+                  height={934}
+                  sizes="(max-width: 760px) 90vw, 360px"
                   priority
                 />
               </figure>

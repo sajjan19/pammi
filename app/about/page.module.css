@@ -1,53 +1,14 @@
-/* ── Her story, as a quote ──────────── */
+/* ── Her story ──────────── */
 
-.quote {
-  position: relative;
-  margin: 0;
-  padding-top: var(--sp-6);
-}
-
-/* A big gold opening quote mark. */
-.quote::before {
-  content: "\201C";
-  position: absolute;
-  top: -0.35em;
-  left: -0.05em;
-  font-family: var(--font-display);
-  font-size: 5.5rem;
-  line-height: 1;
-  color: var(--gold);
-}
-
-.quote p {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 4.5vw, 1.875rem);
-  line-height: 1.35;
+.storyText {
+  margin: 0 0 var(--sp-4);
+  font-size: 1.1875rem;
+  line-height: 1.7;
   color: var(--char);
 }
 
-.quote p:lang(pa) {
-  font-family: var(--font-serif-pa), var(--font-display);
-  font-size: clamp(1.375rem, 4.2vw, 1.75rem);
-  line-height: 1.6;
-}
-
-/* The English, smaller, under the Punjabi. */
-.quote .translation {
-  margin-top: var(--sp-4);
-  font-family: var(--font-body);
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: var(--slate);
-}
-
-.quote footer {
-  margin-top: var(--sp-4);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--wine);
+.storyText:last-child {
+  margin-bottom: 0;
 }
 
 .factsTitle {
@@ -117,30 +78,45 @@
   }
 }
 
-/* Straight, with a soft pink block set just behind and below it, and a
-   gold stitched edge — like a photo pinned to fabric. */
+/* She stands on a fabric patch: an arch of the pink tint with a row of
+   gold stitches just inside its edge, as if sewn onto the page. The photo
+   is a cut-out, so she stands in front of the patch with nothing behind
+   her. */
 .photo {
   position: relative;
-  margin: 0 var(--sp-4) var(--sp-4) 0;
+  margin: 0;
+  padding-top: var(--sp-6);
+}
+
+.photo::before,
+.photo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 18%;
+  border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
 }
 
 .photo::before {
-  content: "";
-  position: absolute;
-  inset: var(--sp-4) calc(var(--sp-4) * -1) calc(var(--sp-4) * -1) var(--sp-4);
   background: var(--cream);
+  border: 1px solid var(--border);
+}
+
+/* The stitching, just inside the patch's edge. */
+.photo::after {
+  inset: calc(18% + 10px) 10px 10px 10px;
   border: 2px dashed var(--gold);
-  border-radius: var(--radius-lg);
+  border-radius: 999px 999px calc(var(--radius-lg) - 6px) calc(var(--radius-lg) - 6px);
+  pointer-events: none;
 }
 
 .photo img {
   position: relative;
+  z-index: 1;
   display: block;
-  width: 100%;
+  width: 88%;
   height: auto;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: center 20%;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  margin: 0 auto;
 }

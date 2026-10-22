@@ -67,9 +67,11 @@ export const business = {
 /* ── About her ─────────────────────────────────────────────── */
 
 export const about = {
-  /** Her story, in her own words, shown as a quote. */
-  quote:
-    "I learned to sew from my mother and my four older sisters in Nawanshahr, Punjab. I moved to Vancouver at 18 and I still sew every suit myself.",
+  /** A couple of short paragraphs about her. */
+  story: [
+    "Parmjit was born and raised in Nawanshahr, Punjab. She learned to sew from her mother and her four older sisters.",
+    "She moved to Canada when she was 18.",
+  ],
   /**
    * Small things about her, each with a little drawing. `id` picks the
    * drawing and links each fact to its Punjabi in lib/content-pa.ts.
@@ -107,7 +109,8 @@ export const about = {
    * which strips the location data phones hide in photos. (This one was
    * checked: it carries none.)
    */
-  photo: "/parmjit-photo.jpeg" as string | null,
+  // Cut out from parmjit-photo.jpeg, so she sits on a stitched patch.
+  photo: "/parmjit-cutout.webp" as string | null,
   photoAlt:
     "Parmjit Kaur Sajjan holding her blue cookie tin, open and full of thread spools.",
 };
